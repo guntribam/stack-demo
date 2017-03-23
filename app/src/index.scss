@@ -1,0 +1,68 @@
+@-webkit-keyframes :global(stripes) {
+  100% {
+    background-position: 0 -50px;
+  }
+}
+
+@keyframes :global(stripes) {
+  100% {
+    background-position: 385px 0;
+  }
+}
+
+:global {
+  .loading {
+    color: red;
+    .material-icons {
+      max-width: 30px;
+      overflow: hidden;
+    }
+    
+    * {
+      font-family: 'BLOKK';
+      font-weight: bold;
+      font-size: 16px!important;
+      white-space: nowrap;
+      color: rgb(197, 206, 210)!important;
+      word-spacing: -20px;
+    }
+  }
+
+}
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background-color: #f6f6f6;
+	padding-bottom: 60px;
+	.right {
+		float: right;
+	}
+	.left{
+		float: left;
+	}
+	.clearfix {
+		clear: both;
+	}
+	.main {
+		margin-top: 25px;
+	}
+	.appbargrid{
+		background-color: rgb(40, 53, 147)!important;
+		width: percentage(1);
+		.appbarRightMenu {
+			color: #fff;
+			font-size: 14px;
+			display: inline-block;
+			margin-left: 20px;
+			vertical-align: middle;
+			.material-icons {
+				vertical-align: middle;
+			}
+		}
+	}
+}
+
+.hidden {
+	display: none!important;
+}
