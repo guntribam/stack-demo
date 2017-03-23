@@ -1,5 +1,5 @@
-# satck-demo-api
-A demo api to showcase the features of the GP stack
+# stack-demo-api
+The API component of stack-demo, an application designed to get you started with the GP stack
 
 **example `./api/package.json` scripts**
 ```

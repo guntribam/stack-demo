@@ -1,13 +1,13 @@
 {
-  "name": "manage-content-app",
-  "description": "The React application component of the manage-content project",
+  "name": "stack-demo-app",
+  "description": "The React application component of stack-demo, an application designed to get you started with the GP stack",
   "version": "1.0.1",
   "author": "GoodPractice",
   "license": "UNLICENSED",
-  "homepage": "https://github.com/gp-technical/manage-content-app",
+  "homepage": "https://github.com/gp-technical/stack-demo-app/readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gp-technical/manage-content-app"
+    "url": "https://github.com/gp-technical/stack-demo"
   },
   "main": "index.js",
   "scripts": {
