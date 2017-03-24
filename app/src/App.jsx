@@ -28,6 +28,7 @@ class component extends React.PureComponent {
               <components.ErrorMessage text={errorMessage} />
               <components.hello />
               <components.fetch />
+              <components.counter />
               </Col>
             </Row>
           </Grid>
