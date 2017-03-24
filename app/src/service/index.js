@@ -1,3 +1,3 @@
-import hello from './hello'
+import fetch from './fetch'
 
-export default {hello}
+export default {fetch}

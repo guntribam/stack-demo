@@ -4,7 +4,7 @@ const processor = async (action) => {
   var {types, type, data} = action
 
   switch (type) {
-    case types.fetchGreeting:
+    case types.fetchFromApi:
       return await 'Hello from the stack-demo API'
   }
 }

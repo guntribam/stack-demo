@@ -27,6 +27,7 @@ class component extends React.PureComponent {
                 lg={12}>
               <components.ErrorMessage text={errorMessage} />
               <components.hello />
+              <components.fetch />
               </Col>
             </Row>
           </Grid>

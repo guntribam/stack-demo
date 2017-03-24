@@ -1,3 +1,3 @@
-const name = 'hello'
+const name = 'fetch'
 
 export default name
