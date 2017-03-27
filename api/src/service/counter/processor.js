@@ -1,17 +1,17 @@
 import { makeProcessor } from '@gp-technical/stack-redux-api'
-import index from './'
+import db from './db'
 
 const processor = async (action) => {
   var {types, type, data} = action
-  var {db} = index
-  console.info('db', db)
   switch (type) {
     case types.counterIncrement:
-      return db.total++
+      db.increment()
+      return {total: db.getTotal()}
     case types.counterDecrement:
-      return db.total--
+      db.decrement()
+      return {total: db.getTotal()}
     case types.counterGetTotal:
-      return db.total
+      return {total: db.getTotal()}
   }
 }
 

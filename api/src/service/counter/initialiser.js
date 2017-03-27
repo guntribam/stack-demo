@@ -1,8 +1,7 @@
-import index from './'
+import db from './db'
 
 const initialiser = async () => {
-  const {db} = index
-  return db.total
+  return {total: db.getTotal()}
 }
 
 export default initialiser

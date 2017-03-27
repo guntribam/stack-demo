@@ -29,6 +29,7 @@ class component extends React.PureComponent {
               <components.hello />
               <components.fetch />
               <components.counter />
+              <components.gp />
               </Col>
             </Row>
           </Grid>

@@ -1,5 +1,5 @@
 import express from 'express'
-import index from './'
+import db from './db'
 
 const router = express.Router({mergeParams: true})
 
@@ -8,18 +8,15 @@ router.get('/counter/ping', (req, res) => {
 })
 
 router.get('/counter/total', (req, res) => {
-  const {db} = index
-  res.json({total: db.total})
+  res.json({total: db.getTotal()})
 })
 
 router.get('/counter/increment', (req, res) => {
-  const {db} = index
-  db.total++
-  res.json({total: db.total})
+  db.increment()
+  res.json({total: db.getTotal()})
 })
 router.get('/counter/decrement', (req, res) => {
-  const {db} = index
-  db.total--
-  res.json({total: db.total})
+  db.decrement()
+  res.json({total: db.getTotal()})
 })
 export default router

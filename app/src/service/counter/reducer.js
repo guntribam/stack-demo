@@ -5,7 +5,7 @@ const reducer = (state = {}, action) => {
     case types.counterGetTotalResponse:
     case types.counterIncrementResponse:
     case types.counterDecrementResponse:
-      return {...state, total: data}
+      return {...state, total: data.total}
     default:
       return state
   }

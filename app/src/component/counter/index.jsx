@@ -19,29 +19,31 @@ class component extends React.PureComponent {
   onDecrementRedux = () => {
     this.props.decrement()
   }
+  onGetTotalRedux = () => {
+    this.props.getTotal()
+  }
   onIncrementRest = () => {
     window.open(url('increment'), '_blank')
-    this.props.getTotal()
   }
   onDecrementRest = () => {
     window.open(url('decrement'), '_blank')
-    this.props.getTotal()
   }
   onGetTotalRest = () => {
     window.open(url('total'), '_blank')
   }
   render () {
     var {total} = this.props
+
     return (
       <components.Box>
         <h2>Working with the API - A Simple Counter</h2>
         <p>
-          This `counter` component demonstrates how to update local state by making requests to the application's API. This achieved by dispatching local REDUX actions and
-          listening for the corresponding API response.
+          This `counter` component demonstrates how to update your application state by making requests to the application's API. This achieved by dispatching REDUX actions,
+          which the the stack will auto-broadcast to the API, and then listening for the corresponding API response.
         </p>
         <p>
-          It also shows how to expose selected aspects of the same API service though REST endpoints. This allows your API services to be both tightly coupled to your application
-          via a websocket <i>and</i> conditonally exposed to third parties via REST.
+          It also shows how to expose selected aspects of the component's server-side API service though REST endpoints. This techniqueallows your API services to be both
+          tightly coupled to your application via a websocket <i>and</i> conditonally exposed to third parties via REST.
         </p>
         <Divider />
         <h1>Total = {total}</h1>
@@ -49,8 +51,9 @@ class component extends React.PureComponent {
         <h3>Dispatch REDUX Actions</h3>
         <RaisedButton label='Increment ++' onClick={this.onIncrementRedux} style={buttonStyle} />
         <RaisedButton label='Decrement --' onClick={this.onDecrementRedux} style={buttonStyle} />
+        <RaisedButton label='Get Total' onClick={this.onGetTotalRedux} style={buttonStyle} />
         <Divider />
-        <h3>Access the REST Endpoints</h3>
+        <h3>Access the Equivalent REST Endpoints</h3>
         <ul>
           <li>
             <a href='#' onClick={this.onIncrementRest}>Increment</a>
