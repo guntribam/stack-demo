@@ -8,7 +8,7 @@ import styles from './index.scss'
 
 class component extends React.PureComponent {
   render () {
-    const {user, errorMessage} = this.props
+    const {user} = this.props
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -25,10 +25,11 @@ class component extends React.PureComponent {
                 sm={12}
                 md={8}
                 lg={12}>
-              <components.ErrorMessage text={errorMessage} />
               <components.hello />
               <components.fetch />
               <components.counter />
+              <components.errors />
+              <components.thunks />
               <components.gp />
               </Col>
             </Row>
@@ -40,8 +41,7 @@ class component extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  user: services.auth.selector.getProfile(state),
-  errorMessage: services.errorMessage.selector.getText(state)
+  user: services.auth.selector.getProfile(state)
 })
 
 export default connect(mapStateToProps)(component)
