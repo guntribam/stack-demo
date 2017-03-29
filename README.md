@@ -9,4 +9,17 @@ The `stack` consists of two packages that together allow you to quickly build si
 
 The `stack` is deliberately opinionated. This means there _is_ a right way to do things and the packages have been designed to work best if they are used in the right way.
 
-This demo has been written to give you concrete examples of the right way to use the packages. It is a reference demo, it does not in particular, but what it does do has been selected to provide a graduated introduction to the ways of the `stack`.
+This demo has been written to give you concrete examples of the right way to use the packages. It is a reference demo, it does nothing in particular, but what it does do has been selected to provide a graduated introduction to the ways of the `stack`.
+
+## Project Folder Structure
+The folder structure for a stack project should be:
+```
+my-project
+  |-api
+    |-src
+      |-service
+  |-app
+    |-src
+      |-service
+      |-component
+```
