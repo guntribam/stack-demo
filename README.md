@@ -53,11 +53,37 @@ stack-demo
 ```
 
 ## Feature: `hello`
+
 This is the simplest feature in the demo. It is just a dumb REACT app component, and too simple to require an `api` or `app` service, but it shows you that the file is placed in `app/src/component/hello` folder.
+### _app/src/component/hello/index.js_
+```javascript
+import React from 'react'
 
-It also shows one other crucial technique. For the stack to know about this component it must be included in the `index.js` found in the `app/src/component` folder. Below is content file, you can see the `hello` component being exported, along with the other components:
+const style = {
+  margin: 20,
+  padding: 20,
+  borderColor: 'lightgray',
+  borderStyle: 'solid',
+  borderWidth: 1,
+  backgroundColor: 'White'
+}
 
-**app/src/component/index.js**
+class component extends React.PureComponent {
+  render () {
+    return (
+      <div style={style}>
+        <h2>Hello World</h2>
+      </div>
+    )
+  }
+}
+
+export default component
+```
+
+For the stack to know about this component it must be included in the `app/src/component/index.js` file.
+
+### _app/src/component/index.js_
 ```javascript
 import counter from './counter'
 import errors from './errors'
@@ -68,10 +94,9 @@ import thunks from './thunks'
 
 export default {counter, errors, fetch, gp, hello, thunks}
 ```
+You can see the `hello` component being exported, along with the other components. Since the component has been correctly exported via the `index.js` file, it is available for use as a standard REACT component. Here it is being used in the `app/src/App.jsx` file.
 
-Since the component has been correctly exported via the `index.js` file, it is available for use as a standard REACT component. Here it is being used in the `app/src/App.jsx` file.
-
-**app/src/App.jsx**
+### _app/src/App.jsx_
 ```javascript
 import { components, services } from './loader'
 class component extends React.PureComponent {
@@ -85,7 +110,7 @@ class component extends React.PureComponent {
 }
 ```
 
-You can see that the `hello` component is exposed via the `components` object that has been imported in from the `loader` file. You do not need to touch the `loader` file. It takes care of exporting all the shared components and services so you can import them whenever you want to use them. All you need to do is make sure you export your own components and services via the corresponding `app/src/component/index.js` file and `app/src/service/index.js` so the `loader` can find them.
+The `hello` component is exposed via the `components` object that has been imported in from the `loader` file. You do not need to touch the `loader` file. It takes care of exporting all the shared components and services so you can import them whenever you want to use them. All you need to do is make sure you export your own components and services via the corresponding `app/src/component/index.js` file and `app/src/service/index.js` so the `loader` can find them.
 
 ## Feature: `fetch`
 This feature shows how a `app` component gets its data.
@@ -214,7 +239,20 @@ import selector from './selector'
 
 export default {actions, types, reducer, selector}
 ```
-It is vitally important that you export the feature-files via the feature's `index.js`. This is true for both the app service files and the api service files.
+
+It is important that you export the service files via the feature's `index.js`. This is true for both the app service files and the api service files.
+### _app/src/service/index.js_
+```javascript
+import counter from './counter'
+import errors from './errors'
+import fetch from './fetch'
+import gp from './gp'
+import thunks from './thunks'
+
+export default {counter, errors, fetch, gp, thunks}
+```
+The feature service is then further exported through the `app/src/service/index.js` file. This makes the feature available via the `loader`.
+
 
 ### The `api` Service Files
 
@@ -247,7 +285,7 @@ export default makeProcessor(processor)
 ```
 An api `processor` plays a similar role as the app `reducer`. It listens out for actions and processes those it is interested in. It is important that you use the `makeProcessor` function to export the actual processor. This allows for error reporting and for more advanced techniques covered later.
 
-Your processor can simply return data, as you see above, and this will automatically be sent back to the app as the payload of a generated `<typeName>Response` action. In this case the action type-name used to return the data would be `fetchFromApiResponse` (see the app [reducer](#appsrcservicefetchreducerjs) code above).
+Your processor can simply return data, as you see above, and this will automatically be sent back to the app as the payload of a generated `<typeName>Response` action. In this case the action type-name used to return the data would be `fetchFromApiResponse` (see the [reducer](#appsrcservicefetchreducerjs) code above).
 
 ### _api/src/service/fetch/index.js_
 ```javascript
@@ -257,4 +295,97 @@ import processor from './processor'
 export default { initialiser, processor}
 
 ```
-It is vitally important that you export the api service files via the feature's `index.js` file. This allows the stack to find and make use of your service elements such as the initialiser and processor files.
+It is important that you export the api service files via the feature's `index.js` file.
+
+### _api/src/service/index.js_
+```javascript
+import counter from './counter'
+import errors from './errors'
+import fetch from './fetch'
+import gp from './gp'
+import thunks from './thunks'
+
+export default { counter, errors, fetch, gp, thunks}
+```
+The feature is then further exported through the `api/src/service/index.js` file to make the stack aware of its existence. This allows the stack to find and make use of your service elements such as the initialiser and processor files.
+
+
+### The `app` Component
+### _app/src/component/fetch/index.jsx_
+```javascript
+import React from 'react'
+import { connect } from 'react-redux'
+import RaisedButton from 'material-ui/RaisedButton'
+import { actionHub, services, components } from '../../loader'
+
+const buttonStyle = {
+  margin: 12
+}
+
+class component extends React.PureComponent {
+  onFetchFromLocal = () => {
+    this.props.fromLocal('This is the data that has been sourced locally.')
+  }
+  onFetchFromApi = () => {
+    this.props.fromApi()
+  }
+  onReload = () => {
+    window.location.reload()
+  }
+  render () {
+    var {source, data} = this.props
+    return (
+      <components.Box>
+        <h2>Fetching Data</h2>
+        //
+        // ... More REACT Markup
+        //
+        <RaisedButton label='Fetch Data Locally' onClick={this.onFetchFromLocal} style={buttonStyle} />
+        <RaisedButton label='Fetch Data from the API' onClick={this.onFetchFromApi} style={buttonStyle} />
+        <RaisedButton label='Reload the Page' onClick={this.onReload} style={buttonStyle} />
+        //
+        // ... More REACT Markup
+        //        
+      </components.Box>
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({
+  source: services.fetch.selector.getSource(state),
+  data: services.fetch.selector.getData(state)
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  fromLocal: (data) => dispatch(actionHub.FETCH_FROM_LOCAL(data)),
+  fromApi: () => dispatch(actionHub.FETCH_FROM_API())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(component)
+```
+The app component is written using the standardised style shown above. All stack components conform to this style. The stack provides the following helper objects via the `loader` file.
+
+* _actionHub_
+
+  This contains _all_ the actions that have been defined by _any_ feature in the app. The action names conform to the standard REDUX format. They are capitalised and are namespaced with the feature name that generated them. You can use the actionHub throughout your code to dispatch any action, or combinations of actions (thunks), regardless of which feature generated them.
+
+* _services_
+
+  This contains all the app services plus any shared services supplied by the `stack-redux-app` package. Typically these will be used to gain access to a features `selector` and so to it's state tree. These are used, in any combination from any service, as props for the component via the `mapStateToProps` function.
+
+* _components_
+
+   This contains all the app components plus any shared services supplied by the `stack-redux-app` package. The `components.Box` is a shared component that is supplied by the package. It can be used alongside any REACT ui components you might export via the
+
+### _app/src/component/index.js_
+```javascript
+import counter from './counter'
+import errors from './errors'
+import fetch from './fetch'
+import gp from './gp'
+import hello from './hello'
+import thunks from './thunks'
+
+export default {counter, errors, fetch, gp, hello, thunks}
+```
+The feature component is then exported through the `app/src/component/index.js` file. This makes the feature's component available via the `loader`.
