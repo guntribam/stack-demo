@@ -132,7 +132,7 @@ export default name
 ```
 Exports the unique feature name. This is used by other feature components and by the stack, for example to correctly namespace generated REDUX Actions.
 
-**app/src/service/fetch/action.js**
+#### `app/src/service/fetch/action.js`
 ```javascript
 import name from './name'
 import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
