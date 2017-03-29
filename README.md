@@ -94,8 +94,6 @@ This feature shows how a `app` component gets its data.
 1. As remote data 'fetched' from the `api` as required
 1. As local data supplied by the `app`
 
-The `fetch` feature has a REACT UI component. It is also the first feature to require a service. A feature's service is typically split into two parts, the `app` service and the `api` service. Each part of the service consists of several specially named files. These files are always named this way.
-
 ### Feature Structure
 
 ```
@@ -120,8 +118,11 @@ stack-demo
           |-reducer.js
           |-selector.js
 ```
+From the structure above you can see that, in common with most features, the `fetch` feature has a REACT UI component found in `app/src/component/fetch/index.js`.
 
-### The `app` Service
+It is also the first feature to require a proper service. A feature's service is typically split into two parts, the `app` service and the `api` service. Each part of the service consists of several specially named files. Depending on capabilities of your feature you may not need all the files but the files are always named this way. It is very important that you name your feature files in the same way.
+
+### The `app` Service Files
 
 **app/src/service/fetch/name.js**
 ```javascript
@@ -151,24 +152,7 @@ Above you see two different types of action being generated. The actions marked 
 
 If the `local` flag is not set (the default case) then the actions will be dispatched to the local reducers as before but will also be automatically broadcast, via a bi-directional web-socket created for you by the stack, to the `api` where they can be picked up by the api service `processor` file (more on this further on).
 
-**app/src/service/fetch/reducer.js**
-```javascript
-const reducer = (state = {}, action) => {
-  const {type, types, data} = action
-  switch (type) {
-    case types.fetch_init:
-      return {...state, data, source: 'initial state pushed by the api'}
-    case types.fetchFromLocal:
-      return {...state, data, source: 'data fetched locally from the app'}
-    case types.fetchFromApiResponse:
-      return {...state, data, source: 'data fetched via the application api'}
-    default:
-      return state
-  }
-}
-
-export default reducer
-```
+The `fetch` feature has a REACT UI component. It is also the first feature to require a service. A feature's service is typically split into two parts, the `app` service and the `api` service. Each part of the service consists of several specially named files. These files are always named this way.
 The REDUX reducer file listens for REDUX actions that have been dispatched either locally by the `app` or remotely by the `api`. The case statement tests the type of the action that has been received and acts accordingly. The type names have been generated for you from the names supplied to the `makeTypes` function above. They are namespaced with the name of the feature found in the `name.js` file.
 
 This reducer shows the three different types of action that the stack will generate for you:
@@ -184,3 +168,23 @@ This reducer shows the three different types of action that the stack will gener
 * `fetchFromApiResponse`
 
   This is the result of dispatching a REDUX action that was then processed by the `api`. If the `api` has data to return it will dispatch an action of type `<typeName>Response`. The type-name is concatenation of the feature-name `fetch` plus the originally dispatched type-name `fromApi` plus the response suffix `Response`
+
+  **app/src/service/fetch/selector.js**
+  ```javascript
+  import name from './name'
+
+  const get = (state) => {
+    return state[name]
+  }
+
+  const getData = (state) => {
+    return get(state).data
+  }
+
+  const getSource = (state) => {
+    return get(state).source
+  }
+
+  export default {get, getData, getSource}
+
+  ```
