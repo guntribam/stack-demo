@@ -132,7 +132,7 @@ export default name
 ```
 Exports the unique feature name. This is used by other feature components and by the stack, for example to correctly namespace generated REDUX Actions.
 
-#### _app/src/service/fetch/action.js_
+### _app/src/service/fetch/action.js_
 ```javascript
 import name from './name'
 import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
@@ -152,7 +152,7 @@ Above you see two different types of action being generated. The actions marked 
 
 If the `local` flag is not set (the default case) then the actions will be dispatched to the local reducers as before but will also be automatically broadcast, via a bi-directional web-socket created for you by the stack, to the `api` where they can be picked up by the api service `processor` file (more on this further on).
 
-#### _app/src/service/fetch/reducer.js_
+### _app/src/service/fetch/reducer.js_
 ```javascript
 const reducer = (state = {}, action) => {
   const {type, types, data} = action
@@ -186,7 +186,7 @@ This reducer shows the three different types of action that the stack will gener
 
   This is the result of dispatching a REDUX action that was then processed by the `api`. If the `api` has data to return it will dispatch an action of type `<typeName>Response`. The type-name is concatenation of the feature-name `fetch` plus the originally dispatched type-name `fromApi` plus the response suffix `Response`
 
-#### _app/src/service/fetch/selector.js_
+### _app/src/service/fetch/selector.js_
 ```javascript
 import name from './name'
 
