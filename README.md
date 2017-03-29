@@ -226,4 +226,35 @@ const initialiser = async () => {
 
 export default initialiser
 ```
-This file is optional. If present the supplied function must be called `initialiser` and it must be marked as `async`. The function can then return whatever data it deems appropriate. Note that the data returned, in common with all api data returned by the api can be normal javascript objects, it does not need to be JSON. The stack takes care of transmitting the data for you (over the websocket) by dispatching a special action with the type-name `<featureName>_init` it can be picked up by an app reducer and incorporated into the local REDUX state tree in the usual way.
+This file is optional. If present the supplied initialiser function must be marked as `async`. The function can then directly return whatever data it deems appropriate. A benefit of being an `async` function is the ability to `await` the results of any database or third-party api calls you might need when gathering initialisation data.
+
+The data returned, in common with all data returned by the api, can be normal javascript types or plain objects, it does not need to be JSON. The stack takes care of transmitting the data for you (over the websocket) by dispatching a special action with the type-name `<featureName>_init`. This action type can then be picked up by an app reducer and the data incorporated into the local REDUX state tree in the usual way.
+
+### _api/src/service/fetch/processor.js_
+```javascript
+import { makeProcessor } from '@gp-technical/stack-redux-api'
+
+const processor = async (action) => {
+  var {types, type, data} = action
+
+  switch (type) {
+    case types.fetchFromApi:
+      return await 'Hello from the stack-demo API'
+  }
+}
+
+export default makeProcessor(processor)
+```
+An api `processor` plays a similar role as the app `reducer`. It listens out for actions and processes those it is interested in. It is important that you use the `makeProcessor` function to export the actual processor. This allows for error reporting and for more advanced techniques covered later.
+
+Your processor can simply return data, as you see above, and this will automatically be sent back to the app as the payload of a generated `<typeName>Response` action. In this case the action type-name used to return the data would be `fetchFromApiResponse` (see the app reducer code above).
+
+### _api/src/service/fetch/index.js_
+```javascript
+import initialiser from './initialiser'
+import processor from './processor'
+
+export default { initialiser, processor}
+
+```
+It is vitally important that you export the api service files via the feature's `index.js` file. This allows the stack to find and make use of your service elements such as the initialiser and processor files.
