@@ -53,9 +53,12 @@ stack-demo
 ```
 
 ## Feature: `hello`
-This is the simplest feature in the demo. It is just a dumb REACT app component, and too simple to require an `api` or `app` service, but it shows you where to place the file. It also shows one other crucial technique. For the stack to know about this component it must be included in the `index.js` found in the `app/src/component` folder. Here is that file, you can see the `hello` component being exported, along with the other components:
+This is the simplest feature in the demo. It is just a dumb REACT app component, and too simple to require an `api` or `app` service, but it shows you that the file is placed in `app/src/component/hello` folder.
 
-```(js)
+It also shows one other crucial technique. For the stack to know about this component it must be included in the `index.js` found in the `app/src/component` folder. Below is content file, you can see the `hello` component being exported, along with the other components:
+
+** `app/src/component/index.js` **
+```(javascript)
 import counter from './counter'
 import errors from './errors'
 import fetch from './fetch'
