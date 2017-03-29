@@ -85,6 +85,6 @@ class component extends React.PureComponent {
 }
 ```
 
-You can see that the `hello` component is exposed via the `components` object that has been imported in from the `loader` file. The `loader` file takes care of importing all the shared components and services you will need without you needing to touch it. All you need to do is make sure you export your own components and services via the corresponding `app/src/component/index.js` file and `app/src/service/index.js`
+You can see that the `hello` component is exposed via the `components` object that has been imported in from the `loader` file. You do not need to touch the `loader` file. It takes care of importing all the shared components and services you will need. All you need to do is make sure you export your own components and services via the corresponding `app/src/component/index.js` file and `app/src/service/index.js`
 
 ## Feature: `fetch`
