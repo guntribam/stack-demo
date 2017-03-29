@@ -115,11 +115,11 @@ The `components` object is imported from the `loader` file. This contains all th
 You do not need to touch the `loader` file. It takes care of exporting all the shared components and services so you can import them whenever you want to use them. All you need to do is make sure you export your own components and services via the corresponding `app/src/component/index.js` file and `app/src/service/index.js` so the `loader` can find them.
 
 ## Feature: `fetch`
-This feature shows how a `app` component gets its data.
+This feature shows how an `app` component can get the data it needs. Either as:
 
-1. As initialisation data 'pushed' from the `api` at startup
-1. As remote data 'fetched' from the `api` as required
-1. As local data supplied by the `app`
+1. Initialisation data 'pushed' from the `api` at startup
+1. Remote data 'fetched' from the `api` as required
+1. Local data supplied by the `app`
 
 ### Feature Structure
 
