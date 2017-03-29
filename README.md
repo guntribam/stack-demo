@@ -176,7 +176,7 @@ This reducer shows the three different types of action that the stack will gener
 
 * `fetch_init`
 
-  This is a special action that is dispatched just once by the `api` during application startup. It supplies a payload of feature specific initialisation data supplied by the `api`. This is optional, but typically  useful when your feature relies on data coming from a database or third-party api.
+  This is an optional action that is dispatched just once by the `api` during application start-up (if the api service supplies an `initialiser.js` file). It delivers a payload of feature specific initialisation data supplied by the `api`. Initialisation data delivered in this way is typically useful when your feature relies on a database or third-party api data-source.
 
 * `fetchFromLocal`
 
@@ -204,3 +204,26 @@ const getSource = (state) => {
 
 export default {get, getData, getSource}
 ```
+A selector is used to easily locate elements within the feature's REDUX state tree. When you require data from REDUX state you should always go through the appropriate feature's selector. You will typically see these being used by REACT components as a data-source for the components props.
+
+### _app/src/service/fetch/index.js_
+```javascript
+import { actions, types } from './action'
+import reducer from './reducer'
+import selector from './selector'
+
+export default {actions, types, reducer, selector}
+```
+It is vitally important that you export the feature-files via the feature's `index.js`. This is true for both the app service files and the api service files.
+
+### The `api` Service Files
+
+### _api/src/service/fetch/initialiser.js_
+```javascript
+const initialiser = async () => {
+  return `This is the initial value for the data. It was sent by the stack-demo API, specifically the 'fetch' service initialiser, at startup.`
+}
+
+export default initialiser
+```
+This file is optional. If present the supplied function must be called `initialiser` and it must be marked as `async`. The function can then return whatever data it deems appropriate. Note that the data returned, in common with all api data returned by the api can be normal javascript objects, it does not need to be JSON. The stack takes care of transmitting the data for you (over the websocket) by dispatching a special action with the type-name `<featureName>_init` it can be picked up by an app reducer and incorporated into the local REDUX state tree in the usual way.
