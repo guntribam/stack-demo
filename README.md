@@ -367,7 +367,7 @@ The app component is written using the standardised style shown above. All stack
 
 * _actionHub_
 
-  This contains _all_ the actions that have been defined by _any_ feature in the app. The action names conform to the standard REDUX format. They are capitalised and are namespaced with the feature name that generated them. You can use the actionHub throughout your code to dispatch any action, or combinations of actions (thunks), regardless of which feature generated them.
+  This contains _all_ the actions that have been defined by _any_ feature in the app. The action names conform to the standard REDUX format. They are capitalised and are namespaced with the feature name that generated them. You can use the actionHub throughout your code to dispatch any action, or combinations of actions (thunks), regardless of which feature generated them. You will often find them being dispatched via the `mapDispatchToProps` function.
 
 * _services_
 
@@ -375,7 +375,7 @@ The app component is written using the standardised style shown above. All stack
 
 * _components_
 
-   This contains all the app components plus any shared services supplied by the `stack-redux-app` package. The `components.Box` is a shared component that is supplied by the package. It can be used alongside any REACT ui components you might export via the
+   This contains all the app components you have exported via the `app/src/component/index.js` file plus any shared services supplied by the `stack-redux-app` package. In the code above the `components.Box` is used. This is an example of a shared component that is supplied by the `stack-redux-app` package.
 
 ### _app/src/component/index.js_
 ```javascript
