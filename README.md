@@ -247,7 +247,7 @@ export default makeProcessor(processor)
 ```
 An api `processor` plays a similar role as the app `reducer`. It listens out for actions and processes those it is interested in. It is important that you use the `makeProcessor` function to export the actual processor. This allows for error reporting and for more advanced techniques covered later.
 
-Your processor can simply return data, as you see above, and this will automatically be sent back to the app as the payload of a generated `<typeName>Response` action. In this case the action type-name used to return the data would be `fetchFromApiResponse` (see the app reducer code above).
+Your processor can simply return data, as you see above, and this will automatically be sent back to the app as the payload of a generated `<typeName>Response` action. In this case the action type-name used to return the data would be `fetchFromApiResponse` (see the app [reducer](#appsrcservicefetchreducerjs) code above).
 
 ### _api/src/service/fetch/index.js_
 ```javascript
