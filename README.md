@@ -68,3 +68,58 @@ import thunks from './thunks'
 
 export default {counter, errors, fetch, gp, hello, thunks}
 ```
+
+Since the component has been correctly exported via the `index.js` file, it is available for use as a standard REACT component. Here it is being used in the `app/src/App.jsx` file.
+
+**app/src/App.jsx**
+```javascript
+import React from 'react'
+import { connect } from 'react-redux'
+import { components, services } from './loader'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { Grid, Row, Col } from 'react-flexbox-grid/lib'
+import { muiTheme } from './theme'
+import styles from './index.scss'
+
+class component extends React.PureComponent {
+  render () {
+    const {user} = this.props
+
+    return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
+          <components.App.Bar
+            title='stack-demo'
+            color={muiTheme.appBar.color}
+            user={user}
+            style={styles} />
+          <Grid>
+            <Row className={styles.main}>
+              <Col
+                xs={12}
+                sm={12}
+                md={8}
+                lg={12}>
+              <components.hello />
+              <components.fetch />
+              <components.counter />
+              <components.errors />
+              <components.thunks />
+              <components.gp />
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+      </MuiThemeProvider>
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({
+  user: services.auth.selector.getProfile(state)
+})
+
+export default connect(mapStateToProps)(component)
+```
+
+That is a lot of code to show a single, simple `hello` feature being used, but if you look closely you can see that is exposed via the `components` object that has been imported in from the `loader` file. The loader file takes care of importing all the shared components and services you will need without you needing to touch it. All you need to do is make sure you export your own components and services via the corresponding `app/src/component/index.js` file and `app/src/service/index.js`
