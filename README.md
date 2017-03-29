@@ -186,23 +186,21 @@ This reducer shows the three different types of action that the stack will gener
 
   This is the result of dispatching a REDUX action that was then processed by the `api`. If the `api` has data to return it will dispatch an action of type `<typeName>Response`. The type-name is concatenation of the feature-name `fetch` plus the originally dispatched type-name `fromApi` plus the response suffix `Response`
 
-  **app/src/service/fetch/selector.js**
-  ```javascript
-  import name from './name'
+**app/src/service/fetch/selector.js**
+```javascript
+import name from './name'
 
-  const get = (state) => {
-    return state[name]
-  }
+const get = (state) => {
+  return state[name]
+}
 
-  const getData = (state) => {
-    return get(state).data
-  }
+const getData = (state) => {
+  return get(state).data
+}
 
-  const getSource = (state) => {
-    return get(state).source
-  }
+const getSource = (state) => {
+  return get(state).source
+}
 
-  export default {get, getData, getSource}
-  ```
-
-  
+export default {get, getData, getSource}
+```
