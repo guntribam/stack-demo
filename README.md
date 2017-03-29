@@ -94,7 +94,7 @@ import thunks from './thunks'
 
 export default {counter, errors, fetch, gp, hello, thunks}
 ```
-You can see the `hello` component being exported, along with the other components. Since the component has been correctly exported via the `index.js` file, it is available for use as a standard REACT component. Here it is being used in the `app/src/App.jsx` file.
+You can see the `hello` component being exported, along with the other components. Since the component has been correctly exported via the `index.js` file, it is now available for use elsewhere in your code. Here it is being used in the `app/src/App.jsx` file.
 
 ### _app/src/App.jsx_
 ```javascript
