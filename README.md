@@ -117,9 +117,9 @@ You do not need to touch the `loader` file. It takes care of exporting all the s
 ## Feature: `fetch`
 This feature shows how an `app` component can get the data it needs. Either as:
 
-1. Initialisation data 'pushed' from the `api` at startup
-1. Remote data 'fetched' from the `api` as required
-1. Local data supplied by the `app`
+* Initialisation data 'pushed' from the `api` at startup
+* Remote data 'fetched' from the `api` as required
+* Local data supplied by the `app`
 
 ### Feature Structure
 
