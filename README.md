@@ -2,7 +2,7 @@
 Get started with the GP stack using this introductory demo application
 
 ## What is the stack?
-The `stack` consists of two packages that together allow you to quickly build single page applications using the REACT and REDUX technologies. They exist to take away much of the boilerplate and leave you with more time to create innovative and useful applications.  These packages are:
+The stack consists of two packages that together allow you to quickly build single page applications using the REACT and REDUX technologies. They exist to take away much of the boilerplate and leave you with more time to create innovative and useful applications.  These packages are:
 
 * [stack-redux-app](https://github.com/gp-technical/stack-redux-app)
 * [stack-redux-api](https://github.com/gp-technical/stack-redux-api)
@@ -28,3 +28,26 @@ my-project
       |-component
 ```
 You can see that the application is first divided into two main domains, the `api` and the `app`. Both of these contain a `service` folder. The `app` also contains a `component` folder. It is important that you structure your stack application in this way, using these names.
+
+### Features
+This demo consists of a series of features. Each feature will typically consist of three items:
+
+1. An `api` service
+1. An `app` service
+1. An `app` component
+
+Each item is named after the feature, so for the example feature called `fetch` the project items will look like this:
+
+```
+stack-demo
+  |-api
+    |-src
+      |-service
+        |-fetch
+  |-app
+    |-src
+      |-service
+        |-fetch
+      |-component
+        |-fetch
+```
