@@ -98,7 +98,7 @@ You can see the `hello` component being exported, along with the other component
 
 ### _app/src/App.jsx_
 ```javascript
-import { components, services } from './loader'
+import { components } from './loader'
 class component extends React.PureComponent {
   render () {
     return (
@@ -110,7 +110,9 @@ class component extends React.PureComponent {
 }
 ```
 
-The `hello` component is exposed via the `components` object that has been imported in from the `loader` file. You do not need to touch the `loader` file. It takes care of exporting all the shared components and services so you can import them whenever you want to use them. All you need to do is make sure you export your own components and services via the corresponding `app/src/component/index.js` file and `app/src/service/index.js` so the `loader` can find them.
+The `components` object is imported from the `loader` file. This contains all the available app components, and now includes the `hello` component.
+
+You do not need to touch the `loader` file. It takes care of exporting all the shared components and services so you can import them whenever you want to use them. All you need to do is make sure you export your own components and services via the corresponding `app/src/component/index.js` file and `app/src/service/index.js` so the `loader` can find them.
 
 ## Feature: `fetch`
 This feature shows how a `app` component gets its data.
