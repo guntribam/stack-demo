@@ -24,8 +24,8 @@ my-project
       |-service
   |-app
     |-src
-      |-service
       |-component
+      |-service
 ```
 You can see that the application is first divided into two main domains, the `api` and the `app`. Both of these contain a `service` folder. The `app` also contains a `component` folder. It is important that you structure your stack application in this way, using these names.
 
@@ -46,9 +46,9 @@ stack-demo
         |-fetch
   |-app
     |-src
-      |-service
-        |-fetch
       |-component
+        |-fetch
+      |-service
         |-fetch
 ```
 
@@ -85,6 +85,99 @@ class component extends React.PureComponent {
 }
 ```
 
-You can see that the `hello` component is exposed via the `components` object that has been imported in from the `loader` file. You do not need to touch the `loader` file. It takes care of importing all the shared components and services you will need. All you need to do is make sure you export your own components and services via the corresponding `app/src/component/index.js` file and `app/src/service/index.js`
+You can see that the `hello` component is exposed via the `components` object that has been imported in from the `loader` file. You do not need to touch the `loader` file. It takes care of exporting all the shared components and services so you can import them whenever you want to use them. All you need to do is make sure you export your own components and services via the corresponding `app/src/component/index.js` file and `app/src/service/index.js` so the `loader` can find them.
 
 ## Feature: `fetch`
+This feature shows how a `app` component gets its data.
+
+1. As initialisation data 'pushed' from the `api` at startup
+1. As remote data 'fetched' from the `api` as required
+1. As local data supplied by the `app`
+
+The `fetch` feature has a REACT UI component. It is also the first feature to require a service. A feature's service is typically split into two parts, the `app` service and the `api` service. Each part of the service consists of several specially named files. These files are always named this way.
+
+### Feature Structure
+
+```
+stack-demo
+  |-api
+    |-src
+      |-service
+        |-fetch
+          |-index.js
+          |-initialiser.js
+          |-processor.js
+  |-app
+    |-src
+      |-component
+        |-fetch
+          |-index.js
+      |-service
+        |-fetch
+          |-action.js
+          |-index.js
+          |-name.js
+          |-reducer.js
+          |-selector.js
+```
+
+### The `app` Service
+
+**app/src/service/fetch/name.js**
+```javascript
+const name = 'fetch'
+
+export default name
+```
+Exports the unique feature name. This is used by other feature components and by the stack, for example to correctly namespace generated REDUX Actions.
+
+**app/src/service/fetch/action.js**
+```javascript
+import name from './name'
+import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
+
+const api = makeTypes(name, ['fromApi'])
+const local = makeTypes(name, ['fromLocal'])
+
+const actions = {...makeActions(api), ...makeActions(local, {local: true})}
+const types = {...api, ...local}
+
+export { actions, types }
+
+```
+Exports the generated REDUX actions and types. The `stack-redux-app` package provides the `makeActions` and `makeTypes` functions to remove nearly all of the REDUX boilerplate.
+
+Above you see two different types of action being generated. The actions marked with the `local` flag will only be dispatched to the reducers in the `app`, the `api` will not be involved.
+
+If the `local` flag is not set (the default case) then the actions will be dispatched to the local reducers as before but will also be automatically broadcast, via a bi-directional web-socket created for you by the stack, to the `api` where they can be picked up by the api service `processor` file (more on this further on).
+
+**app/src/service/fetch/reducer.js**
+```javascript
+const reducer = (state = {}, action) => {
+  const {type, types, data} = action
+  switch (type) {
+    case types.fetch_init:
+      return {...state, data, source: 'initial state pushed by the api'}
+    case types.fetchFromLocal:
+      return {...state, data, source: 'data fetched locally from the app'}
+    case types.fetchFromApiResponse:
+      return {...state, data, source: 'data fetched via the application api'}
+    default:
+      return state
+  }
+}
+
+export default reducer
+```
+The REDUX reducer file listens for REDUX actions that have been dispatched either locally by the `app` or remotely by the `api`. The case statement tests the type of the action that has been received and acts accordingly. The type names have been generated for you from the names supplied to the `makeTypes` function above. They are namespaced with the name of the feature found in the `name.js` file.
+
+This reducer shows the three different types of action that the stack will generate for you:
+
+* `fetch_init`
+  This is a special action that is dispatched just once by the `api` during application startup. It supplies a payload of feature specific initialisation data supplied by the `api`. This is optional, but typically  useful when your feature relies on data coming from a database or third-party api.
+
+* `fetchFromLocal`
+  This is a traditional REDUX action. It is dispatched and processed locally. The type name is a concatenation of the feature-name ('fetch') plus the type-name supplied to the `makeTypes` function ('fromLocal').
+
+* `fetchFromApiResponse`
+  This is the result of dispatching a REDUX action that was then processed by the `api`. If the `api` has data to return as a result of processing an action it will dispatch an action of type `<typeName>Response`. The type-name is therefore a concatenation of the feature-name ('fetch') plus the originally dispatched type-name ('fromApi') plus the api response suffix 'Response'
