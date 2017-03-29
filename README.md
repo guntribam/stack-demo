@@ -161,6 +161,8 @@ The feature consists of three parts and although not all parts are required (the
 
   This contains all the files required to set-up the REDUX actions and types, listen out for actions via a reducer and serve up state-tree data-elements via the selector.
 
+
+
 ### The `app` Service Files
 
 ### _app/src/service/fetch/name.js_
