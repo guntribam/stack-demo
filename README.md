@@ -121,6 +121,8 @@ This feature shows how an `app` component can get the data it needs. Either as:
 * Remote data 'fetched' from the `api` as required
 * Local data supplied by the `app`
 
+Before looking into how the `fetch` feature manages its data its time to look at the general feature structure. All features follow the same structure.
+
 ### Feature Structure
 
 ```
@@ -145,9 +147,19 @@ stack-demo
           |-reducer.js
           |-selector.js
 ```
-From the structure above you can see that, in common with most features, the `fetch` feature has a REACT UI component found in `app/src/component/fetch/index.js`.
+The feature consists of three parts and although not all parts are required (the `hello` feature had no service), most features will consist of:
 
-It is also the first feature to require a proper service. A feature's service is typically split into two folders, the `app` 'service' folder and the `api` 'service' folder. Each of the service folders contain several specially named files. Depending on capabilities of your feature you may not need all the files, but the files are always named this way. It is very important that you name your feature files in the same way.
+* The `api` service
+
+  This is where you listen for and process server-side actions. The actions are typically dispatched from the app and are automatically broadcast to the api by the stack. You can also dispatch actions from the api back to the app and deliver initialisation data for your feature at application start-up
+
+* The `app` component
+
+  This the REACT component. It is fairly standard and makes use of a few stack features that make dispatching actions and re-using other feature components easy.
+
+* The `app` service
+
+  This contains all the files required to set-up the REDUX actions and types, listen out for actions via a reducer and serve up state-tree data-elements via the selector.
 
 ### The `app` Service Files
 
