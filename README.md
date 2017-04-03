@@ -210,7 +210,6 @@ stack-demo
   |-api
     |-src
       |-service
-        index.js            <- the index for all api services
         |-fetch
           |-index.js
           |-initialiser.js
@@ -218,11 +217,9 @@ stack-demo
   |-app
     |-src
       |-component
-        index.js            <- the index for all app components
         |-fetch
           |-index.js
       |-service
-        index.js            <- the index for all app services
         |-fetch
           |-action.js
           |-index.js
