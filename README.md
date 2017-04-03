@@ -243,7 +243,7 @@ The feature consists of three parts and although not all parts are required most
 
 
 
-### The `app` Service Files
+## The `app` Service Files
 
 ### _app/src/service/fetch/name.js_
 ```javascript
@@ -350,7 +350,7 @@ export default {counter, errors, fetch, gp, thunks}
 The feature service is then further exported through the `app/src/service/index.js` file. This makes the feature available via the `loader`.
 
 
-### The `api` Service Files
+## The `api` Service Files
 
 ### _api/src/service/fetch/initialiser.js_
 ```javascript
@@ -406,7 +406,7 @@ export default { counter, errors, fetch, gp, thunks}
 The feature is then further exported through the `api/src/service/index.js` file to make the stack aware of its existence. This allows the stack to find and make use of your service elements such as the initialiser and processor files.
 
 
-### The `app` Component
+## The `app` Component
 ### _app/src/component/fetch/index.jsx_
 ```javascript
 import React from 'react'
