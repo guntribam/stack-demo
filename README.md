@@ -279,7 +279,7 @@ const types = {...api, ...local}
 export { actions, types }
 
 ```
-Exports the generated REDUX actions and types. The `stack-redux-app` package provides the `makeActions` and `makeTypes` functions to remove nearly all of the REDUX boilerplate.
+Exports the generated REDUX `actions` and `types`. The `stack-redux-app` package provides the `makeActions` and `makeTypes` functions to remove nearly all of the REDUX boilerplate.
 
 Above you see two different types of action being generated. The actions marked with the `local` flag will only be dispatched to the reducers in the `app`, the `api` will not be involved.
 
