@@ -257,11 +257,11 @@ These files run in the browser. They use stack functions to define REDUX types a
 ```
 |-service
   |-fetch
-    |-action.js
-    |-index.js
-    |-name.js
-    |-reducer.js
-    |-selector.js
+    |-action.js     <- defines the REDUX actions and types for this feature
+    |-index.js      <- exports the feature's app-service items
+    |-name.js       <- supplies the unique feature name
+    |-reducer.js    <- listens out for and processes REDUX actions
+    |-selector.js   <- simplifies access to the feature's REDUX state tree
 ```
 
 ### _app/src/service/fetch/name.js_
