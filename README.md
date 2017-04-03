@@ -37,7 +37,7 @@ You can see that the application is first divided into two main domains, the `ap
 >
 >All this remains true for a `stack-application` with one additional consideration - by default any dispatched REDUX action will also be broadcast to your `api` where it can be trigger server-side processing. Since web-sockets work in both directions, so your `api` can also dispatch actions that your `app` can listen out for, for example to return data requested by the `app`.
 >
->The upshot of this is the elimination of the machine boundary between your `app` and your `api`. REST and http calls within your application space are not required.
+>The upshot of this is the machine boundary between your `app` and your `api` is eliminated. You do not need to worry about the plumbing that allows your browser-side `app` code to communicate with the server-side `api` code. Internal REST apis and http calls within your application space are a thing of the past. Everything is mediated via dispatched REDUX actions and the changes to local REDUX state they cause.
 
 ### Features
 This demo consists of a series of features. Each feature will typically consist of three items:
