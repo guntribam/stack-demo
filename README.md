@@ -37,10 +37,10 @@ This demo consists of a series of features. Each feature will typically consist 
 
 * An `api` service
 
-  This is the code that runs on the server. It will typically call out to your datastore and return data payloads or perhaps interact securely with third party APIs
+  This is the code that runs on the server. It will typically call out to your data-store and return data payloads or perhaps interact securely with third party APIs
 * An `app` service
 
-  This is the code that runs in the browser and is used to mutate your application state, dispatch REDUX actions and request / receive data from the application api.
+  This is the code that runs in the browser and is used to update your application's REDUX state, dispatch REDUX actions and request / receive data from the application api.
 * An `app` component
 
   The is the REACT component used to surface and interact with the application state
