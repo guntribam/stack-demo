@@ -35,13 +35,13 @@ You can see that the application is first divided into two main domains, the `ap
 ### Features
 This demo consists of a series of features. Each feature will typically consist of three items:
 
-1. An `api` service
+* An `api` service
 
   This is the code that runs on the server. It will typically call out to your datastore and return data payloads or perhaps interact securely with third party APIs
-1. An `app` service
+* An `app` service
 
   This is the code that runs in the browser and is used to mutate your application state, dispatch REDUX actions and request / receive data from the application api.
-1. An `app` component
+* An `app` component
 
   The is the REACT component used to surface and interact with the application state
 
