@@ -136,10 +136,42 @@ There now follows a run through each of the Features in the stack-demo.
 
 This is the simplest feature in the demo. It is just a dumb REACT app component and too simple to require an api or app service. It is here to show you that you don't need to do anything special if you just want to include a standard REACT component.
 
+### _app/src/component/hello/index.js_
+```javascript
+import React from 'react'
+
+const style = {
+  margin: 20,
+  padding: 20,
+  borderColor: 'lightgray',
+  borderStyle: 'solid',
+  borderWidth: 1,
+  backgroundColor: 'White'
+}
+
+class component extends React.PureComponent {
+  render () {
+    return (
+      <div style={style}>
+        <h2>Hello World</h2>
+      </div>
+    )
+  }
+}
+
+export default component
+```
+
 ### _app/src/component/index.js_
 ```javascript
-import hello from './hello'
-export default {hello}
+import counter from './counter'
+import errors from './errors'
+import fetch from './fetch'
+import gp from './gp'
+import hello from './hello'      <- export the hello feature component
+import thunks from './thunks'
+
+export default {counter, errors, fetch, gp, hello, thunks}
 ```
 ### _app/src/App.jsx_
 ```javascript
@@ -148,14 +180,19 @@ class component extends React.PureComponent {
   render () {
     return (
         ...
-        <components.hello />
+        <components.hello />      <- use the hello feature component via the loader.components
+        <components.fetch />
+        <components.counter />
+        <components.errors />
+        <components.thunks />
+        <components.gp />
         ...
     )
   }
 }
 ```
 
-You can see this component has been exported via the `app/src/component/index.js` file, this makes it available to use via the 'loader' object.
+You can see the `hello` component has been exported via the `app/src/component/index.js` file, this makes it available to use via the `loader` object.
 
 ## Feature: `fetch`
 This feature shows how an `app` component can get the data it needs. Either as:
