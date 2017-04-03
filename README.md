@@ -114,7 +114,7 @@ class component extends React.PureComponent {
 }
 ```
 
-Accessing the fetch component is acheived through the `components` object and this is imported from the stack `loader` file. The loader object contains all the available app components and services, and since we have correctly exported our `fetch` component, we can now access here and use it in the App.jsx file.
+Accessing the `fetch` component is achieved through the `components` object and this is imported from the stack `loader` file. The loader object contains all the available app components and services, and since we have correctly exported our `fetch` component, we can now access here and use it in the App.jsx file.
 
 Please note that you do not need to touch the `loader` file. It takes care of automatically loading all the correctly exported components and services so you can import them whenever you want to use them. This includes any shared features supplied by the stack packages. All you need to do is make sure you export your own features via the index files as shown above so the `loader` can find them.
 
