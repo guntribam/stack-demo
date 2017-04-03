@@ -132,7 +132,7 @@ export default {counter, errors, fetch, gp, thunks}
 ```
 There now follows a run through each of the Features in the stack-demo.
 
-## Feature: `hello`
+# Feature: `hello`
 
 This is the simplest feature in the demo. It is just a dumb REACT app component and too simple to require an api or app service. It is here to show you that you don't need to do anything special if you just want to include a standard REACT component.
 
@@ -194,7 +194,7 @@ class component extends React.PureComponent {
 
 You can see the `hello` component has been exported via the `app/src/component/index.js` file, this makes it available to use via the `loader` object.
 
-## Feature: `fetch`
+# Feature: `fetch`
 This feature shows how an `app` component can get the data it needs. Either as:
 
 * Initialisation data 'pushed' from the `api` at startup
