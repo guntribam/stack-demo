@@ -80,8 +80,7 @@ stack-demo
         index.js      <- the index for all app services
         |-fetch
 ```
-
-component it must be included in the `app/src/component/index.js` file.
+Here is the format for exporting each of the feature elements via the index files.
 
 ### _api/src/service/index.js_
 ```javascript
@@ -99,7 +98,7 @@ import fetch from './fetch'
 export default {fetch}
 ```
 
-You can see the `fetch` feature being being exported via the three index files. This feature is now fully wired up and ready to use elsewhere in your code. For example, here is the fetch REACT component being used in the `app/src/App.jsx` file.
+You can see the `fetch` feature being exported in the same way via the three index files. This feature is now fully wired up and ready to use elsewhere in your code. For example, here is the fetch REACT component being used in the `app/src/App.jsx` file.
 
 ### _app/src/App.jsx_
 ```javascript
@@ -115,11 +114,23 @@ class component extends React.PureComponent {
 }
 ```
 
-The `components` object is imported from the `loader` file. This contains all the available app components, and now includes the `fetch` component.
+Accessing the fetch component is acheived through the `components` object and this is imported from the stack `loader` file. The loader object contains all the available app components and services, and since we have correctly exported our `fetch` component, we can now access here and use it in the App.jsx file.
 
-You do not need to touch the `loader` file. It takes care of automatically exporting all the shared components and services so you can import them whenever you want to use them.
+Please note that you do not need to touch the `loader` file. It takes care of automatically loading all the correctly exported components and services so you can import them whenever you want to use them. This includes any shared features supplied by the stack packages. All you need to do is make sure you export your own features via the index files as shown above so the `loader` can find them.
 
-All you need to do is make sure you export your own features via the index files as shown above, then the `loader` can find them and you can use them elsewhere.
+For completeness, here is the real `app/src/service/index.js` file showing all the stack-demo app services being exported. The other index files follow the same format, they may not all export all
+
+### _app/src/service/index.js_
+```javascript
+import counter from './counter'
+import errors from './errors'
+import fetch from './fetch'
+import gp from './gp'
+import thunks from './thunks'
+
+export default {counter, errors, fetch, gp, thunks}
+```
+There now follows a run through each of the Features in the stack-demo. 
 
 ## Feature: `fetch`
 This feature shows how an `app` component can get the data it needs. Either as:
