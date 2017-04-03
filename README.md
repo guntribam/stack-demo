@@ -239,11 +239,23 @@ The feature consists of three parts and although not all parts are required most
 
 * The `app` service
 
-  This contains all the files required to set-up the REDUX actions and types, listen out for actions via a reducer and serve up state-tree data-elements via the selector.
+  This contains all the files required to set-up the REDUX actions and types, listen out for actions via a `reducer` and serve up state-tree data-elements via the feature's `selector`.
 
-
+We will now use the `fetch` feature to go through each of the files that make up a feature. The `fetch` is actually pretty simple, but it deliberately touches on all the pieces you will need to write your own complex features.
 
 ## The `app` Service Files
+
+These files run in the browser. They use stack functions to define REDUX types and actions, take care of dispatching the actions and change local REDUX state in response to actions.
+
+```
+|-service
+  |-fetch
+    |-action.js
+    |-index.js
+    |-name.js
+    |-reducer.js
+    |-selector.js
+```
 
 ### _app/src/service/fetch/name.js_
 ```javascript
