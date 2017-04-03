@@ -46,12 +46,14 @@ This demo consists of a series of features. Each feature will typically consist 
   The is the REACT component used to surface and interact with the application state
 
 ### Some  Theory
->At its heart, the stack is just a web-socket that connects your `app` to your `api`. When you dispatch a REDUX action then the expectation is that somewhere in your code there will be a reducer or reducers listening out for that action so that local state can be changed. Your REACT components then react to these changes and update the UI. All this remains true for a stack-application with one additional consideration. By default any dispatched REDUX action will also be broadcast to your `api` where it can be trigger server-side processing. Since web-sockets work in both directions, so your `api` can also dispatch actions that your `app` can listen out for, for example to return data requested by the `app`.
+>>>
+At its heart, the stack is just a web-socket that connects your `app` to your `api`. When you dispatch a REDUX action then the expectation is that somewhere in your code there will be a reducer or reducers listening out for that action so that local state can be changed. Your REACT components then react to these changes and update the UI. All this remains true for a stack-application with one additional consideration. By default any dispatched REDUX action will also be broadcast to your `api` where it can be trigger server-side processing. Since web-sockets work in both directions, so your `api` can also dispatch actions that your `app` can listen out for, for example to return data requested by the `app`.
 
 The upshot of this is the elimination of the machine boundary between your `app` and your `api`. REST and http calls within your application space are not required.
 
 To keep things a little simpler, actions that you _know_ are local can be marked with the `local` flag. These will only be dispatched to the reducers in the local (browser) `app` and the `api` will not be involved. If the `local` flag is not set (and this is the default case) then the actions will also be automatically broadcast, via that bi-directional web-socket, to the `api` where they can be picked up by the relevant `api` service `processor` files - more on this later...
-```
+>>>
+
 In the project, each item is named after the feature. For example, one of the first stack-demo features is called `fetch`, so for this feature the project items would be as follows:
 
 ```
