@@ -118,7 +118,7 @@ From the `App.jsx` code above you can see that accessing the `fetch` component i
 
 Please note that you do not need to touch the `loader`. It takes care of automatically loading all the correctly exported components and services so you can import them whenever you want to use them. This includes any shared features supplied by the stack packages. All you need to do is make sure you export your own features via the index files as shown above so the `loader` can find them.
 
-For completeness, here is the real `app/src/service/index.js` file showing all the stack-demo app services being exported. The other index files follow the same format, they may not all export all
+For completeness, here is the real `app/src/service/index.js` file showing all the stack-demo app services being exported.
 
 ### _app/src/service/index.js_
 ```javascript
