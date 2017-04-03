@@ -2,20 +2,23 @@
 Get started with the GP stack using this introductory demo application
 
 ## What is the stack?
-The stack consists of two packages that together allow you to quickly build single page applications using the REACT and REDUX technologies. They exist to take away much of the boilerplate and leave you with more time to create innovative and useful applications.  These packages are:
+The stack exists to allow you to quickly build single page applications using the REACT and REDUX technologies. It demands a specific way of writing your code, as well as helper features, that together take away much of the boilerplate and leave you with more time to create innovative and useful applications.
+
+The stack consists of the following two packages:
 
 * [stack-redux-app](https://github.com/gp-technical/stack-redux-app)
 * [stack-redux-api](https://github.com/gp-technical/stack-redux-api)
 
 The stack is deliberately opinionated. This means there _is_ a right way to do things and the packages have been designed to work best if they are used in the right way.
 
-This demo has been written to give you concrete examples of the right way to use the packages. It is a reference demo, it does nothing in particular, but what it does do has been selected to provide a graduated introduction to the ways of the stack.
+This reference demo has been written to give you concrete examples of the right way to use the packages. It does nothing in particular, but what it does do has been selected to provide a graduated introduction via a series a of _features_. In stack-speak, a feature just means all the bits of code that, when taken together, provide a useful chunk of functionality. As you will see, each feature will typically have code that runs on the server (the `api` service), the client (the `app` service) and some UI code (the `app` component).
+
+Starting simply then, the stack-demo shows you how to structure your project, re-use the shared features supplied by the stack and then write your own custom features that together go to make up your own stack-application.
 
 ## Getting Started
-You will need help getting set up to run this demo. The stack does a number of complex tasks for you, for example it ensures your application is capable of Single Sign On (SSO) and it also performs a security handshake with the main GP API so your applications have access to the GP content and data. All this requires setup and so you should contact [Jonny](janderson@goodpractice.com) or [Daniel](ddeak@goodpractice) to see about getting everything working.
+You will probably need some devops help getting set up to run this demo. The stack does a number of complex tasks for you, for example it ensures your application is capable of Single Sign On (SSO) and it also performs a security handshake with the main GP API so your applications have access to the GP content and data. All this requires setup and so you should contact [Jonny](janderson@goodpractice.com) or [Daniel](ddeak@goodpractice) to see about getting everything working.
 
-
-## Project Folder Structure
+## The stack-application Folder Structure
 The folder structure for a stack project should be:
 ```
 my-project
@@ -33,8 +36,14 @@ You can see that the application is first divided into two main domains, the `ap
 This demo consists of a series of features. Each feature will typically consist of three items:
 
 1. An `api` service
+
+  This is the code that runs on the server. It will typically call out to your datastore and return data payloads or perhaps interact securely with third party APIs
 1. An `app` service
+
+  This is the code that runs in the browser and is used to mutate your application state, dispatch REDUX actions and request / receive data from the application api.
 1. An `app` component
+
+  The is the REACT component used to surface and interact with the application state
 
 Each item is named after the feature, so for the example feature called `fetch` the project items will look like this:
 
