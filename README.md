@@ -35,7 +35,7 @@ You can see that the application is first divided into two main domains, the `ap
 ### Some Theory
 >At its heart, the stack is just a web-socket that connects your `app` to your `api`. As is usual for a REACT / REDUX application, when you dispatch a REDUX action then the expectation is that somewhere in your code there will be reducer(s) listening out for that action so that local state can be changed. Your REACT components then react to these changes and update the UI.
 >
->All this remains true for a stack-application with one additional consideration. By default any dispatched REDUX action will also be broadcast to your `api` where it can be trigger server-side processing. Since web-sockets work in both directions, so your `api` can also dispatch actions that your `app` can listen out for, for example to return data requested by the `app`.
+>All this remains true for a `stack-application` with one additional consideration. By default any dispatched REDUX action will also be broadcast to your `api` where it can be trigger server-side processing. Since web-sockets work in both directions, so your `api` can also dispatch actions that your `app` can listen out for, for example to return data requested by the `app`.
 >
 >The upshot of this is the elimination of the machine boundary between your `app` and your `api`. REST and http calls within your application space are not required.
 
