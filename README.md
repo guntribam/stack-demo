@@ -45,7 +45,7 @@ This demo consists of a series of features. Each feature will typically consist 
 
   The is the REACT component used to surface and interact with the application state
 
-Each item is named after the feature. One of the stack-demo features is called `fetch`, so for this feature the project items will look like:
+In the project, each item is named after the feature. Foe example, one of the first stack-demo features is called `fetch`, so for this feature the project items would be as follows:
 
 ```
 stack-demo
