@@ -52,13 +52,13 @@ stack-demo
   |-api
     |-src
       |-service
-        |-fetch
+        |-fetch       <- the api service
   |-app
     |-src
       |-component
-        |-fetch
+        |-fetch       <- the app component
       |-service
-        |-fetch
+        |-fetch       <- the app service
 ```
 
 ## Feature: `hello`
