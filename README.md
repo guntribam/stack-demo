@@ -130,7 +130,32 @@ import thunks from './thunks'
 
 export default {counter, errors, fetch, gp, thunks}
 ```
-There now follows a run through each of the Features in the stack-demo. 
+There now follows a run through each of the Features in the stack-demo.
+
+## Feature: `hello`
+
+This is the simplest feature in the demo. It is just a dumb REACT app component and too simple to require an api or app service. It is here to show you that you don't need to do anything special if you just want to include a standard REACT component.
+
+### _app/src/component/index.js_
+```javascript
+import hello from './hello'
+export default {hello}
+```
+### _app/src/App.jsx_
+```javascript
+import { components } from './loader'
+class component extends React.PureComponent {
+  render () {
+    return (
+        ...
+        <components.hello />
+        ...
+    )
+  }
+}
+```
+
+You can see this component has been exported via the `app/src/component/index.js` file, this makes it available to use via the 'loader' object.
 
 ## Feature: `fetch`
 This feature shows how an `app` component can get the data it needs. Either as:
