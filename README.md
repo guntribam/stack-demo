@@ -227,7 +227,7 @@ stack-demo
           |-reducer.js
           |-selector.js
 ```
-The feature consists of three parts and although not all parts are required most features will consist of:
+The feature consists of three parts and although not all parts are always required for all features, _most_ useful features will consist of:
 
 * The `api` service
 
