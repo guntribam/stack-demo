@@ -61,49 +61,45 @@ stack-demo
         |-fetch    <- the app service
 ```
 
-## Feature: `hello`
+### The Feature `index.js` files
+For the stack to know about each part of a feature it must be exported via the relevant `index.js` file.  The folders that contain the api services, the app components and the api services all have a single index.js file and you must export your feature through these so the stack can discover them.
 
-This is the simplest feature in the demo. It is just a dumb REACT app component, and too simple to require an `api` or `app` service, but it shows you that the file is placed in `app/src/component/hello` folder.
-### _app/src/component/hello/index.js_
-```javascript
-import React from 'react'
-
-const style = {
-  margin: 20,
-  padding: 20,
-  borderColor: 'lightgray',
-  borderStyle: 'solid',
-  borderWidth: 1,
-  backgroundColor: 'White'
-}
-
-class component extends React.PureComponent {
-  render () {
-    return (
-      <div style={style}>
-        <h2>Hello World</h2>
-      </div>
-    )
-  }
-}
-
-export default component
+```
+stack-demo
+  |-api
+    |-src
+      |-service
+        index.js      <- the index for all api services
+        |-fetch
+  |-app
+    |-src
+      |-component
+        index.js      <- the index for all app components
+        |-fetch
+      |-service
+        index.js      <- the index for all app services
+        |-fetch
 ```
 
-For the stack to know about this component it must be included in the `app/src/component/index.js` file.
+component it must be included in the `app/src/component/index.js` file.
 
+### _api/src/service/index.js_
+```javascript
+import fetch from './fetch'
+export default {fetch}
+```
 ### _app/src/component/index.js_
 ```javascript
-import counter from './counter'
-import errors from './errors'
 import fetch from './fetch'
-import gp from './gp'
-import hello from './hello'
-import thunks from './thunks'
-
-export default {counter, errors, fetch, gp, hello, thunks}
+export default {fetch}
 ```
-You can see the `hello` component being exported, along with the other components. Since the component has been correctly exported via the `index.js` file, it is now available for use elsewhere in your code. Here it is being used in the `app/src/App.jsx` file.
+### _app/src/service/index.js_
+```javascript
+import fetch from './fetch'
+export default {fetch}
+```
+
+You can see the `fetch` feature being being exported via the three index files. This feature is now fully wired up and ready to use elsewhere in your code. For example, here is the fetch REACT component being used in the `app/src/App.jsx` file.
 
 ### _app/src/App.jsx_
 ```javascript
@@ -112,16 +108,18 @@ class component extends React.PureComponent {
   render () {
     return (
         ...
-        <components.hello />
+        <components.fetch />
         ...
     )
   }
 }
 ```
 
-The `components` object is imported from the `loader` file. This contains all the available app components, and now includes the `hello` component.
+The `components` object is imported from the `loader` file. This contains all the available app components, and now includes the `fetch` component.
 
-You do not need to touch the `loader` file. It takes care of exporting all the shared components and services so you can import them whenever you want to use them. All you need to do is make sure you export your own components and services via the corresponding `app/src/component/index.js` file and `app/src/service/index.js` so the `loader` can find them.
+You do not need to touch the `loader` file. It takes care of automatically exporting all the shared components and services so you can import them whenever you want to use them.
+
+All you need to do is make sure you export your own features via the index files as shown above, then the `loader` can find them and you can use them elsewhere.
 
 ## Feature: `fetch`
 This feature shows how an `app` component can get the data it needs. Either as:
@@ -139,6 +137,7 @@ stack-demo
   |-api
     |-src
       |-service
+        index.js            <- the index for all api services
         |-fetch
           |-index.js
           |-initialiser.js
@@ -146,9 +145,11 @@ stack-demo
   |-app
     |-src
       |-component
+        index.js            <- the index for all app components
         |-fetch
           |-index.js
       |-service
+        index.js            <- the index for all app services
         |-fetch
           |-action.js
           |-index.js
@@ -156,7 +157,7 @@ stack-demo
           |-reducer.js
           |-selector.js
 ```
-The feature consists of three parts and although not all parts are required (the `hello` feature had no service), most features will consist of:
+The feature consists of three parts and although not all parts are required most features will consist of:
 
 * The `api` service
 
