@@ -358,7 +358,7 @@ import selector from './selector'
 export default {actions, types, reducer, selector}
 ```
 
-It is important that you export the service files via the feature's `index.js`. This is true for both the app service files and the api service files.
+It is important that you export the service files via the feature's `index.js`.
 ### _app/src/service/index.js_
 ```javascript
 import counter from './counter'
@@ -373,6 +373,14 @@ The feature service is then further exported through the `app/src/service/index.
 
 
 ## The `api` Service Files
+
+```
+|-service
+  |-fetch
+    |-index.js        <- exports the feature's api-service items
+    |-initialiser.js  <- provides feature specific data at application start-up
+    |-processor.js    <- listens out for and processes REDUX actions
+```
 
 ### _api/src/service/fetch/initialiser.js_
 ```javascript
