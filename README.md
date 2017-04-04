@@ -57,7 +57,7 @@ This demo consists of a series of features.
 
 * ## [counter](#feature-counter)
 
-
+## Features Explained
 Each feature will typically consist of three items:
 
 * An `api` service
