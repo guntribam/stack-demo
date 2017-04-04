@@ -423,19 +423,6 @@ export default { initialiser, processor}
 ```
 It is important that you export the api service files via the feature's `index.js` file.
 
-### _api/src/service/index.js_
-```javascript
-import counter from './counter'
-import errors from './errors'
-import fetch from './fetch'
-import gp from './gp'
-import thunks from './thunks'
-
-export default { counter, errors, fetch, gp, thunks}
-```
-The feature is then further exported through the `api/src/service/index.js` file to make the stack aware of its existence. This allows the stack to find and make use of your service elements such as the initialiser and processor files.
-
-
 ## The `app` Component
 ### _app/src/component/fetch/index.jsx_
 ```javascript
