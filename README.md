@@ -403,7 +403,7 @@ const processor = async (action) => {
 
   switch (type) {
     case types.fetchFromApi:
-      return await 'Hello from the stack-demo API'
+      return 'Hello from the stack-demo API'
   }
 }
 
