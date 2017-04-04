@@ -71,7 +71,7 @@ This demo consists of a series of features. Each feature extends and builds on t
 
 * ## [gp](#feature-gp)
 
-  As you might expect for an opinionated GP stack, it provides access to the main GP-API out-of-the-box and makes it so easy its almost embarrassing. This feature shows how you can use the main GP-API to:
+  As you might expect for an opinionated GP stack interacting with the GP-API has been made as low-friction as possible. This feature shows how you can use the main GP-API to:
 
   * initialise a drop-down of content folders
   * populate a table with the contents of the selected folder
