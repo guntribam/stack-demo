@@ -775,7 +775,7 @@ The REACT component does nothing special. It pulls in the REDUX state data in  `
 # Feature: `errors`
 When the `api` throws an error, or more specifically when code that is wrapped inside the `makeProcessor` function throws an error, that error is trapped by the stack. The full error is logged to [Log Entries](https://logentries.com) and an error action containing a deliberately anodyne error message is dispatched so the `app` knows something went wrong.
 
-The error acti
+This feature is an example of an edge-case where there is no need to have any local state change handled by your code, because the REDUX state change for the error message (dispatched by the `api`) is baked into the stack. This means that although the feature still defines and dispatches its own REDUX actions, it has no `reducer` or `selector` files. The stack allows for this level of granularity.
 
 
 ## The `app` Service Files
@@ -784,58 +784,76 @@ The error acti
 import name from './name'
 import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
 
-const api = makeTypes(name, ['throwFromApi'])
-const local = makeTypes(name, ['throwFromLocal'])
-
-const actions = {...makeActions(api), ...makeActions(local, {local: true})}
-const types = {...api, ...local}
+const types = makeTypes(name, ['throwFromApi'])
+const actions = makeActions(types)
 
 export { actions, types }
 
 ```
-The actions.js file defines just two actions.
-
-* _throwFromApi_
-
-  An action that is intended to be processed by the `api` (via the this feature's `api` service `processor.js` file)
-
-* _throwFromLocal_
-
-  An action that is intended to be processed by the local `app` code. Note the `local` flag is set to `true` for this action.
-
-### _app/src/service/counter/reducer.js_
-```javascript
-const reducer = (state = {answer: 'unknown'}, action) => {
-  const {type, types, data} = action
-  switch (type) {
-    case types.errorsThrownFromLocal:
-      return {...state, error: data.error}
-    default:
-      return state
-  }
-}
-
-export default reducer
-```
-
-Only the `errorsThrownFromLocal` can be listened for by the reducer.
-
-Note that here the feature's initialisation data is set locally in the `reducer.js`. It is not always necessary to have the `api` send feature initialisation data.
-
-### _app/src/service/errors/selector.js_
-```javascript
-
-```
+The actions.js file defines a single action to be processed by the `api`
 
 ## The `api` Service Files
 ### _api/src/service/errors/processor.js_
 ```javascript
+import { makeProcessor } from '@gp-technical/stack-redux-api'
+
+const processor = async (action) => {
+  var {types, type, data} = action
+  switch (type) {
+    case types.errorsThrowFromApi:
+      throw(new Error('This is a test error that was thrown by the stack-demo API'))
+  }
+}
+
+export default makeProcessor(processor)
 ```
+The `api` service `processor` file listen out for the REDUX action and throws a standard javascript error. Because the processor function is wrapped by the `makeProcessor` function, this error can be intercepted and logged by the stack before dispatching an internal error action.
+
 
 ## The `app` Component
 ### _app/src/component/errors/index.jsx_
 ```javascript
+import React from 'react'
+import { connect } from 'react-redux'
+import Divider from 'material-ui/Divider'
+import RaisedButton from 'material-ui/RaisedButton'
+import { actionHub, services, components } from '../../loader'
+
+const buttonStyle = {
+  margin: 12
+}
+
+class component extends React.PureComponent {
+  onThrowFromApi = () => {
+    this.props.throwFromApi()
+  }
+
+  render () {
+    var {errorMessage} = this.props
+    return (
+      <components.Box>
+        <h2>Displaying Errors From the API</h2>
+        // ... REACT Markup
+        <h3><components.ErrorMessage text={errorMessage} /></h3>
+        <Divider />
+        <RaisedButton label='Thrown an API Error' onClick={this.onThrowFromApi} style={buttonStyle} />
+      </components.Box>
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({
+  errorMessage: services.errorMessage.selector.getText(state)
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  throwFromApi: () => dispatch(actionHub.ERRORS_THROW_FROM_API())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(component)
+
 ```
+This is a standard stack REACT component. Note that the `mapStateToProps` function reaches into the state tree of the `errorMessage` shared feature. This feature is part of the standard set of shared features supplied by the `stack-redux-app` package. Its job is to listen out for the internal error action automatically dispatched by the api when an error occurs in a processor.
 
 # Feature: `thunk`
 ### _app/src/service/thunk/action.js_
