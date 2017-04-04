@@ -320,11 +320,11 @@ This reducer shows the three different types of action that the stack will gener
 
 * `fetchFromLocal`
 
-  This is a traditional REDUX action. It is dispatched and processed locally. The type-name is a concatenation of the feature-name `fetch` plus the `fromLocal` type-name supplied to the `makeTypes` function in the `action.js` file above.
+  This is a traditional REDUX action. It is dispatched and processed locally. The type-name is a concatenation of the feature-name `fetch`+`fromLocal`, the type-name supplied to the `makeTypes` function in the `action.js` file above.
 
 * `fetchFromApiResponse`
 
-  This is the result of dispatching a REDUX action that was then processed by the `api`. If the `api` has data to return it will dispatch an action of type `<typeName>Response`. The type-name is concatenation of the feature-name `fetch` plus the originally dispatched type-name `fromApi` (supplied to the `makeTypes` function) plus the `api` response suffix `Response`
+  This is the result of dispatching a REDUX action that was then processed by the `api`. If the `api` has data to return it will dispatch an action of type `<typeName>Response`. The type-name is concatenation of the feature-name `fetch` + `fromApi`, the type-name supplied to the `makeTypes` function + `Response`, the `api` response suffix
 
 ### _app/src/service/fetch/selector.js_
 ```javascript
