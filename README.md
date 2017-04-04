@@ -57,6 +57,10 @@ This demo consists of a series of features.
 
 * ## [counter](#feature-counter)
 
+  A simple, server-side counter. It shows how to :
+  * update your application state by dispatching actions to the feature's `api` service.
+  * expose selected aspects of the feature's api service though REST endpoints
+
 ## Features Explained
 Each feature will typically consist of three items:
 
