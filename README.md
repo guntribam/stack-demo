@@ -853,7 +853,9 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(component)
 
 ```
-This is a standard stack REACT component. Note that the `mapStateToProps` function reaches into the state tree of the `errorMessage` shared feature. This feature is part of the standard set of shared features supplied by the `stack-redux-app` package. Its job is to listen out for the internal error action automatically dispatched by the api when an error occurs in a processor.
+Note that this feature has no state of its own. Instead the `mapStateToProps` function reaches into the state tree of the `errorMessage` shared feature provided as part of the `stack-redux-app` package.
+
+The `errorMessage` feature will listen out for the internal error action that is automatically dispatched by the api when an error occurs in a processor and update the local state for you. It also supplies the `selector.getText()` method you see being used to get the current error message.
 
 # Feature: `thunk`
 ### _app/src/service/thunk/action.js_
