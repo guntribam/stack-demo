@@ -42,20 +42,20 @@ You can see that the application is first divided into two main domains, the `ap
 ### Features
 This demo consists of a series of features.
 
-* #### [hello](#feature-hello)
+* ### [hello](#feature-hello)
 
   A simple hello-world react component. No stack involved.
 
-* #### [fetch](#feature-fetch)
+* ### [fetch](#feature-fetch)
 
   Shows the three ways your feature can get it's hands on some data:
-  1. From the local `app`
-  2. Automatically as start-up initialisation data from the `api`
-  3. Requested from the `api` during normal running
+  * From the local `app`
+  * Automatically as start-up initialisation data from the `api`
+  * Requested from the `api` during normal running
 
   This is also a _Grand Tour_ of most of the feature files you will need to write any complex feature. The rest of the features below are much shorter as they only explain how they differ from this main example.
 
-* #### [counter](#feature-counter)
+* ### [counter](#feature-counter)
 
 
 Each feature will typically consist of three items:
