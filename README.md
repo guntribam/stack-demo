@@ -40,7 +40,25 @@ You can see that the application is first divided into two main domains, the `ap
 >The upshot of this is the machine boundary between your `app` and your `api` is eliminated. You do not need to worry about the plumbing that allows your browser-side `app` code to communicate with the server-side `api` code. Internal REST apis and http calls within your application space are a thing of the past. Everything is mediated via dispatched REDUX actions and the changes to local REDUX state they cause.
 
 ### Features
-This demo consists of a series of features. Each feature will typically consist of three items:
+This demo consists of a series of features.
+
+* [hello](#feature-hello)
+
+  A simple hello-world react component. No stack involved.
+
+* [fetch](#feature-fetch)
+
+  Shows the three ways your feature can get it's hands on some data:
+  1. From the local `app`
+  1. Automatically as start-up initialisation data from the `api`
+  1. Requested from the `api` during normal running
+
+  This is also a _Grand Tour_ of most of the feature files you will need to write any complex feature. The rest of the features below are much shorter as they only explain how they differ from this main example.
+
+* [counter](#feature-counter)
+
+
+Each feature will typically consist of three items:
 
 * An `api` service
 
@@ -489,16 +507,3 @@ The app component is written using the standardised style shown above. All stack
 * _components_
 
    This contains all the app components you have exported via the `app/src/component/index.js` file plus any shared services supplied by the `stack-redux-app` package. In the code above the `components.Box` is used. This is an example of a shared component that is supplied by the `stack-redux-app` package.
-
-### _app/src/component/index.js_
-```javascript
-import counter from './counter'
-import errors from './errors'
-import fetch from './fetch'
-import gp from './gp'
-import hello from './hello'
-import thunks from './thunks'
-
-export default {counter, errors, fetch, gp, hello, thunks}
-```
-The feature component is then exported through the `app/src/component/index.js` file. This makes the feature's component available via the `loader`.
