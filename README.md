@@ -61,6 +61,13 @@ This demo consists of a series of features.
   * update your application state by dispatching actions to the feature's `api` service.
   * expose selected aspects of the feature's api service though REST endpoints
 
+* ## [errors](#feature-errors)
+
+* ## [thunk](#feature-thunk)
+
+* ## [gp](#feature-gp)
+
+
 ## Features Explained
 Each feature will typically consist of three items:
 
@@ -511,3 +518,23 @@ The app component is written using the standardised style shown above. All stack
 * _components_
 
    This contains all the app components you have exported via the `app/src/component/index.js` file plus any shared services supplied by the `stack-redux-app` package. In the code above the `components.Box` is used. This is an example of a shared component that is supplied by the `stack-redux-app` package.
+
+# Feature: `counter`
+## The `app` Service Files
+## The `api` Service Files
+## The `app` Component
+
+# Feature: `errors`
+## The `app` Service Files
+## The `api` Service Files
+## The `app` Component
+
+# Feature: `thunk`
+## The `app` Service Files
+## The `api` Service Files
+## The `app` Component
+
+# Feature: `gp`
+## The `app` Service Files
+## The `api` Service Files
+## The `app` Component
