@@ -36,7 +36,7 @@ class component extends React.PureComponent {
 
     return (
       <components.Box>
-        <h2>Working with this Application's API</h2>
+        <h2>Working with this Features's API Service</h2>
         <h3>A Simple, Server-Side Counter</h3>
         <p>
           This `counter` component demonstrates how to update your application state by making requests to the application's API. This achieved by dispatching REDUX actions,

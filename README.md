@@ -680,16 +680,104 @@ router.get('/counter/decrement', (req, res) => {
 export default router
 ```
 
-Each of the feature's capabilities has been exposed via a REST endpoint. The `router.js` file exists to declare and export the endpoints using a standard express router object. 
+Each of the feature's capabilities has been exposed via a REST endpoint. The `router.js` file exists to declare and export the endpoints using a standard express router object.
 
+### _api/src/service/counter/index.js_
+```javascript
+import initialiser from './initialiser'
+import processor from './processor'
+import router from './router'
+
+export default { initialiser, processor, router}
+```
+Note that the `router.js` file must be exported via the feature's index file for the endpoints to be discovered and automatically mounted by the stack.
 
 ## The `app` Component
 ### _app/src/component/counter/index.jsx_
 ```javascript
-```
+import React from 'react'
+import { connect } from 'react-redux'
+import Divider from 'material-ui/Divider'
+import RaisedButton from 'material-ui/RaisedButton'
+import { env, actionHub, services, components } from '../../loader'
 
+const buttonStyle = {
+  margin: 12
+}
+
+const url = (path) => {
+  return `${env.apiUrl}/rest/counter/${path}`
+}
+
+class component extends React.PureComponent {
+  onIncrementRedux = () => {
+    this.props.increment()
+  }
+  onDecrementRedux = () => {
+    this.props.decrement()
+  }
+  onGetTotalRedux = () => {
+    this.props.getTotal()
+  }
+  onIncrementRest = () => {
+    window.open(url('increment'), '_blank')
+  }
+  onDecrementRest = () => {
+    window.open(url('decrement'), '_blank')
+  }
+  onGetTotalRest = () => {
+    window.open(url('total'), '_blank')
+  }
+  render () {
+    var {total} = this.props
+
+    return (
+      <components.Box>
+
+        // ... REDUX Markup
+
+        <h3>Dispatch REDUX Actions</h3>
+        <RaisedButton label='Increment ++' onClick={this.onIncrementRedux} style={buttonStyle} />
+        <RaisedButton label='Decrement --' onClick={this.onDecrementRedux} style={buttonStyle} />
+        <RaisedButton label='Get Total' onClick={this.onGetTotalRedux} style={buttonStyle} />
+        <Divider />
+        <h3>Access the Equivalent REST Endpoints</h3>
+        <ul>
+          <li>
+            <a href='#' onClick={this.onIncrementRest}>Increment</a>
+          </li>
+          <li>
+            <a href='#' onClick={this.onDecrementRest}>Decrement</a>
+          </li>
+          <li>
+            <a href='#' onClick={this.onGetTotalRest}>Get Total</a>
+          </li>
+        </ul>
+      </components.Box>
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({
+  total: services.counter.selector.getTotal(state)
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  getTotal: () => dispatch(actionHub.COUNTER_GET_TOTAL()),
+  increment: () => dispatch(actionHub.COUNTER_INCREMENT()),
+  decrement: () => dispatch(actionHub.COUNTER_DECREMENT())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(component)
+```
+The REACT component does nothing special. It pulls in the REDUX state data in  `mapStateToProps` using the feature's selector `services.counter.selector.getTotal` and it allows the feature's REDUX actions to be dispatched via `mapDispatchToProps`.
 
 # Feature: `errors`
+When the `api` throws an error, or more specifically when code that is wrapped inside the `makeProcessor` function throws an error, that error is trapped by the stack. The full error is logged to [Log Entries](https://logentries.com) and an error action containing a deliberately anodyne error message is dispatched so the `app` knows something went wrong.
+
+The error acti
+
+
 ## The `app` Service Files
 ### _app/src/service/counter/action.js_
 ```javascript
