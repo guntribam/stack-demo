@@ -392,7 +392,7 @@ export default initialiser
 ```
 This file is optional. If present the `initialiser` function must be marked as `async`. The function can then directly return whatever data is required by the feature at start-up. A benefit of being an `async` function is the ability to `await` the results of any database or third-party api calls you might need when gathering initialisation data.
 
-The data returned, in common with all data returned by the api, can be normal javascript types or plain objects, it does not need to be JSON. The stack takes care of transmitting the data for you (over the websocket) by dispatching a special action with the type-name `<featureName>_init`. This action type can then be picked up by an app reducer and the data incorporated into the local REDUX state tree in the usual way.
+The data returned, in common with all data returned by the api, can be normal javascript types or plain objects, it does not need to be JSON. The stack takes care of transmitting the data for you (over the websocket) by dispatching a special action with the type-name `<featureName>_init`. This is then processed by the feature's app reducer - see _app/src/service/fetch/reducer.js_
 
 ### _api/src/service/fetch/processor.js_
 ```javascript
