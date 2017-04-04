@@ -39,14 +39,14 @@ You can see that the application is first divided into two main domains, the `ap
 >
 >The upshot of this is the machine boundary between your `app` and your `api` is eliminated. You do not need to worry about the plumbing that allows your browser-side `app` code to communicate with the server-side `api` code. Internal REST apis and http calls within your application space are a thing of the past. Everything is mediated via dispatched REDUX actions and the changes to local REDUX state they cause.
 
-### Features
+## Features
 This demo consists of a series of features.
 
-* ### [hello](#feature-hello)
+* ## [hello](#feature-hello)
 
   A simple hello-world react component. No stack involved.
 
-* ### [fetch](#feature-fetch)
+* ## [fetch](#feature-fetch)
 
   Shows the three ways your feature can get it's hands on some data:
   * From the local `app`
@@ -55,7 +55,7 @@ This demo consists of a series of features.
 
   This is also a _Grand Tour_ of most of the feature files you will need to write any complex feature. The rest of the features below are much shorter as they only explain how they differ from this main example.
 
-* ### [counter](#feature-counter)
+* ## [counter](#feature-counter)
 
 
 Each feature will typically consist of three items:
