@@ -242,7 +242,7 @@ The feature consists of three parts and although not all parts are always requir
 
 * The `app` component
 
-  This the REACT component. It is fairly standard and makes use of a few stack features that make dispatching actions and re-using other feature components easy.
+  This is the REACT UI component. It is fairly standard and makes use of a few stack features that make dispatching actions and re-using other feature components easy.
 
 * The `app` service
 
@@ -290,7 +290,7 @@ Exports the generated REDUX `actions` and `types`. The `stack-redux-app` package
 
 Above you see two different types of action being generated. The actions marked with the `local` flag will only be dispatched to the reducers in the `app`, the `api` will not be involved.
 
-If the `local` flag is not set (the default case) then the actions will be automatically broadcast to the `api` where they can be picked up by the api service `processor` file - more on the `processor` files later on ...
+If the `local` flag is not set (the default case) then the actions will be automatically broadcast to the `api` where they can be picked up by the api service `processor` file - more on these important, server-side `processor` files later on ...
 
 ### _app/src/service/fetch/reducer.js_
 ```javascript
@@ -316,7 +316,7 @@ This reducer shows the three different types of action that the stack will gener
 
 * `fetch_init`
 
-  This is an optional action that is dispatched just once by the `api` during application start-up (if the api service supplies an `initialiser.js` file). It delivers a payload of feature specific initialisation data supplied by the `api`. Initialisation data delivered in this way is typically useful when your feature relies on a database or third-party api data-source.
+  This action is dispatched just once by the `api` during application start-up (but only if the api service exports an `initialiser.js` file). It delivers a payload of feature specific initialisation data supplied by the `api`. Initialisation data delivered in this way is typically useful when your feature relies on a database or third-party api data-source.
 
 * `fetchFromLocal`
 
