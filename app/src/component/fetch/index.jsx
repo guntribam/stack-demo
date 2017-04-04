@@ -24,33 +24,36 @@ class component extends React.PureComponent {
       <components.Box>
         <h2>Fetching Data</h2>
         <p>
-          This component shows the various ways data can be fetched. As initialisation data, from an API or locally.
+          This component shows the various ways data can be fetched:
         </p>
+        <ul>
+          <li>
+            <h4>Initialisation Data from the API</h4>At application start-up the feature's state can be initialised from the API. This is useful when you want to initialise your component state from a database
+            or from a third party source.
+          </li>
+          <li>
+            <h4>Fetched Locally</h4>Local data fetched from the browser-side app.
+          </li>
+          <li>
+            <h4>Fetched From the API</h4>Remote data fetched from the server-side api as required
+          </li>
+        </ul>
         <Divider />
         <h3>Data</h3>
         <ul>
           <li>
-            <b>Source</b>
-            <br/><i>{source}</i>
+            <h4>Source</h4>
+            {source}
           </li>
           <li>
-            <b>Data</b>
-            <br/>
+            <h4>Data</h4>
             {data}
           </li>
         </ul>
+        <Divider />
         <RaisedButton label='Fetch Data Locally' onClick={this.onFetchFromLocal} style={buttonStyle} />
         <RaisedButton label='Fetch Data from the API' onClick={this.onFetchFromApi} style={buttonStyle} />
-        <RaisedButton label='Reload the Page' onClick={this.onReload} style={buttonStyle} />
-        <Divider />
-        <h3>Notes</h3>
-        <b>Initialising the component with API sourced data</b>
-        <p>
-          At startup, the component's state can be initialised from the API. This is useful when you want to initialise your component state from a database or from a thrid
-          party source. When this app starts current state of the this component (see above) is set to some Initial data. This data has come via the application API. Look
-          for the 'initialiser.js' file for this component's API service. Initialising from the API is optional, you can always fall back to local REDUX state initialisation,
-          via the reducer, or none at all.
-        </p>
+        <RaisedButton label='Restart the App' onClick={this.onReload} style={buttonStyle} />
       </components.Box>
     )
   }

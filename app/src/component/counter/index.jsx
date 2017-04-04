@@ -36,15 +36,13 @@ class component extends React.PureComponent {
 
     return (
       <components.Box>
-        <h2>Working with this Features's API Service</h2>
-        <h3>A Simple, Server-Side Counter</h3>
+        <h2>Working with an API Service</h2>
+        <h3>A Simple Counter</h3>
         <p>
-          This `counter` component demonstrates how to update your application state by making requests to the application's API. This achieved by dispatching REDUX actions,
-          which the the stack will auto-broadcast to the API, and then listening for the corresponding API response.
+          This feature demonstrates how to update your local state by dispatching REDUX actions that are processed by the API.
         </p>
         <p>
-          It also shows how to expose selected aspects of the component's server-side API service though REST endpoints. This techniqueallows your API services to be both
-          tightly coupled to your application via a websocket <i>and</i> conditonally exposed to third parties via REST.
+          It also shows how to expose selected aspects of the API service though REST endpoints.
         </p>
         <Divider />
         <h1>Total = {total}</h1>
