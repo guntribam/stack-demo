@@ -63,11 +63,11 @@ This demo consists of a series of features. Each feature extends and builds on t
 
 * ## [errors](#feature-errors)
 
-  Shows how to listen out for and process errors thrown by the api
+  Shows how to listen out for and process errors thrown by the api.
 
 * ## [thunk](#feature-thunk)
 
-  Once your features get interesting you may need to dispatch multiple sub-actions (thunks) for a given action, and sometimes these actions need to happen synchronously (sagas). The `stack` supports this advanced REDUX feature very cleanly and this feature shows how.
+  Once your features get interesting you may need to dispatch multiple sub-actions (thunks) for a given action, and sometimes these actions need to happen synchronously (sagas). The `stack` supports this advanced REDUX feature very cleanly.
 
 * ## [gp](#feature-gp)
 
@@ -530,21 +530,273 @@ The app component is written using the standardised style shown above. All stack
    This contains all the app components you have exported via the `app/src/component/index.js` file plus any shared services supplied by the `stack-redux-app` package. In the code above the `components.Box` is used. This is an example of a shared component that is supplied by the `stack-redux-app` package.
 
 # Feature: `counter`
+This feature implements a server-side `api` counter that simulates more complex interactions with either your data-source or a secure third-party `api`. It supports the following abilities:
+
+* _getTotal_
+
+  returns the current server-side counter value
+
+* _increment_
+
+  increases the server-side counter value by 1
+* _decrement_
+
+  decreases the server-side counter value by 1
+
+These `api` abilities are triggered via REDUX actions in the usual way.
+
+In addition they have been further exposed as REST endpoints using the built in stack feature that automatically mounts any express routes you export via the `router.js` api-service file.
+
 ## The `app` Service Files
+### _app/src/service/counter/action.js_
+```javascript
+import name from './name'
+import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
+
+const types = makeTypes(name, ['getTotal', 'increment', 'decrement'])
+const actions = makeActions(types)
+
+export { actions, types }
+
+```
+The actions.js file defines three REDUX types and actions. All of these actions are to be processed by the `api`
+
+
+### _app/src/service/counter/reducer.js_
+```javascript
+const reducer = (state = {}, action) => {
+  const {type, types, data} = action
+  switch (type) {
+    case types.counter_init:
+    case types.counterGetTotalResponse:
+    case types.counterIncrementResponse:
+    case types.counterDecrementResponse:
+      return {...state, total: data.total}
+    default:
+      return state
+  }
+}
+
+export default reducer
+```
+All the actions cause the `api` to generate an equivalent `<typename>Response` action. The reducer listens for these and processes the state change.
+
+### _app/src/service/counter/selector.js_
+```javascript
+import name from './name'
+
+const get = (state) => {
+  return state[name]
+}
+
+const getTotal = (state) => {
+  return get(state).total
+}
+
+export default {get, getTotal}
+```
+The selector allows access to the feature state. Here it is the single value representing the current state of the `api` counter.
+
 ## The `api` Service Files
+
+### _api/src/service/counter/db.js_
+```javascript
+class db {
+  static total = 0
+  static increment () {
+    this.total++
+  }
+  static decrement () {
+    this.total--
+  }
+  static getTotal () {
+    return this.total
+  }
+}
+
+export default db
+```
+This is a simple simulation of a data-store.
+
+### _api/src/service/counter/initialiser.js_
+```javascript
+import db from './db'
+
+const initialiser = async () => {
+  return {total: db.getTotal()}
+}
+
+export default initialiser
+
+```
+The initialiser calls out to the data-store to get the current value of the counter when the application first starts up.
+
+### _api/src/service/counter/processor.js_
+```javascript
+import { makeProcessor } from '@gp-technical/stack-redux-api'
+import db from './db'
+
+const processor = async (action) => {
+  var {types, type, data} = action
+  switch (type) {
+    case types.counterIncrement:
+      db.increment()
+      return {total: db.getTotal()}
+    case types.counterDecrement:
+      db.decrement()
+      return {total: db.getTotal()}
+    case types.counterGetTotal:
+      return {total: db.getTotal()}
+  }
+}
+
+export default makeProcessor(processor)
+
+```
+The processor file listens for each of the REDUX action types dispatched by the `app` and calls the interacts with the data-store accordingly. You can see each action potentially triggers more than one data-store method and that the return from the processor is a plain, anonymous java-script object.
+### _api/src/service/counter/router.js_
+```javascript
+import express from 'express'
+import db from './db'
+
+const router = express.Router({mergeParams: true})
+
+router.get('/counter/ping', (req, res) => {
+  res.send(`The 'counter' service endpoints have been succesfully mounted : ${new Date().toLocaleString('en-GB')}`)
+})
+
+router.get('/counter/total', (req, res) => {
+  res.json({total: db.getTotal()})
+})
+
+router.get('/counter/increment', (req, res) => {
+  db.increment()
+  res.json({total: db.getTotal()})
+})
+router.get('/counter/decrement', (req, res) => {
+  db.decrement()
+  res.json({total: db.getTotal()})
+})
+export default router
+```
+
+Each of the feature's capabilities has been exposed via a REST endpoint. The `router.js` file exists to declare and export the endpoints using a standard express router object. 
+
+
 ## The `app` Component
+### _app/src/component/counter/index.jsx_
+```javascript
+```
+
 
 # Feature: `errors`
 ## The `app` Service Files
+### _app/src/service/counter/action.js_
+```javascript
+import name from './name'
+import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
+
+const api = makeTypes(name, ['throwFromApi'])
+const local = makeTypes(name, ['throwFromLocal'])
+
+const actions = {...makeActions(api), ...makeActions(local, {local: true})}
+const types = {...api, ...local}
+
+export { actions, types }
+
+```
+The actions.js file defines just two actions.
+
+* _throwFromApi_
+
+  An action that is intended to be processed by the `api` (via the this feature's `api` service `processor.js` file)
+
+* _throwFromLocal_
+
+  An action that is intended to be processed by the local `app` code. Note the `local` flag is set to `true` for this action.
+
+### _app/src/service/counter/reducer.js_
+```javascript
+const reducer = (state = {answer: 'unknown'}, action) => {
+  const {type, types, data} = action
+  switch (type) {
+    case types.errorsThrownFromLocal:
+      return {...state, error: data.error}
+    default:
+      return state
+  }
+}
+
+export default reducer
+```
+
+Only the `errorsThrownFromLocal` can be listened for by the reducer.
+
+Note that here the feature's initialisation data is set locally in the `reducer.js`. It is not always necessary to have the `api` send feature initialisation data.
+
+### _app/src/service/errors/selector.js_
+```javascript
+
+```
+
 ## The `api` Service Files
+### _api/src/service/errors/processor.js_
+```javascript
+```
+
 ## The `app` Component
+### _app/src/component/errors/index.jsx_
+```javascript
+```
 
 # Feature: `thunk`
-## The `app` Service Files
+### _app/src/service/thunk/action.js_
+```javascript
+
+```
+
+### _app/src/service/thunk/reducer.js_
+```javascript
+
+```
+
+### _app/src/service/thunk/selector.js_
+```javascript
+
+```
+
 ## The `api` Service Files
+### _api/src/service/thunk/processor.js_
+```javascript
+```
+
 ## The `app` Component
+### _app/src/component/thunk/index.jsx_
+```javascript
+```
 
 # Feature: `gp`
-## The `app` Service Files
+### _app/src/service/gp/action.js_
+```javascript
+
+```
+
+### _app/src/service/gp/reducer.js_
+```javascript
+
+```
+
+### _app/src/service/gp/selector.js_
+```javascript
+
+```
+
 ## The `api` Service Files
+### _api/src/service/gp/processor.js_
+```javascript
+```
+
 ## The `app` Component
+### _app/src/component/gp/index.jsx_
+```javascript
+```
