@@ -346,6 +346,8 @@ export default {get, getData, getSource}
 ```
 A selector is used to easily locate elements within the feature's REDUX state tree. When you require data from REDUX state you should always go through the appropriate feature's selector. You will typically see these being used by REACT components as a data-source for the components props.
 
+The selector code shown above is simple and makes accessing your feature specific REDUX state easy and clean. For more complex selectors and especially where the optimisation of cached data is desired, you should consider using a REDUX selector library such as [reselect](https://github.com/reactjs/reselect). Regardless of your implementation details, the `selector.js` file above is the correct place to put your features selector code.
+
 ### _app/src/service/fetch/index.js_
 ```javascript
 import { actions, types } from './action'
