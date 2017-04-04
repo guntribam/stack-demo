@@ -40,7 +40,7 @@ You can see that the application is first divided into two main domains, the `ap
 >The upshot of this is the machine boundary between your `app` and your `api` is eliminated. You do not need to worry about the plumbing that allows your browser-side `app` code to communicate with the server-side `api` code. Internal REST apis and http calls within your application space are a thing of the past. Everything is mediated via dispatched REDUX actions and the changes to local REDUX state they cause.
 
 ## Features
-This demo consists of a series of features.
+This demo consists of a series of features. Each feature extends and builds on the previous. The first few are essential reading if you want to use the stack at all, the rest will get you doing genuinely useful things.
 
 * ## [hello](#feature-hello)
 
@@ -63,10 +63,20 @@ This demo consists of a series of features.
 
 * ## [errors](#feature-errors)
 
+  Shows how to listen out for and process errors thrown by the api
+
 * ## [thunk](#feature-thunk)
+
+  Once your features get interesting you may need to dispatch multiple sub-actions (thunks) for a given action, and sometimes these actions need to happen synchronously (sagas). The `stack` supports this advanced REDUX feature very cleanly and this feature shows how.
 
 * ## [gp](#feature-gp)
 
+  As you might expect for an opinionated GP stack, it provides access to the main GP-API out-of-the-box and makes it so easy its almost embarrassing. This feature shows how you can use the main GP-API to:
+
+  * initialise a drop-down of content folders
+  * populate a table with the contents of the selected folder
+
+  The table used is the shared table component supplied by the `stack-redux-app` package.
 
 ## Features Explained
 Each feature will typically consist of three items:
