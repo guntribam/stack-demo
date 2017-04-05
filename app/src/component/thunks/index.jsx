@@ -19,7 +19,7 @@ class component extends React.PureComponent {
     return (
       <components.Box>
         <h2>Feature: <i>thunks</i></h2>
-        <h2>Actions With Multiple Parts</h2>
+        <h2>Multi-Action Sequences</h2>
         <p>
           Demonstrates how to dispatch multiple REDUX actions from a single Thunk. It also shows that each action can be <i>awaited</i> allowing for the fine, synchronous
           control of an multi-action sequence.
