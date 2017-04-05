@@ -878,7 +878,9 @@ actions.thunksGetAnswer = () => {
 
 export { actions, types }
 ```
-Here we see an example of how to customise an action that has been generated using the `makeActions` function. The `getAnswer` action is first generated. A copy of the generated action is stored as `thunksGetAnswer` and the `actions.thunksGetAnswer` is then reset to a multi-action sequence with the `thunksGetAnswer` action being sandwiched between a `SPINNER_ON` action and a `SPINNER_OFF` action, both of which have been defined via the shared `stack-redux-app` feature called `spinner`.
+Here we see an example of how to customise an action that has been generated using the `makeActions` function.
+
+The `getAnswer` action is first generated. A copy of the generated action is stored as `thunksGetAnswer` and the `actions.thunksGetAnswer` is then reset to a multi-action sequence with the `thunksGetAnswer` action being sandwiched between a `SPINNER_ON` action and a `SPINNER_OFF` action, both of which have been defined via the shared `stack-redux-app` feature called `spinner`.
 
 Because the action calls are asynchronous by default, and because the `thunksGetAnswer` invokes a long running, server-side process, the call to `thunksGetAnswer` is _awaited_ to make the sequence synchronous. Now the spinner state is set and it stays that way until the `thunksGetAnswer` completes before being unset.
 
@@ -925,25 +927,171 @@ The api processor listens for the `thunksGetAnswer` action and just sleeps for t
 # Feature: `gp`
 ### _app/src/service/gp/action.js_
 ```javascript
+import name from './name'
+import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
 
+const types = makeTypes(name, ['getDocuments'])
+const actions = makeActions(types)
+
+export { actions, types }
 ```
+
+Define the `getDocuments` action for processing by the `api`
 
 ### _app/src/service/gp/reducer.js_
 ```javascript
+const reducer = (state = {}, action) => {
+  const {type, types, data} = action
+  switch (type) {
+    case types.gp_init:
+      return {...state, folders: data.Locations}
+    case types.gpGetDocumentsResponse:
+      return {...state, documents: data}
+    default:
+      return state
+  }
+}
 
+export default reducer
 ```
+
+The api specifies an `initialiser` so listen for the automatically generated `gp_init` action to process the initial list of GP content folders.
+
+When a folder is selected the `getDocuments` action is dispatched so listen for its automatically generated api response action `gpGetDocumentsResponse` and process the returned list of documents.
 
 ### _app/src/service/gp/selector.js_
 ```javascript
+import name from './name'
 
+const get = (state) => {
+  return state[name]
+}
+
+const getDocuments = (state) => {
+  return get(state).documents
+}
+
+const getFolders = (state) => {
+  return get(state).folders
+}
+
+export default {get, getDocuments, getFolders}
 ```
+The selector reaches into the feature REDUXC state to expose the data elements of use, in this case the list of folders and the currently selected list of documents.
+
+The currently selected folder id (`selectedFolderId`) could have been stored here as well but it instead it is stored as part of the REACT app-component's local state.
 
 ## The `api` Service Files
+### _api/src/service/gp/initialiser.js_
+```javascript
+import { gpapi } from '@gp-technical/stack-redux-api'
+
+// Folder: Responsive Toolkit for Leaders_dev1_auto/Leadership & Strategy
+const folderId = '46c2f86d-0655-009b-86cc-a3bf00ac087a'
+
+const initialiser = async () => {
+  return await gpapi.get(`location/parent-folder/${folderId}/child-folders`)
+}
+
+export default initialiser
+```
+The `gpapi` helper object is imported from the `gp-technical/stack-redux-api` package. It is then used to `get` a list of GP secondary-folders using a hard-coded primary-folder id for the parent location.
+
+Note that the `gpapi.get` is _awaitable_ which simplifies the code as it removes the need to for call-backs or explicit promise handling.
+
+
 ### _api/src/service/gp/processor.js_
 ```javascript
+import { gpapi, makeProcessor } from '@gp-technical/stack-redux-api'
+
+const processor = async (action) => {
+  var {types, type, data} = action
+
+  switch (type) {
+    case types.gpGetDocuments:
+      return await gpapi.get(`folder/${data}/items/simple`)
+  }
+}
+
+export default makeProcessor(processor)
 ```
+
+The processor listens for the `gpGetDocuments` actions dispatched when a folder is selected. It uses the `gpapi` helper object to fetch the list of GP content documents using the action's data payload (its the `selectedFolderId`). The action return is _awaited_ to remove the need for complex call-backs.
 
 ## The `app` Component
 ### _app/src/component/gp/index.jsx_
 ```javascript
+import React from 'react'
+import { connect } from 'react-redux'
+import Divider from 'material-ui/Divider'
+import MenuItem from 'material-ui/MenuItem'
+import SelectField from 'material-ui/SelectField'
+import { actionHub, services, components } from '../../loader'
+
+class component extends React.PureComponent {
+  state = {
+    selectedFolderId: null
+  }
+  getMenuItems = (list) => {
+    if (list) {
+      return list.map(i => <MenuItem value={i.Id} key={i.Id} primaryText={i.Name} />)
+    }
+    return <MenuItem value={null} primaryText='' />
+  }
+
+  onFolderSelected = (e, i, folderId) => {
+    this.setState({selectedFolderId: folderId})
+    this.props.getDocuments(folderId)
+  }
+
+  onFileSelected = (file, row) => {
+    const message = `In a real system, the file '${file.name}' would have been uploaded to the document '${row.name}'`
+    window.alert(message)
+  }
+
+  columns = {
+    name: 'name',
+    type: 'content type',
+    created: {
+      format: ({created}) => created.replace(' 00:00:00', '')
+    },
+    upload: {
+      label: 'custom action',
+      custom: (row) => (<components.FileUpload label='select' row={row} onFileSelected={this.onFileSelected} />)
+    }
+  }
+
+  render () {
+    const {folders, documents} = this.props
+    const {selectedFolderId} = this.state
+    return (
+      <components.Box>
+        <h2>Feature: <i>gp</i></h2>
+        // REACT Markup ...   
+        <SelectField floatingLabelText='Select a Folder' value={selectedFolderId} onChange={this.onFolderSelected}>
+          {this.getMenuItems(folders)}
+        </SelectField>
+        <components.Table rows={documents} columns={this.columns} />
+      </components.Box>
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({
+  folders: services.gp.selector.getFolders(state),
+  documents: services.gp.selector.getDocuments(state)
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  getDocuments: (folderId) => dispatch(actionHub.GP_GET_DOCUMENTS(folderId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(component)
+
 ```
+
+The app component exposes the features REDUX state through the `mapStateToProps` using the feature's `selector`. It also dispatches the feature's `GP_GET_DOCUMENTS` action via the `mapDispatchToProps` function.
+
+The `selectedFolderId` value is stored on local REACT state which is set when the `onFolderSelected` function is called whenever the user selects a new folder from the dropdown. This function also dispatches the `GP_GET_DOCUMENTS` action via the `getDocuments` function.
+
+The `components.Table` is a shared component supplied by the `stack-redux-app` package. The columns of this table are defined using a plain `js` object called `columns`. You can see here that the table component supports custom column contents and the custom formatting of column values.
