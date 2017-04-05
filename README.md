@@ -1090,7 +1090,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(component)
 
 ```
 
-The app component exposes the features REDUX state through the `mapStateToProps` using the feature's `selector`. It also dispatches the feature's `GP_GET_DOCUMENTS` action via the `mapDispatchToProps` function.
+The app component exposes the REDUX state through the `mapStateToProps` using the feature's `selector`. It also dispatches the feature's `GP_GET_DOCUMENTS` action via the `mapDispatchToProps` function.
 
 The `selectedFolderId` value is stored on local REACT state which is set when the `onFolderSelected` function is called whenever the user selects a new folder from the dropdown. This function also dispatches the `GP_GET_DOCUMENTS` action via the `getDocuments` function.
 
