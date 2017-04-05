@@ -18,10 +18,11 @@ class component extends React.PureComponent {
     if (isSpinning) answer = 'Calculating answer, this will take 3 seconds ...'
     return (
       <components.Box>
-        <h2>Multi-Action Thunks and Synchronous Sagas</h2>
+        <h2>Feature: <i>thunks</i></h2>
+        <h2>Actions With Multiple Parts</h2>
         <p>
-          This `thunks` component demonstrates how to dispatch multiple REDUX actions from a single Thunk. It also shows that each action can be awaited allowing for the fine,
-          synchronous control of an multi-action sequence.
+          Demonstrates how to dispatch multiple REDUX actions from a single Thunk. It also shows that each action can be <i>awaited</i> allowing for the fine, synchronous
+          control of an multi-action sequence.
         </p>
         <Divider />
         <h3>Answer To Life, The Universe and Everything</h3>

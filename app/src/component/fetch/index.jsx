@@ -22,9 +22,10 @@ class component extends React.PureComponent {
     var {source, data} = this.props
     return (
       <components.Box>
-        <h2>Fetching Data</h2>
+        <h2>Feature: <i>fetch</i></h2>
+        <h3>Fetching and Displaying Data</h3>
         <p>
-          This component shows the various ways data can be fetched:
+          Shows the various ways data can make its way to your feature's REACT component:
         </p>
         <ul>
           <li>

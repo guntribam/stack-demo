@@ -17,11 +17,14 @@ class component extends React.PureComponent {
     var {errorMessage} = this.props
     return (
       <components.Box>
-        <h2>Displaying Errors From the API</h2>
+        <h2>Feature: <i>errors</i></h2>
+        <h3>Displaying Errors From the API</h3>
         <p>
-          This `errors` component demonstrates how to display errors thrown on the API. For security reason the error details from the API are logged via Watson with only
-          a bland error message being returned for display. If you are running this locally you can see the full server error in your command window. Otherwise it can
-          be found in the LogEntries website.
+          Highlights how to display errors thrown on the API. For security reason the error details from the API are logged via Watson with only a bland error message being
+          returned for display.
+        </p>
+        <p>
+          If you are running this locally you can see the full server error in your command window. Otherwise it can be found in the LogEntries website.
         </p>
         <Divider />
         <h3><components.ErrorMessage text={errorMessage} /></h3>

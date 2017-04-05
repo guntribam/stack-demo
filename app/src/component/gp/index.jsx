@@ -43,11 +43,14 @@ class component extends React.PureComponent {
     const {selectedFolderId} = this.state
     return (
       <components.Box>
-        <h2>Retrieve Content via the GP-API</h2>
+        <h2>Feature: <i>gp</i></h2>
+        <h3>Retrieve Content via the GP-API</h3>
         <p>
-          This `gp` component demonstrates how to retrieve a list of folders and the content of the currently selcted folder via the main GP-API. For security reasons the
-          GP-API cannot be called directly this local application. Instead the calls must be made on the server-side and to make this both easy and secure-by-default the
-          stack provides an API component called gpapi. Use this to securely interact with the GP-API from your application API.
+          Shows how to retrieve a list of folders and the content of the currently selcted folder via the main GP-API.
+        </p>
+        <p>
+          For security reasons the GP-API cannot be called directly this local application. Instead the calls must be made on the server-side and the stack makes this easy
+          and secure by default.
         </p>
         <h3>Reuse the shared Table component</h3>
         <p>
@@ -65,12 +68,10 @@ class component extends React.PureComponent {
           </li>
         </ul>
         <Divider />
-        <components.Box>
-          <SelectField floatingLabelText='Select a Folder' value={selectedFolderId} onChange={this.onFolderSelected}>
-            {this.getMenuItems(folders)}
-          </SelectField>
-          <components.Table rows={documents} columns={this.columns} />
-        </components.Box>
+        <SelectField floatingLabelText='Select a Folder' value={selectedFolderId} onChange={this.onFolderSelected}>
+          {this.getMenuItems(folders)}
+        </SelectField>
+        <components.Table rows={documents} columns={this.columns} />
       </components.Box>
     )
   }

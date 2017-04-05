@@ -860,28 +860,67 @@ The `errorMessage` feature will listen out for the internal error action that is
 # Feature: `thunk`
 ### _app/src/service/thunk/action.js_
 ```javascript
+import name from './name'
+import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
+import { actionHub } from '../../loader'
 
+const types = makeTypes(name, ['getAnswer'])
+const actions = makeActions(types)
+
+const thunksGetAnswer = actions.thunksGetAnswer
+actions.thunksGetAnswer = () => {
+  return async (dispatch, getState) => {
+    dispatch(actionHub.SPINNER_ON())
+    await dispatch(thunksGetAnswer())
+    dispatch(actionHub.SPINNER_OFF())
+  }
+}
+
+export { actions, types }
 ```
+Here we see an example of how to customise an action that has been generated using the `makeActions` function. The `getAnswer` action is first generated. A copy of the generated action is stored as `thunksGetAnswer` and the `actions.thunksGetAnswer` is then reset to a multi-action sequence with the `thunksGetAnswer` action being sandwiched between a `SPINNER_ON` action and a `SPINNER_OFF` action, both of which have been defined via the shared `stack-redux-app` feature called `spinner`.
+
+Because the action calls are asynchronous by default, and because the `thunksGetAnswer` invokes a long running, server-side process, the call to `thunksGetAnswer` is _awaited_ to make the sequence synchronous. Now the spinner state is set and it stays that way until the `thunksGetAnswer` completes before being unset.
 
 ### _app/src/service/thunk/reducer.js_
 ```javascript
+const reducer = (state = {answer: 'unknown'}, action) => {
+  const {type, types, data} = action
+  switch (type) {
+    case types.thunksGetAnswerResponse:
+      return {...state, answer: data.answer}
+    default:
+      return state
+  }
+}
 
+export default reducer
 ```
+The reducer handles the local REDUX state change using the data supplied by the api. The action it listens for is called `thunksGetAnswerResponse` because this is the return from the `thunksGetAnswer` action dispatched in the thunk (see `action.js` above).
 
-### _app/src/service/thunk/selector.js_
-```javascript
-
-```
+Note that _awaiting_ the `thunksGetAnswer` in the thunk does not change the way the data is sent back via the `thunksGetAnswerResponse`.
 
 ## The `api` Service Files
 ### _api/src/service/thunk/processor.js_
 ```javascript
-```
+import { makeProcessor } from '@gp-technical/stack-redux-api'
 
-## The `app` Component
-### _app/src/component/thunk/index.jsx_
-```javascript
+function sleep (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+const processor = async (action) => {
+  var {types, type, data} = action
+  switch (type) {
+    case types.thunksGetAnswer:
+      await sleep(3000)
+      return {answer: 42}
+  }
+}
+
+export default makeProcessor(processor)
 ```
+The api processor listens for the `thunksGetAnswer` action and just sleeps for three seconds before returning its data payload.
 
 # Feature: `gp`
 ### _app/src/service/gp/action.js_

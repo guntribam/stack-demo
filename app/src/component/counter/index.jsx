@@ -36,10 +36,10 @@ class component extends React.PureComponent {
 
     return (
       <components.Box>
-        <h2>Working with an API Service</h2>
-        <h3>A Simple Counter</h3>
+        <h2>Feature: <i>counter</i></h2>
+        <h3>Working with an API Service</h3>
         <p>
-          This feature demonstrates how to update your local state by dispatching REDUX actions that are processed by the API.
+          Demonstrates how to update your local state by dispatching REDUX actions that are processed by the API.
         </p>
         <p>
           It also shows how to expose selected aspects of the API service though REST endpoints.
