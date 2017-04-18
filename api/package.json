@@ -28,6 +28,7 @@
     "babel-eslint": "^7.0.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-stage-2": "^6.16.0",
+    "env-cmd": "^5.0.0",
     "eslint": "^3.6.1",
     "eslint-config-standard": "^6.1.0",
     "eslint-plugin-standard": "^2.0.0"
