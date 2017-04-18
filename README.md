@@ -39,6 +39,8 @@ You can see that the application is first divided into two main domains, the `ap
 >
 >The upshot of this is the machine boundary between your `app` and your `api` is eliminated. You do not need to worry about the plumbing that allows your browser-side `app` code to communicate with the server-side `api` code. Internal REST apis and http calls within your application space are a thing of the past. Everything is mediated via dispatched REDUX actions and the changes to local REDUX state they cause.
 
+## Environment Variables
+
 ## Features
 This demo consists of a series of features. Each feature extends and builds on the previous. The first few are essential reading if you want to use the stack at all, the rest will get you doing genuinely useful things.
 
@@ -1095,3 +1097,49 @@ The app component exposes the REDUX state through the `mapStateToProps` using th
 The `selectedFolderId` value is stored on local REACT state which is set when the `onFolderSelected` function is called whenever the user selects a new folder from the dropdown. This function also dispatches the `GP_GET_DOCUMENTS` action via the `getDocuments` function.
 
 The `components.Table` is a shared component supplied by the `stack-redux-app` package. The columns of this table are defined using a plain `js` object called `columns`. You can see here that the table component supports custom column contents and the custom formatting of column values.
+
+## Example API Environment file -  `./api/.env`
+The `api` component of a stack application requires a set of environment values to be supplied via the `./api/.env` file. The file is _not_ included in the github repository as it contains sensitive details. Each time you create a new stack application you must re-create the `.env` file and update its values as required.
+
+Below is a complete example of a `.env` file with the sensitive data obscured.
+```
+# GENERAL
+APP_ROOT="https://localhost:3000"
+API_NAME="stack-demo"
+API_PORT=3001
+API_ROOT="https://localhost:3001"
+API_LOGENTRIES_TOKEN="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+# HTTPS NODE SERVER
+# Set to 0 to allow for self-signed TLS certificates during development
+NODE_TLS_REJECT_UNAUTHORIZED="0"
+
+
+# Self-signed certs for development
+# To generate a private key and public cert with no passphrase for TLS use:
+# > openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 3650 -nodes
+
+TLS_CERT="MIIE7TC...+gozUoKc="
+TLS_KEY="MIIJRAIB...DBq1R"
+
+
+# AMAZON AWS
+AWS_ACCESS_KEY_ID="xxxxxxxxxxxxxxxxxxxx"
+AWS_SECRET_ACCESS_KEY="xxxxxxxxxxxxxxxxxxxxx"
+AWS_ROOT_BUCKET="goodpractice"
+
+
+# SSO
+SSO_COOKIE_SECRET="95tuX...entropy...LWebas"
+SSO_IDP_URL="https://accounts.google.com/o/saml2/idp?idpid=C03qui8l3"
+SSO_SP_ENTITYID="manage-star-local"
+SSO_SP_PRIVATE_KEY="MIIJRA...0Pmf2"
+
+
+# GP-API
+GP_API_URL="http://localhost:8082"
+GP_API_PUBLIC="xxxxxxxxxxxxxxxxxxxxxxxx"
+GP_API_SECRET="xxxxxxxxxxxxxxxxxxxxxxxx"
+GP_API_ADMIN="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+```
