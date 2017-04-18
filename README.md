@@ -41,6 +41,10 @@ You can see that the application is first divided into two main domains, the `ap
 
 ## Environment Variables
 
+The `api` component of a stack application requires a set of environment values to be supplied via the `./api/.env` file. The file is _not_ included in the github repository as it contains sensitive details. Each time you create a new stack application you must re-create the `.env` file and update its values as required.
+
+* ## [sample environment file](#example-api-environment-file)
+
 ## Features
 This demo consists of a series of features. Each feature extends and builds on the previous. The first few are essential reading if you want to use the stack at all, the rest will get you doing genuinely useful things.
 
@@ -1098,7 +1102,7 @@ The `selectedFolderId` value is stored on local REACT state which is set when th
 
 The `components.Table` is a shared component supplied by the `stack-redux-app` package. The columns of this table are defined using a plain `js` object called `columns`. You can see here that the table component supports custom column contents and the custom formatting of column values.
 
-## Example API Environment file -  `./api/.env`
+## Example API Environment file
 The `api` component of a stack application requires a set of environment values to be supplied via the `./api/.env` file. The file is _not_ included in the github repository as it contains sensitive details. Each time you create a new stack application you must re-create the `.env` file and update its values as required.
 
 Below is a complete example of a `.env` file with the sensitive data obscured.
