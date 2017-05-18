@@ -32,9 +32,7 @@ winston.info('---------------------------')
     // rest endpoints provided by the individual services.
     rest.setRoutes({
       app,
-      services,
-      baseUrl: '/rest'
-    })
+    services})
 
     // Mounts the SSO routes to allow for SSO handshakes
     sso.setRoutes({

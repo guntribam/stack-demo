@@ -7,14 +7,21 @@ import { actionHub, services, components } from '../../loader'
 const buttonStyle = {
   margin: 12
 }
+const localData = 'This is the data that has been sourced locally.'
 
 class component extends React.PureComponent {
   onFetchFromLocal = () => {
-    this.props.fromLocal('This is the data that has been sourced locally.')
+    this.props.fromLocal(localData)
   }
+
   onFetchFromApi = () => {
     this.props.fromApi()
   }
+
+  onFetchFromBoth = () => {
+    this.props.fromBoth(localData)
+  }
+
   onReload = () => {
     window.location.reload()
   }
@@ -54,6 +61,7 @@ class component extends React.PureComponent {
         <Divider />
         <RaisedButton label='Fetch Data Locally' onClick={this.onFetchFromLocal} style={buttonStyle} />
         <RaisedButton label='Fetch Data from the API' onClick={this.onFetchFromApi} style={buttonStyle} />
+        <RaisedButton label='Fetch Data from Both' onClick={this.onFetchFromBoth} style={buttonStyle} />
         <RaisedButton label='Restart the App' onClick={this.onReload} style={buttonStyle} />
       </components.Box>
     )
@@ -67,7 +75,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fromLocal: (data) => dispatch(actionHub.FETCH_FROM_LOCAL(data)),
-  fromApi: () => dispatch(actionHub.FETCH_FROM_API())
+  fromApi: () => dispatch(actionHub.FETCH_FROM_API()),
+  fromBoth: (data) => dispatch(actionHub.FETCH_FROM_BOTH(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(component)

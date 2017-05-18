@@ -7,6 +7,10 @@ const reducer = (state = {}, action) => {
       return {...state, data, source: 'APP'}
     case types.fetchFromApiResponse:
       return {...state, data, source: 'API'}
+    case types.fetchFromBoth:
+      return {...state, data, source: 'BOTH'}
+    case types.fetchFromBothResponse:
+      return {...state, data: `${state.data} + ${data}`, source: 'BOTH'}
     default:
       return state
   }

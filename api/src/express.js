@@ -1,13 +1,13 @@
 import { x509 } from '@gp-technical/stack-redux-api'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
+import winston from 'winston'
 import server from 'express'
 import https from 'https'
 import path from 'path'
-import winston from 'winston'
 import util from 'util'
 
-const start = async (services) => {
+const start = async () => {
   try {
     const app = server()
     app.use(cookieParser(process.env.SSO_COOKIE_SECRET))

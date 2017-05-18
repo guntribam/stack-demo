@@ -3,8 +3,9 @@ import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
 
 const api = makeTypes(name, ['fromApi'])
 const local = makeTypes(name, ['fromLocal'])
+const both = makeTypes(name, ['fromBoth'])
 
-const actions = {...makeActions(api), ...makeActions(local, {local: true})}
-const types = {...api, ...local}
+const actions = {...makeActions(api, {local: false}), ...makeActions(local, {local: true}), ...makeActions(both)}
+const types = {...api, ...local, ...both}
 
 export { actions, types }

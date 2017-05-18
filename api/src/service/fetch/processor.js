@@ -6,6 +6,8 @@ const processor = async (action) => {
   switch (type) {
     case types.fetchFromApi:
       return 'Hello from the stack-demo API'
+    case types.fetchFromBoth:
+      return 'This data was returned by the API and appended to the data returned by the local App'
   }
 }
 
