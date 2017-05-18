@@ -324,9 +324,10 @@ import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
 
 const api = makeTypes(name, ['fromApi'])
 const local = makeTypes(name, ['fromLocal'])
+const both = makeTypes(name, ['fromBoth'])
 
-const actions = {...makeActions(api), ...makeActions(local, {local: true})}
-const types = {...api, ...local}
+const actions = {...makeActions(api, {local: false}), ...makeActions(local, {local: true}), ...makeActions(both)}
+const types = {...api, ...local, ...both}
 
 export { actions, types }
 
@@ -335,7 +336,20 @@ Exports the generated REDUX `actions` and `types`. The `stack-redux-app` package
 
 Above you see two different types of action being generated. The actions marked with the `local` flag will only be dispatched to the reducers in the `app`, the `api` will not be involved.
 
-If the `local` flag is not set (the default case) then the actions will be automatically broadcast to the `api` where they can be picked up by the api service `processor` file - more on these important, server-side `processor` files later on ...
+#### The `local` flag
+If the `local` flag is not set (the default case) then the actions will be automatically broadcast to _both_ the `app` and the `api`. Actions broadcast to the `app` can be intercepted by your REDUX reducers in the usual way. Actions broadcast to the `api` can be picked up by server-side `processor` files that act very much like reducers. When an `api` processor returns a value to the `app` it does so by dispatching an automatic `<original-typeName>Response` action.
+
+* `local` : `undefined` (default)
+
+  The action is dispatched to both the `app` reducers and the `api` processors
+
+* `local` : `true`
+
+  The action is dispatched to the `app` reducers only
+
+* `local` : `false`
+
+    The action is dispatched to the `api` processors only
 
 ### _app/src/service/fetch/reducer.js_
 ```javascript
@@ -343,11 +357,15 @@ const reducer = (state = {}, action) => {
   const {type, types, data} = action
   switch (type) {
     case types.fetch_init:
-      return {...state, data, source: 'initial state pushed by the api'}
+      return {...state, data, source: 'API'}
     case types.fetchFromLocal:
-      return {...state, data, source: 'data fetched locally from the app'}
+      return {...state, data, source: 'APP'}
     case types.fetchFromApiResponse:
-      return {...state, data, source: 'data fetched via the application api'}
+      return {...state, data, source: 'API'}
+    case types.fetchFromBoth:
+      return {...state, data, source: 'BOTH'}
+    case types.fetchFromBothResponse:
+      return {...state, data: `${state.data} + ${data}`, source: 'BOTH'}
     default:
       return state
   }
@@ -355,7 +373,7 @@ const reducer = (state = {}, action) => {
 
 export default reducer
 ```
-The REDUX reducer file listens for REDUX actions that have been dispatched either locally by the `app` or remotely by the `api`. The case statement tests the type of the action that has been received and acts accordingly. The type names have been generated for you from the names supplied to the `makeTypes` function above. They are namespaced with the name of the feature found in the `name.js` file.
+The REDUX reducer file listens for REDUX actions that have been dispatched either locally by the `app` or remotely by the `api`. The case statement tests the type of the action that has been received and acts accordingly. The type names have been generated for you from the names supplied to the `makeTypes` function above. They are name-spaced with the name of the feature found in the `name.js` file.
 
 This reducer shows the three different types of action that the stack will generate for you:
 
