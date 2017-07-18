@@ -18,8 +18,8 @@
     "production": "webpack -p --config ./webpack.config.js"
   },
   "dependencies": {
-    "@gp-technical/stack-redux-app": "^0.4.5",
-    "babel-polyfill": "^6.16.0",
+    "@gp-technical/stack-redux-app": "^0.4.13",
+    "babel-polyfill": "^6.23.0",
     "material-ui": "^0.17.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",

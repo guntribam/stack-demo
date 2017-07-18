@@ -36,7 +36,7 @@ const start = async () => {
 
     return {tls, app}
   } catch (inner) {
-    const err = new Error('An error occurred whils starting the Express TLS Server')
+    const err = new Error('An error occurred while starting the Express TLS Server')
     err.inner = inner
     winston.error(util.inspect(err))
   }
