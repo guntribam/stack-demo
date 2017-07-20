@@ -4,5 +4,6 @@ import fetch from './fetch'
 import gp from './gp'
 import hello from './hello'
 import thunks from './thunks'
+import todos from './todos'
 
-export default {counter, errors, fetch, gp, hello, thunks}
+export default {counter, errors, fetch, gp, hello, thunks, todos}

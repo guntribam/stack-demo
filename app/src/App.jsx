@@ -31,6 +31,7 @@ class component extends React.PureComponent {
                 <components.counter />
                 <components.errors />
                 <components.thunks />
+                <components.todos />
                 <components.gp />
                 </Col>
               </Row>
