@@ -84,6 +84,14 @@ This demo consists of a series of features. Each feature extends and builds on t
 
   The table used is the shared table component supplied by the `stack-redux-app` package.
 
+## Additional Features
+
+The following features have been added to flesh out the example set and are offered here without any additional help. You can use these features to further enhance your understanding of the stack with examples contributed by team members. If you write your own demo feature then please submit it for inclusion in this list.
+
+  * ## todos
+
+  Recreates the canonical REDUX demo application. This feature allows you to add / edit and delete list items to a todo list. It also shows how to use a material-ui input form when editing a todo item.
+
 ## Features Explained
 Each feature will typically consist of three items:
 
