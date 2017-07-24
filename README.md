@@ -86,7 +86,7 @@ This demo consists of a series of features. Each feature extends and builds on t
 
 ## Additional Features
 
-The following features have been added to flesh out the example set and are offered here without any additional help. You can use these features to further enhance your understanding of the stack with examples contributed by team members. If you write your own demo feature then please submit it for inclusion in this list.
+The following features have been added to flesh out the example set and are offered here without any additional help. You can use these features to further enhance your understanding of the stack with examples contributed by team members. If you write your own demo-feature then please submit it for inclusion in this list.
 
   * ## todos
 
