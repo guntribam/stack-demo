@@ -1,4 +1,5 @@
-import { gpapi, makeProcessor } from '@gp-technical/stack-redux-api'
+import { gpapi } from 'stack-pack-gpapi'
+import { makeProcessor } from '@gp-technical/stack-redux-api'
 
 const processor = async (action) => {
   var {types, type, data} = action

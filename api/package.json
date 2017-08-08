@@ -20,6 +20,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
     "le_node": "^1.7.0",
+    "stack-demo-gpapi": "^0.1.1",
     "winston": "^2.3.1"
   },
   "devDependencies": {
