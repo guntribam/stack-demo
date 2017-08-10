@@ -1,5 +1,5 @@
 import name from './name'
-import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
+import { makeActions, makeTypes } from '@gp-technical/stack-pack-app'
 
 const api = makeTypes(name, ['fromApi'])
 const local = makeTypes(name, ['fromLocal'])

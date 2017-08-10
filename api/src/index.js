@@ -1,14 +1,13 @@
 import 'babel-polyfill'
-import { sharedServices } from '@gp-technical/stack-redux-api'
+import { sharedServices } from '@gp-technical/stack-pack-api'
 // import { sharedServices } from '@gp-technical/stack-redux-api'
 import { gpapi } from '@gp-technical/stack-pack-gpapi'
 import rest from '@gp-technical/stack-pack-rest'
 import sso from '@gp-technical/stack-pack-sso'
-import socket from '@gp-technical/stack-pack-socket'
+import api from '@gp-technical/stack-pack-api'
 import { x509 } from "@gp-technical/stack-pack-util"
 import { request } from "@gp-technical/stack-pack-request"
 import file from "@gp-technical/stack-pack-file"
-import api from "@gp-technical/stack-pack-api"
 import message from "@gp-technical/stack-pack-message"
 import action from "@gp-technical/stack-pack-action"
 import awsS3 from "@gp-technical/stack-pack-awsS3"
@@ -58,7 +57,7 @@ winston.info('---------------------------')
     })
 
     // Connects the socket to receive and broadcast REDUX actions to and from the app
-    socket.connect({
+    api.connect({
       services,
     tls})
   } catch (inner) {

@@ -1,5 +1,5 @@
 import name from './name'
-import { makeActions, makeTypes } from '@gp-technical/stack-redux-app'
+import { makeActions, makeTypes } from '@gp-technical/stack-pack-app'
 import { actionHub } from '../../loader'
 
 const types = makeTypes(name, ['getAnswer'])

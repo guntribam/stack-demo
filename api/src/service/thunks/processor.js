@@ -1,4 +1,4 @@
-import makeProcessor from '@gp-technical/stack-pack-makeProcessor'
+import makeProcessor from '@gp-technical/stack-pack-api'
 
 function sleep (ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
