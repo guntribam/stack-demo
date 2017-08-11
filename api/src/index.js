@@ -1,6 +1,5 @@
 import 'babel-polyfill'
 import { sharedServices } from '@gp-technical/stack-pack-api'
-// import { sharedServices } from '@gp-technical/stack-redux-api'
 import { gpapi } from '@gp-technical/stack-pack-gpapi'
 import rest from '@gp-technical/stack-pack-rest'
 import sso from '@gp-technical/stack-pack-sso'

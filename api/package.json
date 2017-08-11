@@ -15,12 +15,12 @@
     "production": "babel --presets latest,stage-2 src --out-dir /build"
   },
   "dependencies": {
+    "stack-pack-gpapi": "^0.1.0",
+    "stack-pack-request": "^0.1.1",
     "@gp-technical/stack-pack-api": "^0.1.0",
-    "@gp-technical/stack-pack-gpapi": "^0.1.0",
     "@gp-technical/stack-pack-rest": "^1.0.0",
     "@gp-technical/stack-pack-sso": "^0.1.0",
     "@gp-technical/stack-pack-util": "^0.1.0",
-    "@gp-technical/stack-pack-request": "^0.1.1",
     "@gp-technical/stack-pack-file": "^0.1.0",
     "@gp-technical/stack-pack-mongo": "^0.1.0",
     "@gp-technical/stack-pack-message": "^0.1.0",
