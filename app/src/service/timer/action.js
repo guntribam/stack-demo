@@ -1,8 +1,7 @@
 import name from './name'
 import { makeActions, makeTypes } from '@gp-technical/stack-pack-app'
 
-const types = makeTypes(name, ['create', 'update', 'delete'])
-
+const types = makeTypes(name, ['getTime'])
 const actions = makeActions(types)
 
 export { actions, types }

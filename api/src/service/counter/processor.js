@@ -1,5 +1,9 @@
-import makeProcessor from '@gp-technical/stack-pack-makeProcessor'
+import api from '@gp-technical/stack-pack-api'
+import { makeProcessor } from '@gp-technical/stack-pack-api'
 import db from './db'
+
+console.info('makeProcessor', makeProcessor)
+console.info('api.makeProcessor', api.makeProcessor)
 
 const processor = async (action) => {
   var {types, type, data} = action

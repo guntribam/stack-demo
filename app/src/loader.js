@@ -1,4 +1,4 @@
-import { makeActionHub, sharedServices, sharedComponents } from '@gp-technical/stack-redux-app'
+import { makeActionHub, sharedServices, sharedComponents } from '@gp-technical/stack-pack-app'
 
 import localComponents from './component'
 import localServices from './service'
