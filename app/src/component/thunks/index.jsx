@@ -14,8 +14,8 @@ class component extends React.PureComponent {
   }
 
   render () {
-    var {answer, isSpinning} = this.props
-    if (isSpinning) answer = 'Calculating answer, this will take 3 seconds ...'
+    var {answer, isBusy} = this.props
+    if (isBusy) answer = 'Calculating answer, this will take 3 seconds ...'
     return (
       <components.Box>
         <h2>Feature: <i>thunks</i></h2>
@@ -37,7 +37,7 @@ class component extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   answer: services.thunks.selector.getAnswer(state),
-  isSpinning: services.spinner.selector.getIsSpinning(state)
+  isBusy: services.busy.selector.getIsBusy(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({

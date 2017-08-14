@@ -8,9 +8,9 @@ const actions = makeActions(types)
 const thunksGetAnswer = actions.thunksGetAnswer
 actions.thunksGetAnswer = () => {
   return async (dispatch, getState) => {
-    dispatch(actionHub.SPINNER_ON())
+    dispatch(actionHub.BUSY_ON())
     await dispatch(thunksGetAnswer())
-    dispatch(actionHub.SPINNER_OFF())
+    dispatch(actionHub.BUSY_OFF())
   }
 }
 

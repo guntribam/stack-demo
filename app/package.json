@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@gp-technical/stack-pack-app": "^0.1.0",
+    "@gp-technical/stack-pack-components": "0.0.2",
     "babel-polyfill": "^6.23.0",
     "material-ui": "^0.17.1",
     "react": "^15.3.2",

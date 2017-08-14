@@ -1,14 +1,6 @@
 import 'babel-polyfill'
-import { sharedServices } from '@gp-technical/stack-pack-api'
-import rest from '@gp-technical/stack-pack-rest'
-import sso from '@gp-technical/stack-pack-sso'
-import api from '@gp-technical/stack-pack-api'
+import { rest, sharedServices, socket, sso } from '@gp-technical/stack-pack-api'
 import { x509 } from '@gp-technical/stack-pack-util'
-import file from '@gp-technical/stack-pack-file'
-import message from '@gp-technical/stack-pack-message'
-import action from '@gp-technical/stack-pack-action'
-import mongo from '@gp-technical/stack-pack-mongo'
-import { request } from 'stack-pack-request'
 import { gpapi } from 'stack-pack-gpapi'
 
 import localServices from './service'
@@ -55,7 +47,7 @@ winston.info('---------------------------')
     })
 
     // Connects the socket to receive and broadcast REDUX actions to and from the app
-    api.connect({
+    socket.connect({
       services,
     tls})
   } catch (inner) {
