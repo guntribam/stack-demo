@@ -14,7 +14,6 @@ class component extends React.PureComponent {
   }
 
   render () {
-    console.info('services', services)
     var {errorMessage} = this.props
     return (
       <components.Box>

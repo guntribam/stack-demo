@@ -1,7 +1,6 @@
 import name from './name'
 
 const get = (state) => {
-  console.info('state', state)
   return state[name]
 }
 

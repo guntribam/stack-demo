@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { actionHub, services, components } from '../../loader'
+import { actionHub, services, components, helper } from '../../loader'
 import TextField from 'material-ui/TextField'
 import Divider from 'material-ui/Divider'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -28,7 +28,7 @@ class component extends React.PureComponent {
   }
 
   onDelete = (e) => {
-    const id = e.target.dataset.id
+    const id = helper.dom.findDataSetValue(e.target, 'id')
     const { deleteTodo } = this.props
     deleteTodo(id)
   }
@@ -41,13 +41,13 @@ class component extends React.PureComponent {
   }
 
   handleChange = (e) => {
-    const status = e.target.dataset.status
+    const status = helper.dom.findDataSetValue(e.target, 'status')
     const value = e.target.value
     this.setState({ [status]: value })
   }
 
   handleOpen = (e) => {
-    const id = e.target.dataset.id
+    const id = helper.dom.findDataSetValue(e.target, 'id')
     const { todos } = this.props
     this.setState({openModal: true, editId: id, edit: todos[id]})
   }
