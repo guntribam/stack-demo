@@ -1,4 +1,4 @@
-import { makeProcessor } from '@gp-technical/stack-redux-api'
+import {makeProcessor} from '@gp-technical/stack-pack-api'
 import db from './db'
 
 const processor = async (action) => {

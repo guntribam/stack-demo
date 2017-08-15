@@ -14,9 +14,9 @@ class component extends React.PureComponent {
       <components.Loader show={!!user} branding={branding}>
         <MuiThemeProvider muiTheme={muiTheme}>
           <div>
-            <components.App.Bar
+            <components.App
               title='stack-demo'
-              color={muiTheme.appBar.color}
+              color={muiTheme.app.color}
               user={user}
               style={styles} />
             <Grid>

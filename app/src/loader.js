@@ -1,12 +1,13 @@
-import { makeActionHub, sharedServices, sharedComponents } from '@gp-technical/stack-redux-app'
-
+import { makeActionHub, sharedServices, sharedComponents, sharedHelper } from '@gp-technical/stack-pack-app'
+import { Box, FileUpload, Table } from '@gp-technical/stack-pack-components'
 import localComponents from './component'
 import localServices from './service'
 import env from './env'
 
 const services = {...localServices, ...sharedServices}
-
-const components = {...localComponents, ...sharedComponents}
 const actionHub = makeActionHub(services)
 
-export { actionHub, env, components, services }
+const components = {...localComponents, ...sharedComponents, ...{Box, FileUpload, Table}}
+const helper = {...sharedHelper}
+
+export { actionHub, env, components, services, helper }

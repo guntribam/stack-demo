@@ -15,7 +15,11 @@
     "production": "babel --presets latest,stage-2 src --out-dir /build"
   },
   "dependencies": {
-    "@gp-technical/stack-redux-api": "^0.4.18",
+    "@gp-technical/stack-pack-api": "^0.1.0",
+    "@gp-technical/stack-pack-aws": "^0.1.0",
+    "@gp-technical/stack-pack-file": "^0.1.0",
+    "@gp-technical/stack-pack-mongo": "^0.1.0",
+    "@gp-technical/stack-pack-util": "^0.1.0",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.13.4",

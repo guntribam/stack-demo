@@ -27,7 +27,7 @@ class component extends React.PureComponent {
           If you are running this locally you can see the full server error in your command window. Otherwise it can be found in the LogEntries website.
         </p>
         <Divider />
-        <h3><components.ErrorMessage text={errorMessage} /></h3>
+        <h3><components.ErrorMsg text={errorMessage} /></h3>
         <Divider />
         <RaisedButton label='Thrown an API Error' onClick={this.onThrowFromApi} style={buttonStyle} />
       </components.Box>
@@ -36,7 +36,7 @@ class component extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  errorMessage: services.errorMessage.selector.getText(state)
+  errorMessage: services.errorMsg.selector.getText(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({

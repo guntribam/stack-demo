@@ -21,7 +21,7 @@ const muiTheme = getMuiTheme({
     clockCircleColor: fade(darkBlack, 0.07),
     shadowColor: fullBlack
   },
-  appBar: {
+  app: {
     height: 80,
     textColor: white
   },
