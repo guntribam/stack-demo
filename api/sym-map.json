@@ -1,8 +1,0 @@
-{
-  "@gp-technical/stack-pack-api": "^0.1.0",
-  "@gp-technical/stack-pack-aws": "^0.1.0",
-  "@gp-technical/stack-pack-file": "^0.1.0",
-  "@gp-technical/stack-pack-mongo": "^0.1.0",
-  "@gp-technical/stack-pack-util": "^0.1.0",
-  "stack-pack-gpapi": "0.1.1"
-}
