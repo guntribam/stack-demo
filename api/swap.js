@@ -15,10 +15,11 @@ switch (packageJson.dependencyTarget) {
   default:
     throw new Error('incorrect dependencyTarget')
 }
-
+console.log('---------------------------------')
+console.info('Swapping Package References to: ', packageJson.dependencyTarget)
 for (let name in target) {
   let value = target[name]
-  console.info('value', value)
+  console.log(`    ${name}:${value}`)
   packageJson.dependencies[name] = value
 }
 
