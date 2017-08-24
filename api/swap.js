@@ -1,12 +1,25 @@
-var manifest = require('./package.json')
-var symMap = require('./sym-map.json')
-var fs = require('fs')
+var packageJson = require('./package.json')
 
-for (let name in symMap) {
-  let manifestValue = manifest.dependencies[name]
-  manifest.dependencies[name] = symMap[name]
-  symMap[name] = manifestValue
+var fs = require('fs')
+var target = {}
+
+switch (packageJson.dependencyTarget) {
+  case 'local':
+    target = packageJson.publishedDependencies
+    packageJson.dependencyTarget = 'published'
+    break
+  case 'published':
+    target = packageJson.localDependencies
+    packageJson.dependencyTarget = 'local'
+    break
+  default:
+    throw new Error('incorrect dependencyTarget')
 }
 
-fs.writeFile('./package.json', JSON.stringify(manifest, null, '  '))
-fs.writeFile('./sym-map.json', JSON.stringify(symMap, null, '  '))
+for (let name in target) {
+  let value = target[name]
+  console.info('value', value)
+  packageJson.dependencies[name] = value
+}
+
+fs.writeFile('./package.json', JSON.stringify(packageJson, null, '  '))
