@@ -11,7 +11,6 @@
   },
   "main": "index.js",
   "scripts": {
-    "swap": "node ../swap.js app",
     "lint": "eslint src",
     "babel": "babel --presets latest,stage-2 src --out-dir build",
     "build": "npm run lint && npm run babel",
