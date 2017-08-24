@@ -1,29 +1,17 @@
-swap(`api`)
-swap(`app`)
+#!/usr/bin/env node
+const { exec } = require('child_process')
+
+swap('app')
+swap('api')
+
 function swap (dir) {
-  var packageJson = require(`./${dir}/package.json`)
-  var {swap} = packageJson
-  var fs = require('fs')
-  var target = {}
-
-  switch (swap.dependencyTarget) {
-    case 'local':
-      target = swap.publishedDependencies
-      swap.dependencyTarget = 'published'
-      break
-    case 'published':
-      target = swap.localDependencies
-      swap.dependencyTarget = 'local'
-      break
-    default:
-      throw new Error('incorrect dependencyTarget')
-  }
-
-  console.log(`-------------- ${swap.dependencyTarget} ----------------`)
-  for (let name in target) {
-    let value = target[name]
-    console.log(`${name}:${value}`)
-    packageJson.dependencies[name] = value
-  }
-  fs.writeFile(`../${dir}/package.json`, JSON.stringify(packageJson, null, '  '))
+  const projectPath = `D:/code/stack/stack-demo/${dir}`
+  const ls = exec(`"sp-swap" ${projectPath}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`)
+      return
+    }
+    console.log(`${stdout}`)
+    if (stderr) console.log(`${stderr}`)
+  })
 }
