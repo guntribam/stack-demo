@@ -11,11 +11,23 @@
   },
   "main": "index.js",
   "scripts": {
+    "swap": "node ../swap.js app",
     "lint": "eslint src",
     "babel": "babel --presets latest,stage-2 src --out-dir build",
     "build": "npm run lint && npm run babel",
     "start": "npm run build && webpack-dev-server",
     "production": "webpack -p --config ./webpack.config.js"
+  },
+  "swap": {
+    "dependencyTarget": "local",
+    "localDependencies": {
+      "@gp-technical/stack-pack-app": "file:../../stack-pack/stack-pack-app",
+      "@gp-technical/stack-pack-components": "file:../../stack-pack/stack-pack-components"
+    },
+    "publishedDependencies": {
+      "@gp-technical/stack-pack-app": "^0.1.0",
+      "@gp-technical/stack-pack-components": "^0.1.1"
+    }
   },
   "dependencies": {
     "@gp-technical/stack-pack-app": "file:../../stack-pack/stack-pack-app",
