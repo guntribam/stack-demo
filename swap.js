@@ -10,5 +10,6 @@ function swap (dir) {
   const target = process.argv[2]
   exec(`"sp-swap" ${path} ${target}`, (error, stdout, stderr) => {
     console.log(`${stdout}`)
+    if (stderr) console.log(`${stdout}`)
   })
 }
