@@ -15,7 +15,7 @@
     "production": "babel --presets latest,stage-2 src --out-dir /build"
   },
   "swap": {
-    "dependencyTarget": "published",
+    "target": "published",
     "localDependencies": {
       "@gp-technical/stack-pack-api": "file:../../stack-pack/stack-pack-api",
       "@gp-technical/stack-pack-aws": "file:../../stack-pack/stack-pack-aws",
@@ -36,15 +36,6 @@
     }
   },
   "dependencies": {
-    "0": "p",
-    "1": "u",
-    "2": "b",
-    "3": "l",
-    "4": "i",
-    "5": "s",
-    "6": "h",
-    "7": "e",
-    "8": "d",
     "@gp-technical/stack-pack-api": "^0.1.0",
     "@gp-technical/stack-pack-aws": "^0.1.0",
     "@gp-technical/stack-pack-dev": "file:../../stack-pack/stack-pack-dev",
