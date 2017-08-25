@@ -8,7 +8,7 @@ swap('api')
 
 function swap (dir) {
   path = `${projectPath}/${dir}`
-  const ls = exec(`"sp-swap" ${path} ${target}`, stdout => {
+  const ls = exec(`"sp-swap" ${path} ${target}`, (error, stdout, stderr) => {
     console.log(`${stdout}`)
   })
 }
