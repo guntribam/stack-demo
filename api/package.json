@@ -35,17 +35,17 @@
     }
   },
   "dependencies": {
-    "@gp-technical/stack-pack-api": "file:../../stack-pack/stack-pack-api",
-    "@gp-technical/stack-pack-aws": "file:../../stack-pack/stack-pack-aws",
-    "@gp-technical/stack-pack-dev": "file:../../stack-pack/stack-pack-dev",
-    "@gp-technical/stack-pack-file": "file:../../stack-pack/stack-pack-file",
-    "@gp-technical/stack-pack-mongo": "file:../../stack-pack/stack-pack-mongo",
-    "@gp-technical/stack-pack-util": "file:../../stack-pack/stack-pack-util",
+    "@gp-technical/stack-pack-api": "^0.1.0",
+    "@gp-technical/stack-pack-aws": "^0.1.0",
+    "@gp-technical/stack-pack-dev": "0.1.0",
+    "@gp-technical/stack-pack-file": "^0.1.0",
+    "@gp-technical/stack-pack-mongo": "^0.1.0",
+    "@gp-technical/stack-pack-util": "^0.1.0",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
     "le_node": "^1.7.0",
-    "stack-pack-gpapi": "file:../../stack-pack/stack-pack-gpapi",
+    "stack-pack-gpapi": "0.1.1",
     "winston": "^2.3.1"
   },
   "devDependencies": {
