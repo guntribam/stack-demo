@@ -2,7 +2,7 @@
 const { exec } = require('child_process')
 const projectPath = 'D:/code/stack/stack-demo'
 
-console.info('process.argv', process.argv)
+console.info('process.argv', __dirname)
 
 console.log()
 
