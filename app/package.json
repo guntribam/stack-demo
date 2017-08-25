@@ -18,7 +18,10 @@
     "production": "webpack -p --config ./webpack.config.js"
   },
   "swapDep": {
-    "target": "published",
+    "target": {
+      "@gp-technical/stack-pack-app": "^0.1.0",
+      "@gp-technical/stack-pack-components": "^0.1.1"
+    },
     "local": {
       "@gp-technical/stack-pack-app": "file:../../stack-pack/stack-pack-app",
       "@gp-technical/stack-pack-components": "file:../../stack-pack/stack-pack-components"

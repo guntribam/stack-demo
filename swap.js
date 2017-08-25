@@ -3,6 +3,7 @@ const { exec } = require('child_process')
 const projectPath = 'D:/code/stack/stack-demo'
 
 console.log()
+
 swap('app')
 swap('api')
 
