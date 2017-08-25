@@ -3,16 +3,14 @@ const { exec } = require('child_process')
 const projectPath = 'D:/code/stack/stack-demo'
 const target = process.argv[2]
 
-console.info('target', target)
+swap('app')
+swap('api')
 
-// swap('app')
-// swap('api')
-//
-// function swap (dir) {
-//   path = `${projectPath}/${dir}`
-//   const ls = exec(`"sp-swap" ${path} ${target}`, (error, stdout, stderr) => {
-//     if (error) return console.error(`exec error: ${error}`)
-//     console.log(`${stdout}`)
-//     console.log(`${stderr}`)
-//   })
-// }
+function swap (dir) {
+  path = `${projectPath}/${dir}`
+  const ls = exec(`"sp-swap" ${path} ${target}`, (error, stdout, stderr) => {
+    if (error) return console.error(`exec error: ${error}`)
+    console.log(`${stdout}`)
+    console.log(`${stderr}`)
+  })
+}
