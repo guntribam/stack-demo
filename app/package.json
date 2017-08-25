@@ -19,20 +19,27 @@
   },
   "swapDep": {
     "local": {
-      "@gp-technical/stack-pack-app": "file:../../stack-pack/stack-pack-app",
-      "@gp-technical/stack-pack-components": "file:../../stack-pack/stack-pack-components",
-      "@gp-technical/stack-pack-dev": "file:../../stack-pack/stack-pack-dev"
+      "dep":{
+        "@gp-technical/stack-pack-app": "file:../../stack-pack/stack-pack-app",
+        "@gp-technical/stack-pack-components": "file:../../stack-pack/stack-pack-components"
+      },
+      "dev":{
+        "@gp-technical/stack-pack-dev": "file:../../stack-pack/stack-pack-dev"
+      }
     },
     "published": {
-      "@gp-technical/stack-pack-app": "^0.1.0",
-      "@gp-technical/stack-pack-components": "^0.1.1",
-      "@gp-technical/stack-pack-dev": "0.1.0"
+      "dep":{
+        "@gp-technical/stack-pack-app": "0.1.0",
+        "@gp-technical/stack-pack-components": "0.1.1",
+      },
+      "dev":{
+        "@gp-technical/stack-pack-dev": "0.1.0"
+      }
     }
   },
   "dependencies": {
-    "@gp-technical/stack-pack-app": "^0.1.0",
-    "@gp-technical/stack-pack-components": "^0.1.1",
-    "@gp-technical/stack-pack-dev": "0.1.0",
+    "@gp-technical/stack-pack-app": "file:../../stack-pack/stack-pack-app",
+    "@gp-technical/stack-pack-components": "file:../../stack-pack/stack-pack-components",
     "babel-polyfill": "^6.23.0",
     "material-ui": "^0.17.1",
     "react": "^15.3.2",
@@ -43,6 +50,7 @@
     "redux": "^3.5.2"
   },
   "devDependencies": {
+    "@gp-technical/stack-pack-dev": "file:../../stack-pack/stack-pack-dev",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.16.0",
     "babel-eslint": "^7.0.0",
