@@ -18,10 +18,6 @@
     "production": "webpack -p --config ./webpack.config.js"
   },
   "swapDep": {
-    "target": {
-      "@gp-technical/stack-pack-app": "^0.1.0",
-      "@gp-technical/stack-pack-components": "^0.1.1"
-    },
     "local": {
       "@gp-technical/stack-pack-app": "file:../../stack-pack/stack-pack-app",
       "@gp-technical/stack-pack-components": "file:../../stack-pack/stack-pack-components"
@@ -32,8 +28,8 @@
     }
   },
   "dependencies": {
-    "@gp-technical/stack-pack-app": "^0.1.0",
-    "@gp-technical/stack-pack-components": "^0.1.1",
+    "@gp-technical/stack-pack-app": "file:../../stack-pack/stack-pack-app",
+    "@gp-technical/stack-pack-components": "file:../../stack-pack/stack-pack-components",
     "babel-polyfill": "^6.23.0",
     "material-ui": "^0.17.1",
     "react": "^15.3.2",
