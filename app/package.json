@@ -17,7 +17,7 @@
     "start": "npm run build && webpack-dev-server",
     "production": "webpack -p --config ./webpack.config.js"
   },
-  "swapDependencies": {
+  "swapDep": {
     "target": "published",
     "local": {
       "@gp-technical/stack-pack-app": "file:../../stack-pack/stack-pack-app",

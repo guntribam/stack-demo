@@ -14,9 +14,9 @@
     "start": "env-cmd .env babel-node src/index.js --silent",
     "production": "babel --presets latest,stage-2 src --out-dir /build"
   },
-  "swap": {
+  "swapDep": {
     "target": "published",
-    "localDependencies": {
+    "local": {
       "@gp-technical/stack-pack-api": "file:../../stack-pack/stack-pack-api",
       "@gp-technical/stack-pack-aws": "file:../../stack-pack/stack-pack-aws",
       "@gp-technical/stack-pack-dev": "file:../../stack-pack/stack-pack-dev",
@@ -25,7 +25,7 @@
       "@gp-technical/stack-pack-util": "file:../../stack-pack/stack-pack-util",
       "stack-pack-gpapi": "file:../../stack-pack/stack-pack-gpapi"
     },
-    "publishedDependencies": {
+    "published": {
       "@gp-technical/stack-pack-api": "^0.1.0",
       "@gp-technical/stack-pack-aws": "^0.1.0",
       "@gp-technical/stack-pack-dev": "0.1.0",
