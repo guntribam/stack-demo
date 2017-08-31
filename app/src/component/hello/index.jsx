@@ -1,5 +1,7 @@
 import React from 'react'
+const test = require('./test.js')
 
+console.info('test', test)
 const style = {
   margin: 20,
   padding: 20,
