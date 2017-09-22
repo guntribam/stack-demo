@@ -8,15 +8,14 @@ import winston from 'winston'
 import Logger from 'le_node' // eslint-disable-line no-unused-vars
 import util from 'util'
 
-const services = {...localServices, ...sharedServices}
+const services = { ...localServices, ...sharedServices }
 
 winston.add(winston.transports.Logentries, { token: process.env.API_LOGENTRIES_TOKEN })
 winston.info('---------------------------')
-
 ;(async () => {
   try {
     // Starts an HTTPS express server
-    const {tls, app} = await express.start(services)
+    const { tls, app } = await express.start(services)
 
     // Performs the security handshake with the GP-API
     // Sets up a single proxy endpoint to allow secure access to all GP-API endpoints
@@ -25,8 +24,7 @@ winston.info('---------------------------')
       app,
       apiUrl: process.env.GP_API_URL,
       keyPublic: process.env.GP_API_PUBLIC,
-      keyPrivate: process.env.GP_API_SECRET,
-      keyAdmin: process.env.GP_API_ADMIN
+      keyPrivate: process.env.GP_API_SECRET
     })
 
     // Discovers and mounts any endpoints found in service/router.js files
@@ -34,7 +32,8 @@ winston.info('---------------------------')
     // rest endpoints provided by the individual services.
     rest.setRoutes({
       app,
-    services})
+      services
+    })
 
     // Mounts the SSO routes to allow for SSO handshakes
     sso.setRoutes({
@@ -48,7 +47,8 @@ winston.info('---------------------------')
     // Connects the socket to receive and broadcast REDUX actions to and from the app
     socket.connect({
       services,
-    tls})
+      tls
+    })
   } catch (inner) {
     const err = new Error(`An error occurred whilst starting the ${process.env.API_NAME} API`)
     err.inner = inner
