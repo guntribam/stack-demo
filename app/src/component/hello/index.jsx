@@ -1,7 +1,7 @@
 import React from 'react'
-const test = require('./test.js')
+import { connect } from 'react-redux'
+import { actionHub, services, components } from '../../loader'
 
-console.info('test', test)
 const style = {
   margin: 20,
   padding: 20,
