@@ -15,7 +15,7 @@ class component extends React.PureComponent {
     this.props.getVolume(parseInt(value))
   }
 
-  render () {
+  render() {
     const { radius, volume } = this.props
     return (
       <components.Box>
