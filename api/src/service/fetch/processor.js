@@ -1,14 +1,14 @@
-import { makeProcessor } from "@gp-technical/stack-pack-api";
+import { makeProcessor } from '@gp-technical/stack-pack-api'
 
 const processor = async action => {
-  var { types, type, data } = action;
+  var { types, type, data } = action
 
   switch (type) {
     case types.fetchFromApi:
-      return "Hello from the stack-demo API";
+      return 'Hello from the stack-demo API'
     case types.fetchFromBoth:
-      return "This data was returned by the API and appended to the data returned by the local App";
+      return 'This data was returned by the API and appended to the data returned by the local App'
   }
-};
+}
 
-export default makeProcessor(processor);
+export default makeProcessor(processor)
