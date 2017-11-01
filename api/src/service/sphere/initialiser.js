@@ -2,7 +2,7 @@ import calculator from "./calculator";
 const initialiser = async () => {
   const radius = 6372;
   return {
-    radius,
+    radius: radius,
     volume: calculator.getVolume(radius)
   };
 };
