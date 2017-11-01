@@ -5,5 +5,6 @@ import gp from './gp'
 import hello from './hello'
 import thunks from './thunks'
 import todos from './todos'
+import sphere from './sphere'
 
-export default {counter, errors, fetch, gp, hello, thunks, todos}
+export default { counter, errors, fetch, gp, hello, thunks, todos, sphere }
