@@ -1,6 +1,13 @@
 {
-	"presets": [
-    "latest",
-    "stage-2"
-	]
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ],
+    ["stage-2"]
+  ]
 }
