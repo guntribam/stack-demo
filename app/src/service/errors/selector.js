@@ -1,11 +1,11 @@
 import name from './name'
 
-const get = (state) => {
+const get = state => {
   return state[name]
 }
 
-const getText = (state) => {
+const getText = state => {
   return get(state).text
 }
 
-export default {get, getText}
+export default { getText }

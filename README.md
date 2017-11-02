@@ -413,7 +413,7 @@ const getSource = (state) => {
   return get(state).source
 }
 
-export default {get, getData, getSource}
+export default { getData, getSource}
 ```
 A selector is used to easily locate elements within the feature's REDUX state tree. When you require data from REDUX state you should always go through the appropriate feature's selector. You will typically see these being used by REACT components as a data-source for the components props.
 
@@ -625,7 +625,7 @@ const getTotal = (state) => {
   return get(state).total
 }
 
-export default {get, getTotal}
+export default { getTotal}
 ```
 The selector allows access to the feature state. Here it is the single value representing the current state of the `api` counter.
 
@@ -1007,7 +1007,7 @@ const getFolders = (state) => {
   return get(state).folders
 }
 
-export default {get, getDocuments, getFolders}
+export default { getDocuments, getFolders}
 ```
 The selector reaches into the feature REDUXC state to expose the data elements of use, in this case the list of folders and the currently selected list of documents.
 

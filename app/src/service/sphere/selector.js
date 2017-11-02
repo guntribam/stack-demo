@@ -12,4 +12,4 @@ const getRadius = state => {
   return get(state).radius
 }
 
-export default { get, getVolume, getRadius }
+export default { getVolume, getRadius }

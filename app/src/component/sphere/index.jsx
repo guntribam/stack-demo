@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Divider from 'material-ui/Divider'
 import TextField from 'material-ui/TextField'
 import { actionHub, services, components } from '../../loader'
+import { DebounceInput } from 'react-debounce-input'
 
 const sup = {
   position: 'relative',
@@ -11,8 +12,8 @@ const sup = {
 }
 
 class component extends React.PureComponent {
-  onRadiusChange = (e, value) => {
-    this.props.getVolume(parseInt(value))
+  onRadiusChange = e => {
+    this.props.getVolume(parseInt(e.target.value))
   }
 
   render() {
@@ -32,12 +33,15 @@ class component extends React.PureComponent {
         <p>
           V=(4/3)π r<i style={sup}>3</i>
         </p>
-        <label>Enter a Radius(Km)</label>
-        <TextField
-          id="sphere-radius"
+        <DebounceInput
+          element={TextField}
+          minLength={1}
+          debounceTimeout={1000}
+          hintText="Enter a Radius"
           defaultValue={radius}
           onChange={this.onRadiusChange}
         />
+        <span>Km</span>
         <p>
           The volume is : {volume}
           &nbsp;Km<i style={sup}>3</i>

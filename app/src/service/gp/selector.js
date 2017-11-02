@@ -1,15 +1,15 @@
 import name from './name'
 
-const get = (state) => {
+const get = state => {
   return state[name]
 }
 
-const getDocuments = (state) => {
+const getDocuments = state => {
   return get(state).documents
 }
 
-const getFolders = (state) => {
+const getFolders = state => {
   return get(state).folders
 }
 
-export default {get, getDocuments, getFolders}
+export default { getDocuments, getFolders }
