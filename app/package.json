@@ -27,14 +27,14 @@
     },
     "published": {
       "dep": {
-        "@gp-technical/stack-pack-app": "1.1.2",
+        "@gp-technical/stack-pack-app": "1.1.3",
         "@gp-technical/stack-pack-components": "1.1.2"
       },
       "dev": {}
     }
   },
   "dependencies": {
-    "@gp-technical/stack-pack-app": "1.1.2",
+    "@gp-technical/stack-pack-app": "1.1.3",
     "@gp-technical/stack-pack-components": "1.1.2",
     "babel-polyfill": "^6.23.0",
     "fbjs": "^0.8.16",
