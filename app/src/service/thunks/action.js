@@ -2,15 +2,18 @@ import name from './name'
 import { makeActions, makeTypes } from '@gp-technical/stack-pack-app'
 import { actionHub } from '../../loader'
 
-const types = makeTypes(name, ['getAnswer'])
-const actions = makeActions(types)
+const api = makeTypes(name, ['getAnswer'])
+const local = makeTypes(name, ['start', 'finish'])
+
+const actions = { ...makeActions(api, { local: false }), ...makeActions(local, { local: true }) }
+const types = { ...api, ...local }
 
 const thunksGetAnswer = actions.thunksGetAnswer
 actions.thunksGetAnswer = () => {
   return async (dispatch, getState) => {
-    dispatch(actionHub.BUSY_ON())
+    dispatch(actionHub.THUNKS_START())
     await dispatch(thunksGetAnswer())
-    dispatch(actionHub.BUSY_OFF())
+    dispatch(actionHub.THUNKS_FINISH())
   }
 }
 

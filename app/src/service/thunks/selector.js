@@ -8,4 +8,8 @@ const getAnswer = state => {
   return get(state).answer
 }
 
-export default { getAnswer }
+const getIsRunning = state => {
+  return get(state).isRunning
+}
+
+export default { getAnswer, getIsRunning }
