@@ -112,11 +112,17 @@ genuinely useful things.
 ## Additional Features
 
 The following features have been added to flesh out the example set and are offered here without any additional help. You can use these features to further enhance your understanding of the stack with
-examples contributed by team members. If you write your own demo-feature then please submit it for inclusion in this list.
+examples contributed by team members.
 
-* ## todos
+If you write your own demo-feature then please submit it for inclusion in this list.
+
+* ## [todos](#feature-to)
 
 Recreates the canonical REDUX demo application. This feature allows you to add / edit and delete list items to a todo list. It also shows how to use a material-ui input form when editing a todo item.
+
+* ## [sphere](#feature-sphere)
+
+Calculates the volume of a sphere. This feature shows simple `app` <-> `api` communication as well as a neat _debounce_ text box that throttles the user input to prevent excessive calls to the api
 
 ## Features Explained
 
