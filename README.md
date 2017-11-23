@@ -64,65 +64,16 @@ details. Each time you create a new stack application you must re-create the `.e
 
 * ## [sample environment file](#example-api-environment-file)
 
-## Features
+# Features
 
-This demo consists of a series of features. Each feature extends and builds on the previous. The first few are essential reading if you want to use the stack at all, the rest will get you doing
-genuinely useful things.
+In stack-speak a _Feature_ is a unit of functionality. A feature does something, it is the way that we separate out the individual _concerns_ of an application and bundle them up into useful,
+re-usable components. A single feature can, and very often does, span both the `app` and `api`. The feature has files that represent _app-side-logic_ _app-side-user-interface_ and _api-side-logic_.
+All these files taken together allow a feature to do its thing easily, with the minimum of boilerplate, and withoutregard to the traditional app|api machine boundary.
 
-* ## [hello](#feature-hello)
+Like all stack applications, the `stack-demo` consists of a series of features. In this case the fetaures are here to teach you how to use the stack, so they are all a little contrived and bare-bones.
+The features start of simple and get more complex as they go on. Each feature extends and builds on the previous one to make a coherent learning experience.
 
-  A simple hello-world react component. No stack involved.
-
-* ## [fetch](#feature-fetch)
-
-  Shows the three ways your feature can get it's hands on some data:
-
-  * From the local `app`
-  * Automatically as start-up initialisation data from the `api`
-  * Requested from the `api` during normal running
-
-  This is also a _Grand Tour_ of most of the feature files you will need to write any complex feature. The rest of the features below are much shorter as they only explain how they differ from this
-  main example.
-
-* ## [counter](#feature-counter)
-
-  A simple, server-side counter. It shows how to :
-
-  * update your application state by dispatching actions to the feature's `api` service.
-  * expose selected aspects of the feature's api service though REST endpoints
-
-* ## [errors](#feature-errors)
-
-  Shows how to listen out for and process errors thrown by the api.
-
-* ## [thunk](#feature-thunk)
-
-  Once your features get interesting you may need to dispatch multiple sub-actions (thunks) for a given action, and sometimes these actions need to happen synchronously (sagas). The `stack` supports
-  this advanced REDUX feature very cleanly.
-
-* ## [gp](#feature-gp)
-
-  As you might expect for an opinionated GP stack interacting with the GP-API has been made as low-friction as possible. This feature shows how you can use the main GP-API to:
-
-  * initialise a drop-down of content folders
-  * populate a table with the contents of the selected folder
-
-  The table used is the shared table component supplied by the `stack-redux-app` package.
-
-## Additional Features
-
-The following features have been added to flesh out the example set and are offered here without any additional help. You can use these features to further enhance your understanding of the stack with
-examples contributed by team members.
-
-If you write your own demo-feature then please submit it for inclusion in this list.
-
-* ## [todos](#feature-to)
-
-Recreates the canonical REDUX demo application. This feature allows you to add / edit and delete list items to a todo list. It also shows how to use a material-ui input form when editing a todo item.
-
-* ## [sphere](#feature-sphere)
-
-Calculates the volume of a sphere. This feature shows simple `app` <-> `api` communication as well as a neat _debounce_ text box that throttles the user input to prevent excessive calls to the api
+The first few are essential reading if you want to use the stack at all, the rest introduce concepts that will get you doing genuinely useful things.
 
 ## Features Explained
 
@@ -240,7 +191,64 @@ import thunks from './thunks'
 export default { counter, errors, fetch, gp, thunks }
 ```
 
+## Feature List
+
 There now follows a run through each of the Features in the stack-demo.
+
+* ## [hello](#feature-hello)
+
+  A simple hello-world react component. No stack involved.
+
+* ## [fetch](#feature-fetch)
+
+  Shows the three ways your feature can get it's hands on some data:
+
+  * From the local `app`
+  * Automatically as start-up initialisation data from the `api`
+  * Requested from the `api` during normal running
+
+  This is also a _Grand Tour_ of most of the feature files you will need to write any complex feature. The rest of the features below are much shorter as they only explain how they differ from this
+  main example.
+
+* ## [counter](#feature-counter)
+
+  A simple, server-side counter. It shows how to :
+
+  * update your application state by dispatching actions to the feature's `api` service.
+  * expose selected aspects of the feature's api service though REST endpoints
+
+* ## [errors](#feature-errors)
+
+  Shows how to listen out for and process errors thrown by the api.
+
+* ## [thunk](#feature-thunk)
+
+  Once your features get interesting you may need to dispatch multiple sub-actions (thunks) for a given action, and sometimes these actions need to happen synchronously (sagas). The `stack` supports
+  this advanced REDUX feature very cleanly.
+
+* ## [gp](#feature-gp)
+
+  As you might expect for an opinionated GP stack interacting with the GP-API has been made as low-friction as possible. This feature shows how you can use the main GP-API to:
+
+  * initialise a drop-down of content folders
+  * populate a table with the contents of the selected folder
+
+  The table used is the shared table component supplied by the `stack-redux-app` package.
+
+## Additional Features
+
+The following features have been added to flesh out the example set and are offered here without any additional help. You can use these features to further enhance your understanding of the stack with
+examples contributed by team members.
+
+If you write your own demo-feature then please submit it for inclusion in this list.
+
+* ## todos
+
+Recreates the canonical REDUX demo application. This feature allows you to add / edit and delete list items to a todo list. It also shows how to use a material-ui input form when editing a todo item.
+
+* ## sphere
+
+Calculates the volume of a sphere. This feature shows simple `app` <-> `api` communication as well as a neat _debounce_ text box that throttles the user input to prevent excessive calls to the api
 
 # Feature: `hello`
 
