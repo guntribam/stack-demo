@@ -66,9 +66,9 @@ details. Each time you create a new stack application you must re-create the `.e
 
 # Features
 
-In stack-speak a _Feature_ is a unit of functionality. A feature _does something_, it is the way that we separate out the individual _concerns_ of an application and bundle them up into useful,
-re-usable components. A single feature can, and very often does, span both the `app` and `api`. The feature has files that represent _app-side-logic_ _app-side-user-interface_ and _api-side-logic_.
-All these files taken together allow a feature to do its thing easily, with the minimum of boilerplate, and withoutregard to the traditional app|api machine boundary.
+In stack-speak a _Feature_ is a unit of functionality. A feature _does something_, it is the way that we separate the 'concerns' of an application and bundle them up into useful, re-usable components.
+A single feature can, and very often does, span both the `app` and `api`. The feature has files that represent _app-side-logic_ _app-side-user-interface_ and _api-side-logic_. All these files taken
+together allow a feature to do its thing easily, with the minimum of boilerplate, and withoutregard to the traditional app|api machine boundary.
 
 Like all stack applications, the `stack-demo` consists of a series of features. In this case the fetaures are here to teach you how to use the stack, so they are all a little contrived and bare-bones.
 The features start of simple and get more complex as they go on. Each feature extends and builds on the previous one to make a coherent learning experience.
