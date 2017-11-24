@@ -6,5 +6,6 @@ import hello from './hello'
 import thunks from './thunks'
 import todos from './todos'
 import sphere from './sphere'
+import shopping from './shopping'
 
-export default { counter, errors, fetch, gp, hello, thunks, todos, sphere }
+export default { counter, errors, fetch, gp, hello, thunks, todos, sphere, shopping }
