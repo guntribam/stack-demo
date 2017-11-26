@@ -23,6 +23,8 @@ const reducer = (state = { productsInCard: [] }, action) => {
       return { ...state, isHandlingCheckout: false, checkoutCompleted: data.checkoutCompleted, productsInCard: [] }
     case types.shoppingResetCard:
       return { ...state, checkoutCompleted: false }
+    case types.shoppingSearchProductsResponse:
+      return { ...state, products: data.products }
     default:
       return state
   }

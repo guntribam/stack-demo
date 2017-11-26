@@ -15,10 +15,10 @@ class component extends React.PureComponent {
       return (
         <div style={style}>
           {products.map((product, index) => (
-            <Card key={index}>
+            <Card key={index} style={{marginTop: 20, maxWidth: '30%'}}>
               <CardTitle title={product.name} subtitle={product.description} />
               <CardMedia>
-                <img src={product.imageURL} alt="" />
+                <img src={product.imageURL} style={{display: 'block', margin: 'auto'}} />
               </CardMedia>
               <CardTitle title={`$ ${product.price}`} subtitle={product.categories.join()} />
               <CardActions>
