@@ -15,14 +15,14 @@ class component extends React.PureComponent {
       return (
         <div style={style}>
           {products.map((product, index) => (
-            <Card>
+            <Card key={index}>
               <CardTitle title={product.name} subtitle={product.description} />
               <CardMedia>
                 <img src={product.imageURL} alt="" />
               </CardMedia>
               <CardTitle title={`$ ${product.price}`} subtitle={product.categories.join()} />
               <CardActions>
-                <FlatButton label="Add to Cart"/>
+                <FlatButton label="Add to Cart" onClick={() => { this.props.onAddProductToCard(product) }} />
               </CardActions>
             </Card>
          ))}
