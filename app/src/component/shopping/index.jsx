@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Divider from 'material-ui/Divider'
-import { List, ListItem } from 'material-ui/List'
 
 import { services, components } from '../../loader'
 
@@ -14,11 +13,7 @@ class component extends React.PureComponent {
         <h3>A list of available product to buy.</h3>
         <Divider />
         <h3>Products</h3>
-        {products && products.length > 0 &&
-         <List>
-           {products.map((product, index) => (<ListItem key={index} primaryText={product.name} secondaryText={product.description} />)
-            )}
-         </List>}
+        <components.productList products={products} />
       </components.Box>
     )
   }

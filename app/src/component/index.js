@@ -7,5 +7,6 @@ import thunks from './thunks'
 import todos from './todos'
 import sphere from './sphere'
 import shopping from './shopping'
+import productList from './productList'
 
-export default { counter, errors, fetch, gp, hello, thunks, todos, sphere, shopping }
+export default { counter, errors, fetch, gp, hello, thunks, todos, sphere, shopping, productList }
