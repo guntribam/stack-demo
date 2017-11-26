@@ -8,5 +8,6 @@ import todos from './todos'
 import sphere from './sphere'
 import shopping from './shopping'
 import productList from './productList'
+import shoppingCard from './shoppingCard'
 
-export default { counter, errors, fetch, gp, hello, thunks, todos, sphere, shopping, productList }
+export default { counter, errors, fetch, gp, hello, thunks, todos, sphere, shopping, productList, shoppingCard }

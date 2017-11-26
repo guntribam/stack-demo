@@ -12,4 +12,12 @@ const getProducts = state => {
   return get(state).products
 }
 
-export default { getProducts, getProductsInCard }
+const getHandlingCheckout = state => {
+  return get(state).isHandlingCheckout
+}
+
+const getCheckoutCompleted = state => {
+  return get(state).checkoutCompleted
+}
+
+export default { getProducts, getProductsInCard, getHandlingCheckout, getCheckoutCompleted }

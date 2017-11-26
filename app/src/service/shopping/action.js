@@ -1,9 +1,16 @@
 import name from './name'
 import { makeActions, makeTypes } from '@gp-technical/stack-pack-app'
 
-const addItemToCard = makeTypes(name, ['addItemToCard'])
+const addProductToCard = makeTypes(name, ['addProductToCard'])
+const removeProductFromCard = makeTypes(name, ['removeProductFromCard'])
+const checkoutCard = makeTypes(name, ['checkoutCard'])
+const resetCard = makeTypes(name, ['resetCard'])
 
-const actions = {...makeActions(addItemToCard, {local: true})}
-const types = {...addItemToCard}
-
+const actions = {
+  ...makeActions(addProductToCard, {local: true}),
+  ...makeActions(removeProductFromCard, {local: true}),
+  ...makeActions(checkoutCard),
+  ...makeActions(resetCard, {local: true})
+}
+const types = {...addProductToCard, ...removeProductFromCard, ...checkoutCard, ...resetCard}
 export { actions, types }
