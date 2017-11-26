@@ -22,7 +22,6 @@ const reducer = (state = { productsInCard: [] }, action) => {
     case types.shoppingCheckoutCardResponse:
       return { ...state, isHandlingCheckout: false, checkoutCompleted: data.checkoutCompleted, productsInCard: [] }
     case types.shoppingResetCard:
-      debugger;
       return { ...state, checkoutCompleted: false }
     default:
       return state
