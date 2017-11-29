@@ -14,6 +14,8 @@ const processor = async action => {
       return { checkoutCompleted: true }
     case types.shoppingSearchProducts:
       return { products: db.queryProducts(data) }
+    case types.shoppingFilterProductByCategory:
+      return { products: db.queryCategories(data) }
   }
 }
 

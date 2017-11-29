@@ -4,7 +4,8 @@ const reducer = (state = { productsInCard: [] }, action) => {
   switch (type) {
     case types.shopping_init:
       const { products } = data
-      return { ...state, products }
+      const { categories } = data
+      return { ...state, products, categories }
     case types.shoppingAddProductToCard:
       return { ...state, productsInCard: state.productsInCard.concat(data) }
     case types.shoppingRemoveProductFromCard:
@@ -24,6 +25,8 @@ const reducer = (state = { productsInCard: [] }, action) => {
     case types.shoppingResetCard:
       return { ...state, checkoutCompleted: false }
     case types.shoppingSearchProductsResponse:
+      return { ...state, products: data.products }
+    case types.shoppingFilterProductByCategoryResponse:
       return { ...state, products: data.products }
     default:
       return state

@@ -9,5 +9,6 @@ import sphere from './sphere'
 import shopping from './shopping'
 import productList from './productList'
 import shoppingCard from './shoppingCard'
+import filter from './filter'
 
-export default { counter, errors, fetch, gp, hello, thunks, todos, sphere, shopping, productList, shoppingCard }
+export default { counter, errors, fetch, gp, hello, thunks, todos, sphere, shopping, productList, shoppingCard, filter }

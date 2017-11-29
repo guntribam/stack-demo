@@ -86,6 +86,7 @@ class component extends React.PureComponent {
             />
           </ToolbarGroup>
         </Toolbar>
+        <components.filter />
         <components.productList
           products={products}
           onAddProductToCard={this.onAddProductToCard}
