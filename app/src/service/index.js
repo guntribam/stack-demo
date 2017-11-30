@@ -5,5 +5,17 @@ import gp from './gp'
 import thunks from './thunks'
 import todos from './todos'
 import sphere from './sphere'
+import simpleDialog from './simpleDialog'
+import formDialog from './formDialog'
 
-export default { counter, errors, fetch, gp, thunks, todos, sphere }
+export default {
+  counter,
+  errors,
+  fetch,
+  gp,
+  thunks,
+  todos,
+  sphere,
+  simpleDialog,
+  formDialog
+}
