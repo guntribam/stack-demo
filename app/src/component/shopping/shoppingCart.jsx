@@ -22,7 +22,7 @@ const style = {
 
 class component extends React.PureComponent {
 
-  cardTotal = () => {
+  cartTotal = () => {
     return this.props.products.reduce((currentTotal, product) => {
       return currentTotal + product.price
     }, 0)
@@ -34,12 +34,12 @@ class component extends React.PureComponent {
       return [
         <FlatButton
           label="Back Shopping"
-          onClick={this.props.onCardClose}
+          onClick={this.props.onCartClose}
         />,
         <FlatButton
           label="Checkout"
           primary={true}
-          onClick={ () => { this.props.onCheckoutCard(products) }}
+          onClick={ () => { this.props.onCheckoutCart(products) }}
         />
       ]
     } else {
@@ -47,13 +47,13 @@ class component extends React.PureComponent {
         <FlatButton
           label="Back Shopping"
           primary={true}
-          onClick={this.props.onCardClose}
+          onClick={this.props.onCartClose}
         />
       ]
     }
   }
 
-  renderProductsInCard = () => {
+  renderProductsInCart = () => {
     var { products } = this.props
     if (products && products.length > 0) {
       return (
@@ -76,7 +76,7 @@ class component extends React.PureComponent {
                 <TableRowColumn>$ {product.price}</TableRowColumn>
                 <TableRowColumn>{product.description}</TableRowColumn>
                 <TableRowColumn>
-                  <FlatButton onClick={() => { this.props.onRemoveProductFromCard(product) }}>
+                  <FlatButton onClick={() => { this.props.onRemoveProductFromCart(product) }}>
                     <FontIcon className="material-icons" color={red500}>delete</FontIcon>
                   </FlatButton>
                 </TableRowColumn>
@@ -86,7 +86,7 @@ class component extends React.PureComponent {
           <TableFooter adjustForCheckbox={false}>
            <TableRow>
              <TableRowColumn colSpan="4" style={{textAlign: 'right'}}>
-               Total: ${this.cardTotal()}
+               Total: ${this.cartTotal()}
              </TableRowColumn>
            </TableRow>
          </TableFooter>
@@ -95,7 +95,7 @@ class component extends React.PureComponent {
     } else {
       return (
         <p style={style.noProduct}>
-          No product in Card.
+          No product in Cart.
         </p>
       )
     }
@@ -113,7 +113,7 @@ class component extends React.PureComponent {
       if (this.props.checkoutCompleted) {
         return (<div style={{textAlign: 'center'}}> Checkout completed </div>)
       } else {
-        return this.renderProductsInCard()
+        return this.renderProductsInCart()
       }
     }
   }
@@ -121,10 +121,10 @@ class component extends React.PureComponent {
   render () {
     return (
       <Dialog
-       title="Shopping Card - Checkout"
+       title="Shopping Cart - Checkout"
        modal={false}
-       open={this.props.isCardOpen}
-       onRequestClose={this.props.onCardClose}
+       open={this.props.isCartOpen}
+       onRequestClose={this.props.onCartClose}
        actions={this.renderActions()}
      >
       {this.renderDialogContent()}

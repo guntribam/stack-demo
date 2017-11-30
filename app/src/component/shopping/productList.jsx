@@ -28,7 +28,7 @@ class component extends React.PureComponent {
               </CardMedia>
               <CardTitle title={`$ ${product.price}`} subtitle={product.categories.join()} />
               <CardActions>
-                <FlatButton label="Add to Cart" onClick={() => { this.props.onAddProductToCard(product) }} />
+                <FlatButton label="Add to Cart" onClick={() => { this.props.onAddProductToCart(product) }} />
               </CardActions>
             </Card>
          ))}

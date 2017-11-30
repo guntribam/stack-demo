@@ -8,8 +8,8 @@ const getCategories = state => {
   return get(state).categories
 }
 
-const getProductsInCard = state => {
-  return get(state).productsInCard
+const getProductsInCart = state => {
+  return get(state).productsInCart
 }
 
 const getProducts = state => {
@@ -24,4 +24,10 @@ const getCheckoutCompleted = state => {
   return get(state).checkoutCompleted
 }
 
-export default { getProducts, getProductsInCard, getHandlingCheckout, getCheckoutCompleted, getCategories }
+export default {
+  getProducts,
+  getProductsInCart,
+  getHandlingCheckout,
+  getCheckoutCompleted,
+  getCategories
+}

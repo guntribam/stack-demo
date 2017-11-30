@@ -1,4 +1,4 @@
-const reducer = (state = { productsInCard: [] }, action) => {
+const reducer = (state = { productsInCart: [] }, action) => {
   const { type, types, data } = action
 
   switch (type) {
@@ -6,23 +6,24 @@ const reducer = (state = { productsInCard: [] }, action) => {
       const { products } = data
       const { categories } = data
       return { ...state, products, categories }
-    case types.shoppingAddProductToCard:
-      return { ...state, productsInCard: state.productsInCard.concat(data) }
-    case types.shoppingRemoveProductFromCard:
-      // Immutable remove element from array
-      // 1 - make a copy, 2 - find index, 3 - splice copy
-      const productsInCard = state.productsInCard.slice()
+    case types.shoppingAddProductToCart:
+      return { ...state, productsInCart: state.productsInCart.concat(data) }
+    case types.shoppingRemoveProductFromCart:
+        // Immutable remove element from array
+        // 1 - make a copy, 2 - find index, 3 - splice copy
+      debugger;
+      const productsInCart = state.productsInCart.slice()
 
-      const productToRemoveIndex = productsInCard.findIndex((product) => {
+      const productToRemoveIndex = productsInCart.findIndex((product) => {
         return product.id === data.id
       })
-      productsInCard.splice(productToRemoveIndex, 1)
-      return { ...state, productsInCard: productsInCard }
-    case types.shoppingCheckoutCard:
+      productsInCart.splice(productToRemoveIndex, 1)
+      return { ...state, productsInCart: productsInCart }
+    case types.shoppingCheckoutCart:
       return { ...state, isHandlingCheckout: true }
-    case types.shoppingCheckoutCardResponse:
-      return { ...state, isHandlingCheckout: false, checkoutCompleted: data.checkoutCompleted, productsInCard: [] }
-    case types.shoppingResetCard:
+    case types.shoppingCheckoutCartResponse:
+      return { ...state, isHandlingCheckout: false, checkoutCompleted: data.checkoutCompleted, productsInCart: [] }
+    case types.shoppingResetCart:
       return { ...state, checkoutCompleted: false }
     case types.shoppingSearchProductsResponse:
       return { ...state, products: data.products }

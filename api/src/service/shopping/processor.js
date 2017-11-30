@@ -6,7 +6,7 @@ const processor = async action => {
   var { types, type, data } = action
 
   switch (type) {
-    case types.shoppingCheckoutCard:
+    case types.shoppingCheckoutCart:
       await sleep(5000)
       return { checkoutCompleted: true }
     case types.shoppingSearchProducts:
