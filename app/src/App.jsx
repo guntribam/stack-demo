@@ -31,12 +31,9 @@ class component extends React.PureComponent {
                   <components.todos />
                   <components.gp />
                   <components.sphere />
-<<<<<<< HEAD
                   <components.simpleDialog />
                   <components.formDialog />
-=======
                   <components.shopping />
->>>>>>> remotes/origin/feature/shopping-list
                 </Col>
               </Row>
             </Grid>
