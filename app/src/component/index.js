@@ -6,9 +6,9 @@ import hello from './hello'
 import thunks from './thunks'
 import todos from './todos'
 import sphere from './sphere'
-import shopping from './shopping'
-import productList from './productList'
-import shoppingCard from './shoppingCard'
+import productList from './shopping/productList'
+import shoppingCart from './shopping/shoppingCart'
+import shoppingFilter from './shopping/shoppingFilter'
 import simpleDialog from './simpleDialog'
 import formDialog from './formDialog'
 
@@ -23,7 +23,7 @@ export default {
   sphere,
   simpleDialog,
   formDialog,
-  shopping,
-  shoppingCard,
-  productList
+  productList,
+  shoppingCart,
+  shoppingFilter
 }

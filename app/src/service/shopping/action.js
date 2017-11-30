@@ -1,26 +1,20 @@
 import name from './name'
 import { makeActions, makeTypes } from '@gp-technical/stack-pack-app'
 
-const addProductToCard = makeTypes(name, ['addProductToCard'])
-const removeProductFromCard = makeTypes(name, ['removeProductFromCard'])
-const checkoutCard = makeTypes(name, ['checkoutCard'])
-const resetCard = makeTypes(name, ['resetCard'])
-const searchProducts = makeTypes(name, ['searchProducts'])
+const api = makeTypes(name, ['filterProductByCategory'])
+const local = makeTypes(name, ['addProductToCart', 'removeProductFromCart', 'resetCart'])
+const both = makeTypes(name, ['checkoutCart', 'searchProducts'])
 
 const actions = {
-  ...makeActions(addProductToCard, {local: true}),
-  ...makeActions(removeProductFromCard, {local: true}),
-  ...makeActions(checkoutCard),
-  ...makeActions(resetCard, {local: true}),
-  ...makeActions(searchProducts)
+  ...makeActions(both),
+  ...makeActions(local, { local: true }),
+  ...makeActions(api, { local: false })
 }
 
 const types = {
-  ...addProductToCard,
-  ...removeProductFromCard,
-  ...checkoutCard,
-  ...resetCard,
-  ...searchProducts
+  ...api,
+  ...local,
+  ...both
 }
 
 export { actions, types }

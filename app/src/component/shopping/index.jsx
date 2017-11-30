@@ -10,35 +10,35 @@ import { services, components, actionHub } from '../../loader'
 
 class component extends React.PureComponent {
   state = {
-    isCardOpen: false,
+    isCartOpen: false,
     isSnackBarOpen: false,
     productBeingAdded: null
   }
 
-  onCardClose = () => {
-    this.setState({isCardOpen: false})
+  onCartClose = () => {
+    this.setState({isCartOpen: false})
   }
 
-  onCardOpen = () => {
-    this.setState({isCardOpen: true})
-    this.props.resetCard()
+  onCartOpen = () => {
+    this.setState({isCartOpen: true})
+    this.props.resetCart()
   }
 
   onSearchInput = (e) => {
     this.props.searchProducts(e.target.value)
   }
 
-  onAddProductToCard = (product) => {
-    this.props.addItemToCard(product)
+  onAddProductToCart = (product) => {
+    this.props.addProductToCart(product)
     this.setState({ productBeingAdded: product, isSnackBarOpen: true })
   }
 
-  onRemoveProductFromCard = (product) => {
-    this.props.removeProductFromCard(product)
+  onRemoveProductFromCart = (product) => {
+    this.props.removeProductFromCart(product)
   }
 
   onRemoveProductBeingAdded = () => {
-    this.props.removeProductFromCard(this.state.productBeingAdded)
+    this.props.removeProductFromCart(this.state.productBeingAdded)
     this.onSnackBarClose()
   }
 
@@ -46,15 +46,15 @@ class component extends React.PureComponent {
     this.setState({ productBeingAdded: null, isSnackBarOpen: false })
   }
 
-  onCheckoutCard = (products) => {
-    this.props.checkoutCard(products)
+  onCheckoutCart = (products) => {
+    this.props.checkoutCart(products)
   }
 
   productBeingAddedSnackText = () => {
     if (this.state.productBeingAdded) {
-      return `${this.state.productBeingAdded.name} was added to card`
+      return `${this.state.productBeingAdded.name} was added to cart`
     } else {
-      return 'Product was added to card'
+      return 'Product was added to cart'
     }
   }
 
@@ -81,21 +81,22 @@ class component extends React.PureComponent {
           <ToolbarGroup>
             <FlatButton
               style={{color: '#54647a'}}
-              label={`Card(${this.props.productsInCard.length})`}
-              onClick={() => { this.onCardOpen() }}
+              label={`Cart(${this.props.productsInCart.length})`}
+              onClick={() => { this.onCartOpen() }}
             />
           </ToolbarGroup>
         </Toolbar>
+        <components.shoppingFilter />
         <components.productList
           products={products}
-          onAddProductToCard={this.onAddProductToCard}
+          onAddProductToCart={this.onAddProductToCart}
         />
-        <components.shoppingCard
-          isCardOpen={this.state.isCardOpen}
-          onCardClose={this.onCardClose}
-          products={this.props.productsInCard}
-          onRemoveProductFromCard={this.onRemoveProductFromCard}
-          onCheckoutCard={this.onCheckoutCard}
+        <components.shoppingCart
+          isCartOpen={this.state.isCartOpen}
+          onCartClose={this.onCartClose}
+          products={this.props.productsInCart}
+          onRemoveProductFromCart={this.onRemoveProductFromCart}
+          onCheckoutCart={this.onCheckoutCart}
           isHandlingCheckout={this.props.isHandlingCheckout}
           checkoutCompleted={this.props.checkoutCompleted}
         />
@@ -114,16 +115,16 @@ class component extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   products: services.shopping.selector.getProducts(state),
-  productsInCard: services.shopping.selector.getProductsInCard(state),
+  productsInCart: services.shopping.selector.getProductsInCart(state),
   isHandlingCheckout: services.shopping.selector.getHandlingCheckout(state),
   checkoutCompleted: services.shopping.selector.getCheckoutCompleted(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  addItemToCard: (product) => dispatch(actionHub.SHOPPING_ADD_PRODUCT_TO_CARD(product)),
-  removeProductFromCard: (product) => dispatch(actionHub.SHOPPING_REMOVE_PRODUCT_FROM_CARD(product)),
-  checkoutCard: (products) => dispatch(actionHub.SHOPPING_CHECKOUT_CARD(products)),
-  resetCard: () => dispatch(actionHub.SHOPPING_RESET_CARD()),
+  addProductToCart: (product) => dispatch(actionHub.SHOPPING_ADD_PRODUCT_TO_CART(product)),
+  removeProductFromCart: (product) => dispatch(actionHub.SHOPPING_REMOVE_PRODUCT_FROM_CART(product)),
+  checkoutCart: (products) => dispatch(actionHub.SHOPPING_CHECKOUT_CART(products)),
+  resetCart: () => dispatch(actionHub.SHOPPING_RESET_CART()),
   searchProducts: (query) => dispatch(actionHub.SHOPPING_SEARCH_PRODUCTS(query))
 })
 

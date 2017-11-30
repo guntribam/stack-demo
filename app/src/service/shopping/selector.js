@@ -4,8 +4,12 @@ const get = state => {
   return state[name]
 }
 
-const getProductsInCard = state => {
-  return get(state).productsInCard
+const getCategories = state => {
+  return get(state).categories
+}
+
+const getProductsInCart = state => {
+  return get(state).productsInCart
 }
 
 const getProducts = state => {
@@ -20,4 +24,10 @@ const getCheckoutCompleted = state => {
   return get(state).checkoutCompleted
 }
 
-export default { getProducts, getProductsInCard, getHandlingCheckout, getCheckoutCompleted }
+export default {
+  getProducts,
+  getProductsInCart,
+  getHandlingCheckout,
+  getCheckoutCompleted,
+  getCategories
+}
