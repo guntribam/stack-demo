@@ -16,6 +16,10 @@ const getProducts = state => {
   return get(state).products
 }
 
+const getCartOpen = state => {
+  return get(state).cartOpen
+}
+
 const getHandlingCheckout = state => {
   return get(state).isHandlingCheckout
 }
@@ -29,5 +33,6 @@ export default {
   getProductsInCart,
   getHandlingCheckout,
   getCheckoutCompleted,
-  getCategories
+  getCategories,
+  getCartOpen
 }

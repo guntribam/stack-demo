@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar'
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
 import FlatButton from 'material-ui/FlatButton'
 import Snackbar from 'material-ui/Snackbar'
 import TextField from 'material-ui/TextField'
@@ -10,30 +10,24 @@ import { services, components, actionHub } from '../../loader'
 
 class component extends React.PureComponent {
   state = {
-    isCartOpen: false,
     isSnackBarOpen: false,
     productBeingAdded: null
   }
 
-  onCartClose = () => {
-    this.setState({isCartOpen: false})
+  handleCart = e => {
+    this.props.open === false ? this.props.openCart : this.props.closeCart
   }
 
-  onCartOpen = () => {
-    this.setState({isCartOpen: true})
-    this.props.resetCart()
-  }
-
-  onSearchInput = (e) => {
+  onSearchInput = e => {
     this.props.searchProducts(e.target.value)
   }
 
-  onAddProductToCart = (product) => {
+  onAddProductToCart = product => {
     this.props.addProductToCart(product)
     this.setState({ productBeingAdded: product, isSnackBarOpen: true })
   }
 
-  onRemoveProductFromCart = (product) => {
+  onRemoveProductFromCart = product => {
     this.props.removeProductFromCart(product)
   }
 
@@ -46,7 +40,7 @@ class component extends React.PureComponent {
     this.setState({ productBeingAdded: null, isSnackBarOpen: false })
   }
 
-  onCheckoutCart = (products) => {
+  onCheckoutCart = products => {
     this.props.checkoutCart(products)
   }
 
@@ -59,14 +53,16 @@ class component extends React.PureComponent {
   }
 
   render () {
-    var { products } = this.props
+    var { products, cartOpen } = this.props
     return (
       <components.Box>
-        <h2>Feature: <i>Shopping</i></h2>
-        <Toolbar style={{background: '#e0e0e0'}}>
+        <h2>
+          Feature: <i>Shopping</i>
+        </h2>
+        <Toolbar style={{ background: '#e0e0e0' }}>
           <ToolbarGroup firstChild={true}>
             <ToolbarTitle
-              style={{color: '#54647a', marginLeft: 20}}
+              style={{ color: '#54647a', marginLeft: 20 }}
               text="Products"
             />
           </ToolbarGroup>
@@ -76,13 +72,14 @@ class component extends React.PureComponent {
               minLength={0}
               debounceTimeout={500}
               hintText="Search by name, category..."
-              onChange={this.onSearchInput} />
+              onChange={this.onSearchInput}
+            />
           </ToolbarGroup>
           <ToolbarGroup>
             <FlatButton
-              style={{color: '#54647a'}}
+              style={{ color: '#54647a' }}
               label={`Cart(${this.props.productsInCart.length})`}
-              onClick={() => { this.onCartOpen() }}
+              onClick={this.props.openCart}
             />
           </ToolbarGroup>
         </Toolbar>
@@ -92,8 +89,8 @@ class component extends React.PureComponent {
           onAddProductToCart={this.onAddProductToCart}
         />
         <components.shoppingCart
-          isCartOpen={this.state.isCartOpen}
-          onCartClose={this.onCartClose}
+          isCartOpen={cartOpen}
+          onCartClose={this.props.closeCart}
           products={this.props.productsInCart}
           onRemoveProductFromCart={this.onRemoveProductFromCart}
           onCheckoutCart={this.onCheckoutCart}
@@ -113,19 +110,25 @@ class component extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   products: services.shopping.selector.getProducts(state),
   productsInCart: services.shopping.selector.getProductsInCart(state),
   isHandlingCheckout: services.shopping.selector.getHandlingCheckout(state),
-  checkoutCompleted: services.shopping.selector.getCheckoutCompleted(state)
+  checkoutCompleted: services.shopping.selector.getCheckoutCompleted(state),
+  cartOpen: services.shopping.selector.getCartOpen(state)
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  addProductToCart: (product) => dispatch(actionHub.SHOPPING_ADD_PRODUCT_TO_CART(product)),
-  removeProductFromCart: (product) => dispatch(actionHub.SHOPPING_REMOVE_PRODUCT_FROM_CART(product)),
-  checkoutCart: (products) => dispatch(actionHub.SHOPPING_CHECKOUT_CART(products)),
+const mapDispatchToProps = dispatch => ({
+  addProductToCart: product =>
+    dispatch(actionHub.SHOPPING_ADD_PRODUCT_TO_CART(product)),
+  removeProductFromCart: product =>
+    dispatch(actionHub.SHOPPING_REMOVE_PRODUCT_FROM_CART(product)),
+  checkoutCart: products =>
+    dispatch(actionHub.SHOPPING_CHECKOUT_CART(products)),
   resetCart: () => dispatch(actionHub.SHOPPING_RESET_CART()),
-  searchProducts: (query) => dispatch(actionHub.SHOPPING_SEARCH_PRODUCTS(query))
+  openCart: () => dispatch(actionHub.SHOPPING_OPEN_CART()),
+  closeCart: () => dispatch(actionHub.SHOPPING_CLOSE_CART()),
+  searchProducts: query => dispatch(actionHub.SHOPPING_SEARCH_PRODUCTS(query))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(component)

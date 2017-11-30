@@ -21,7 +21,6 @@ const style = {
 }
 
 class component extends React.PureComponent {
-
   cartTotal = () => {
     return this.props.products.reduce((currentTotal, product) => {
       return currentTotal + product.price
@@ -32,14 +31,13 @@ class component extends React.PureComponent {
     var { products } = this.props
     if (products && products.length > 0) {
       return [
-        <FlatButton
-          label="Back Shopping"
-          onClick={this.props.onCartClose}
-        />,
+        <FlatButton label="Back Shopping" onClick={this.props.closeCart} />,
         <FlatButton
           label="Checkout"
           primary={true}
-          onClick={ () => { this.props.onCheckoutCart(products) }}
+          onClick={() => {
+            this.props.onCheckoutCart(products)
+          }}
         />
       ]
     } else {
@@ -47,7 +45,7 @@ class component extends React.PureComponent {
         <FlatButton
           label="Back Shopping"
           primary={true}
-          onClick={this.props.onCartClose}
+          onClick={this.props.closeCart}
         />
       ]
     }
@@ -61,7 +59,8 @@ class component extends React.PureComponent {
           <TableHeader
             displaySelectAll={false}
             adjustForCheckbox={false}
-            enableSelectAll={false}>
+            enableSelectAll={false}
+          >
             <TableRow>
               <TableHeaderColumn>Name</TableHeaderColumn>
               <TableHeaderColumn>Price</TableHeaderColumn>
@@ -76,42 +75,44 @@ class component extends React.PureComponent {
                 <TableRowColumn>$ {product.price}</TableRowColumn>
                 <TableRowColumn>{product.description}</TableRowColumn>
                 <TableRowColumn>
-                  <FlatButton onClick={() => { this.props.onRemoveProductFromCart(product) }}>
-                    <FontIcon className="material-icons" color={red500}>delete</FontIcon>
+                  <FlatButton
+                    onClick={() => {
+                      this.props.onRemoveProductFromCart(product)
+                    }}
+                  >
+                    <FontIcon className="material-icons" color={red500}>
+                      delete
+                    </FontIcon>
                   </FlatButton>
                 </TableRowColumn>
               </TableRow>
             ))}
           </TableBody>
           <TableFooter adjustForCheckbox={false}>
-           <TableRow>
-             <TableRowColumn colSpan="4" style={{textAlign: 'right'}}>
-               Total: ${this.cartTotal()}
-             </TableRowColumn>
-           </TableRow>
-         </TableFooter>
+            <TableRow>
+              <TableRowColumn colSpan="4" style={{ textAlign: 'right' }}>
+                Total: ${this.cartTotal()}
+              </TableRowColumn>
+            </TableRow>
+          </TableFooter>
         </Table>
       )
     } else {
-      return (
-        <p style={style.noProduct}>
-          No product in Cart.
-        </p>
-      )
+      return <p style={style.noProduct}>No product in Cart.</p>
     }
   }
 
   renderDialogContent = () => {
     if (this.props.isHandlingCheckout) {
       return (
-        <div style={{textAlign: 'center'}}>
+        <div style={{ textAlign: 'center' }}>
           <CircularProgress />
           <p> Checking payment </p>
         </div>
       )
     } else {
       if (this.props.checkoutCompleted) {
-        return (<div style={{textAlign: 'center'}}> Checkout completed </div>)
+        return <div style={{ textAlign: 'center' }}> Checkout completed </div>
       } else {
         return this.renderProductsInCart()
       }
@@ -119,16 +120,17 @@ class component extends React.PureComponent {
   }
 
   render () {
+    var { open } = this.props
     return (
       <Dialog
-       title="Shopping Cart - Checkout"
-       modal={false}
-       open={this.props.isCartOpen}
-       onRequestClose={this.props.onCartClose}
-       actions={this.renderActions()}
-     >
-      {this.renderDialogContent()}
-     </Dialog>
+        title="Shopping Cart - Checkout"
+        modal={false}
+        open={open}
+        onRequestClose={this.props.closeCart}
+        actions={this.renderActions()}
+      >
+        {this.renderDialogContent()}
+      </Dialog>
     )
   }
 }
