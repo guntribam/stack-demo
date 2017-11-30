@@ -7,8 +7,8 @@ import thunks from './thunks'
 import todos from './todos'
 import sphere from './sphere'
 import shopping from './shopping'
-import productList from './productList'
-import shoppingCard from './shoppingCard'
-import filter from './filter'
+import productList from './shopping/productList'
+import shoppingCart from './shopping/shoppingCart'
+import shoppingFilter from './shopping/shoppingFilter'
 
-export default { counter, errors, fetch, gp, hello, thunks, todos, sphere, shopping, productList, shoppingCard, filter }
+export default { counter, errors, fetch, gp, hello, thunks, todos, sphere, shopping, productList, shoppingCart, shoppingFilter }

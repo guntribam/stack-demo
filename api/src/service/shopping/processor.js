@@ -1,9 +1,6 @@
 import { makeProcessor } from '@gp-technical/stack-pack-api'
+import { sleep } from '@gp-technical/stack-pack-util'
 import db from './db'
-
-const sleep = (ms = 0) => {
-  return new Promise(r => setTimeout(r, ms))
-}
 
 const processor = async action => {
   var { types, type, data } = action

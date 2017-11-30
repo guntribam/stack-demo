@@ -81,17 +81,17 @@ class component extends React.PureComponent {
           <ToolbarGroup>
             <FlatButton
               style={{color: '#54647a'}}
-              label={`Card(${this.props.productsInCard.length})`}
+              label={`Cart(${this.props.productsInCard.length})`}
               onClick={() => { this.onCardOpen() }}
             />
           </ToolbarGroup>
         </Toolbar>
-        <components.filter />
+        <components.shoppingFilter />
         <components.productList
           products={products}
           onAddProductToCard={this.onAddProductToCard}
         />
-        <components.shoppingCard
+        <components.shoppingCart
           isCardOpen={this.state.isCardOpen}
           onCardClose={this.onCardClose}
           products={this.props.productsInCard}
