@@ -8,10 +8,6 @@ import { actionHub, services, components } from '../../loader'
 
 class formDialog extends React.PureComponent {
   state = {
-    firstName: '',
-    lastName: '',
-    age: '',
-    email: '',
     errorMessages: {
       wordsError: 'Please only use letters',
       numericError: 'Please provide a number',
