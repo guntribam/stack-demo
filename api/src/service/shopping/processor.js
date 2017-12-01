@@ -13,6 +13,9 @@ const processor = async action => {
       return { products: db.queryProducts(data) }
     case types.shoppingFilterProductByCategory:
       return { products: db.queryCategories(data) }
+    case types.shoppingFilterProductByPriceRange:
+      console.log(data)
+      return { products: db.queryPriceRange(data) }
   }
 }
 
