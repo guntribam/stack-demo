@@ -12,6 +12,9 @@ const getSubmitted = state => {
   return get(state).submitted
 }
 
+const getErrorMessages = state => {
+  return get(state).errorMessages
+}
 const getForm = state => {
   return {
     firstName: get(state).firstName,
@@ -25,5 +28,6 @@ export default {
   get,
   getOpen,
   getSubmitted,
-  getForm
+  getForm,
+  getErrorMessages
 }

@@ -54,7 +54,6 @@ class component extends React.PureComponent {
 
   render () {
     var { products, isCartOpen } = this.props
-    console.info('this.props.openCart', this.props.openCart)
 
     return (
       <components.Box>
