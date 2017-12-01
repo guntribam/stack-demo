@@ -1,5 +1,6 @@
 import React from 'react'
 import Dialog from 'material-ui/Dialog'
+import { connect } from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
 import FontIcon from 'material-ui/FontIcon'
 import { red500 } from 'material-ui/styles/colors'
@@ -13,6 +14,7 @@ import {
   TableRowColumn,
   TableFooter
 } from 'material-ui/Table'
+import { services, actionHub } from '../../loader'
 
 const style = {
   noProduct: {
@@ -120,12 +122,12 @@ class component extends React.PureComponent {
   }
 
   render () {
-    var { open } = this.props
+    var { isCartOpen } = this.props
     return (
       <Dialog
         title="Shopping Cart - Checkout"
         modal={false}
-        open={open}
+        open={isCartOpen}
         onRequestClose={this.props.closeCart}
         actions={this.renderActions()}
       >
@@ -135,4 +137,14 @@ class component extends React.PureComponent {
   }
 }
 
-export default component
+const mapStateToProps = state => ({
+  isCartOpen: services.shopping.selector.getCartOpen(state)
+})
+
+const mapDispatchToProps = dispatch => ({
+  resetCart: () => dispatch(actionHub.SHOPPING_RESET_CART()),
+  openCart: () => dispatch(actionHub.SHOPPING_OPEN_CART()),
+  closeCart: () => dispatch(actionHub.SHOPPING_CLOSE_CART())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(component)

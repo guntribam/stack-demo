@@ -53,7 +53,9 @@ class component extends React.PureComponent {
   }
 
   render () {
-    var { products, cartOpen } = this.props
+    var { products, isCartOpen } = this.props
+    console.info('this.props.openCart', this.props.openCart)
+
     return (
       <components.Box>
         <h2>
@@ -89,7 +91,7 @@ class component extends React.PureComponent {
           onAddProductToCart={this.onAddProductToCart}
         />
         <components.shoppingCart
-          isCartOpen={cartOpen}
+          isCartOpen={isCartOpen}
           onCartClose={this.props.closeCart}
           products={this.props.productsInCart}
           onRemoveProductFromCart={this.onRemoveProductFromCart}
@@ -115,7 +117,7 @@ const mapStateToProps = state => ({
   productsInCart: services.shopping.selector.getProductsInCart(state),
   isHandlingCheckout: services.shopping.selector.getHandlingCheckout(state),
   checkoutCompleted: services.shopping.selector.getCheckoutCompleted(state),
-  cartOpen: services.shopping.selector.getCartOpen(state)
+  isCartOpen: services.shopping.selector.getCartOpen(state)
 })
 
 const mapDispatchToProps = dispatch => ({

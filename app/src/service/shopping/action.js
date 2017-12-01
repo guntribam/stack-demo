@@ -2,7 +2,13 @@ import name from './name'
 import { makeActions, makeTypes } from '@gp-technical/stack-pack-app'
 
 const api = makeTypes(name, ['filterProductByCategory'])
-const local = makeTypes(name, ['addProductToCart', 'removeProductFromCart', 'resetCart'])
+const local = makeTypes(name, [
+  'addProductToCart',
+  'removeProductFromCart',
+  'resetCart',
+  'openCart',
+  'closeCart'
+])
 const both = makeTypes(name, ['checkoutCart', 'searchProducts'])
 
 const actions = {

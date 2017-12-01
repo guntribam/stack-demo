@@ -13,7 +13,12 @@ const getSubmitted = state => {
 }
 
 const getForm = state => {
-  return get(state).form
+  return {
+    firstName: get(state).firstName,
+    lastName: get(state).lastName,
+    age: get(state).age,
+    email: get(state).email
+  }
 }
 
 export default {

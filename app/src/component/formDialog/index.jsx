@@ -21,13 +21,12 @@ class formDialog extends React.PureComponent {
   }
 
   onSubmit = () => {
-    this.setState({
+    this.props.submit({
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       age: this.state.age,
       email: this.state.email
     })
-    this.props.submit()
   }
   handleChange = e => {
     if (e.target.name === 'firstName') {
@@ -86,7 +85,6 @@ class formDialog extends React.PureComponent {
         onClick={this.onSubmit}
       />
     ]
-
     return (
       <components.Box>
         <h2>
@@ -103,13 +101,13 @@ class formDialog extends React.PureComponent {
           Dialog : {open === true ? 'Opened' : 'Closed'}
         </p>
         <p>
-          First Name : {open === true ? <i>None</i> : this.state.firstName}
+          First Name :{open === true ? <i>None</i> : form.firstName}
           <br />
-          Last Name : {open === true ? <i>None</i> : this.state.lastName} <br />
-          Age : {open === true ? <i>None</i> : this.state.age} <br />
-          Email : {open === true ? <i>None</i> : this.state.email}
+          Last Name : {open === true ? <i>None</i> : form.lastName}
           <br />
-          Data from API : {form}
+          Age : {open === true ? <i>None</i> : form.age} <br />
+          Email : {open === true ? <i>None</i> : form.email}
+          <br />
         </p>
         <RaisedButton
           label="Open Form Dialog"
@@ -192,7 +190,7 @@ const mapDispatchToProps = dispatch => ({
   openDialog: () => dispatch(actionHub.FORM_DIALOG_OPEN_DIALOG()),
   closeDialog: () => dispatch(actionHub.FORM_DIALOG_CLOSE_DIALOG()),
   delete: () => dispatch(actionHub.FORM_DIALOG_DELETE()),
-  submit: () => dispatch(actionHub.FORM_DIALOG_SUBMIT())
+  submit: data => dispatch(actionHub.FORM_DIALOG_SUBMIT(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(formDialog)
