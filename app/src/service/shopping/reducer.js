@@ -28,6 +28,8 @@ const reducer = (state = { productsInCart: [] }, action) => {
       return { ...state, products: data.products }
     case types.shoppingFilterProductByCategoryResponse:
       return { ...state, products: data.products }
+    case types.shoppingFilterProductByPriceRangeResponse:
+      return { ...state, products: data.products }
     default:
       return state
   }
