@@ -11,7 +11,6 @@ const reducer = (state = { productsInCart: [] }, action) => {
     case types.shoppingRemoveProductFromCart:
         // Immutable remove element from array
         // 1 - make a copy, 2 - find index, 3 - splice copy
-      debugger;
       const productsInCart = state.productsInCart.slice()
 
       const productToRemoveIndex = productsInCart.findIndex((product) => {

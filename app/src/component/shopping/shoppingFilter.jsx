@@ -1,26 +1,37 @@
 import React from 'react'
-import FlatButton from 'material-ui/FlatButton'
 import { services, actionHub } from '../../loader'
 import { connect } from 'react-redux'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
 
 class component extends React.PureComponent {
-
-  onFilterByCategory = (category) => {
-    console.log(category)
-    this.props.filterByCategory(category)
-    // TODO when search is called , print the button for buttonStyleHightlighted
+  state = {
+    values: 0
   }
+
+  onFilterByCategory = (event, index, value) => {
+    this.setState({value})
+    if (value === 0) {
+      this.props.filterByCategory('')
+    }
+    this.props.filterByCategory(this.props.categories[index - 1])
+  }
+
+  handleChange = (event, index, value) => this.setState({value});
 
   render () {
     var { categories } = this.props
     if (categories && categories.length > 0) {
       return (
         <div>
-          {categories.map((category, index) => (
-            <FlatButton key={index}
-              label={category}
-              onClick={() => this.onFilterByCategory(category)}/>
-          ))}
+          <SelectField
+            floatingLabelText="Category"
+            value={this.state.value}
+            onChange={this.onFilterByCategory}>
+            <MenuItem value={0} primaryText='All'/>
+            {categories.map((category, index) =>
+              (<MenuItem value={index + 1} key={index + 1} primaryText={category} />))}
+          </SelectField>
         </div>
       )
     } else {
