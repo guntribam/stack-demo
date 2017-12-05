@@ -44,16 +44,19 @@ class db {
     let inCartId = this.productsInCart.reduce((accumulator, current) => {
       return current.inCartId + accumulator
     }, 1)
-    this.productsInCart = this.productsInCart.concat({
-      ...product,
-      inCartId: inCartId
-    })
+    let addedProduct = { ...product, inCartId: inCartId }
+    this.productsInCart = this.productsInCart.concat(addedProduct)
+    return addedProduct
   }
 
   static removeProductFromCart (productToRemove) {
     this.productsInCart = this.productsInCart.filter((product) => {
       return product.inCartId !== productToRemove.inCartId
     })
+  }
+
+  static removeAllProductsFromCart () {
+    this.productsInCart = []
   }
 
   static getProducts () {

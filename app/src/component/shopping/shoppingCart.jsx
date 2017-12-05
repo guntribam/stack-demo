@@ -3,6 +3,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import FontIcon from 'material-ui/FontIcon'
 import { red500 } from 'material-ui/styles/colors'
+import { connect } from 'react-redux'
 import CircularProgress from 'material-ui/CircularProgress'
 import {
   Table,
@@ -14,6 +15,8 @@ import {
   TableFooter
 } from 'material-ui/Table'
 
+import { services, actionHub } from '../../loader'
+
 const style = {
   noProduct: {
     textAlign: 'center'
@@ -22,15 +25,24 @@ const style = {
 
 class component extends React.PureComponent {
 
+  onRemoveProductFromCart = (product) => {
+    this.props.removeProductFromCart(product)
+  }
+
+  onCheckoutCart = () => {
+    this.props.checkoutCart()
+  }
+
   cartTotal = () => {
-    return this.props.products.reduce((currentTotal, product) => {
+    let total = this.props.productsInCart.reduce((currentTotal, product) => {
       return currentTotal + product.price
     }, 0)
+    return total.toFixed(2)
   }
 
   renderActions = () => {
-    var { products } = this.props
-    if (products && products.length > 0) {
+    var { productsInCart } = this.props
+    if (productsInCart && productsInCart.length > 0) {
       return [
         <FlatButton
           label="Back Shopping"
@@ -39,7 +51,7 @@ class component extends React.PureComponent {
         <FlatButton
           label="Checkout"
           primary={true}
-          onClick={ () => { this.props.onCheckoutCart(products) }}
+          onClick={ () => { this.onCheckoutCart() }}
         />
       ]
     } else {
@@ -54,8 +66,8 @@ class component extends React.PureComponent {
   }
 
   renderProductsInCart = () => {
-    var { products } = this.props
-    if (products && products.length > 0) {
+    var { productsInCart } = this.props
+    if (productsInCart && productsInCart.length > 0) {
       return (
         <Table selectable={false}>
           <TableHeader
@@ -70,13 +82,13 @@ class component extends React.PureComponent {
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-            {products.map((product, index) => (
+            {productsInCart.map((product, index) => (
               <TableRow key={index}>
                 <TableRowColumn>{product.name}</TableRowColumn>
                 <TableRowColumn>$ {product.price}</TableRowColumn>
                 <TableRowColumn>{product.description}</TableRowColumn>
                 <TableRowColumn>
-                  <FlatButton onClick={() => { this.props.onRemoveProductFromCart(product) }}>
+                  <FlatButton onClick={() => { this.onRemoveProductFromCart(product) }}>
                     <FontIcon className="material-icons" color={red500}>delete</FontIcon>
                   </FlatButton>
                 </TableRowColumn>
@@ -102,7 +114,9 @@ class component extends React.PureComponent {
   }
 
   renderDialogContent = () => {
-    if (this.props.isHandlingCheckout) {
+    const { isHandlingCheckout, isCheckoutCompleted } = this.props
+
+    if (isHandlingCheckout) {
       return (
         <div style={{textAlign: 'center'}}>
           <CircularProgress />
@@ -110,7 +124,7 @@ class component extends React.PureComponent {
         </div>
       )
     } else {
-      if (this.props.checkoutCompleted) {
+      if (isCheckoutCompleted) {
         return (<div style={{textAlign: 'center'}}> Checkout completed </div>)
       } else {
         return this.renderProductsInCart()
@@ -133,4 +147,15 @@ class component extends React.PureComponent {
   }
 }
 
-export default component
+const mapStateToProps = (state) => ({
+  productsInCart: services.shopping.selector.getProductsInCart(state),
+  isCheckoutCompleted: services.shopping.selector.getIsCheckoutCompleted(state),
+  isHandlingCheckout: services.shopping.selector.getHandlingCheckout(state)
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  removeProductFromCart: (product) => dispatch(actionHub.SHOPPING_REMOVE_PRODUCT_FROM_CART(product)),
+  checkoutCart: () => dispatch(actionHub.SHOPPING_CHECKOUT_CART())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(component)

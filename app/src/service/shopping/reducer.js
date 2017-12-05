@@ -6,15 +6,31 @@ const reducer = (state = {}, action) => {
       const { products, categories, productsInCart } = data
       return { ...state, products, categories, productsInCart }
     case types.shoppingAddProductToCartResponse:
-      return { ...state, productsInCart: data.productsInCart }
+      return {
+        ...state,
+        productsInCart: data.productsInCart,
+        addedProduct: data.addedProduct,
+        isSnackBarOpen: true
+      }
+    case types.shoppingCloseAddedProductSnackbar:
+      return { ...state, isSnackBarOpen: false }
     case types.shoppingRemoveProductFromCartResponse:
-      return { ...state, productsInCart: data.productsInCart }
+      return {
+        ...state,
+        productsInCart: data.productsInCart,
+        isSnackBarOpen: false
+      }
     case types.shoppingCheckoutCart:
       return { ...state, isHandlingCheckout: true }
     case types.shoppingCheckoutCartResponse:
-      return { ...state, isHandlingCheckout: false, checkoutCompleted: data.checkoutCompleted, productsInCart: [] }
+      return {
+        ...state,
+        isHandlingCheckout: false,
+        isCheckoutCompleted: data.isCheckoutCompleted,
+        productsInCart: data.productsInCart
+      }
     case types.shoppingResetCart:
-      return { ...state, checkoutCompleted: false }
+      return { ...state, isCheckoutCompleted: false }
     case types.shoppingSearchProductsResponse:
       return { ...state, products: data.products }
     case types.shoppingFilterProductByCategoryResponse:
