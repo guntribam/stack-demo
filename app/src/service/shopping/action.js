@@ -8,7 +8,6 @@ const api = makeTypes(name, [
   'removeProductFromCart'
 ])
 const local = makeTypes(name, [
-  'resetCart',
   'closeAddedProductSnackbar',
   'openCart',
   'closeCart'

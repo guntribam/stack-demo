@@ -154,7 +154,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  resetCart: () => dispatch(actionHub.SHOPPING_RESET_CART()),
   openCart: () => dispatch(actionHub.SHOPPING_OPEN_CART()),
   closeCart: () => dispatch(actionHub.SHOPPING_CLOSE_CART()),
   removeProductFromCart: (product) => dispatch(actionHub.SHOPPING_REMOVE_PRODUCT_FROM_CART(product)),

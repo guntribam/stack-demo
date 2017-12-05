@@ -68,7 +68,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   openCart: () => dispatch(actionHub.SHOPPING_OPEN_CART()),
   closeCart: () => dispatch(actionHub.SHOPPING_CLOSE_CART()),
-  resetCart: () => dispatch(actionHub.SHOPPING_RESET_CART()),
   searchProducts: (query) => dispatch(actionHub.SHOPPING_SEARCH_PRODUCTS(query))
 })
 

@@ -28,8 +28,6 @@ const reducer = (state = { cartOpen: false }, action) => {
         isCheckoutCompleted: data.isCheckoutCompleted,
         productsInCart: data.productsInCart
       }
-    case types.shoppingResetCart:
-      return { ...state, isCheckoutCompleted: false }
     case types.shoppingSearchProductsResponse:
       return { ...state, products: data.products }
     case types.shoppingFilterProductByCategoryResponse:
