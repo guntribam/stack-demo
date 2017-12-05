@@ -23,8 +23,9 @@ class component extends React.PureComponent {
     this.setState({value})
     if (value === 0) {
       this.props.filterByCategory('')
+    } else {
+      this.props.filterByCategory(this.props.categories[index])
     }
-    this.props.filterByCategory(this.props.categories[index - 1])
   }
 
   onFilterPriceRange = (range) => {
@@ -34,8 +35,11 @@ class component extends React.PureComponent {
   render () {
     var { categories } = this.props
     if (categories && categories.length > 0) {
-      var menuItems = categories.map((category, index) => (<MenuItem value={index + 1} key={index + 1} primaryText={category} />))
-      var buttons = this.state.ranges.map((range, index) => (<RaisedButton label={range.label} key={index} style={buttonStyle} onClick={() => { this.onFilterPriceRange(range) }}/>))
+      if (!categories.includes('All')) {
+        categories.unshift('All')
+      }
+      const menuItems = categories.map((category, index) => (<MenuItem value={index} key={index} primaryText={category} />))
+      const buttons = this.state.ranges.map((range, index) => (<RaisedButton label={range.label} key={index} style={buttonStyle} onClick={() => { this.onFilterPriceRange(range) }}/>))
       return (
         <div>
           <p>Filter by category</p>
