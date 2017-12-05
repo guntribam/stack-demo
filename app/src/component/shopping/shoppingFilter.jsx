@@ -34,6 +34,8 @@ class component extends React.PureComponent {
   render () {
     var { categories } = this.props
     if (categories && categories.length > 0) {
+      var menuItems = categories.map((category, index) => (<MenuItem value={index + 1} key={index + 1} primaryText={category} />))
+      var buttons = this.state.ranges.map((range, index) => (<RaisedButton label={range.label} key={index} style={buttonStyle} onClick={() => { this.onFilterPriceRange(range) }}/>))
       return (
         <div>
           <p>Filter by category</p>
@@ -41,14 +43,10 @@ class component extends React.PureComponent {
               floatingLabelText="Category"
               value={this.state.value}
               onChange={this.onFilterByCategory}>
-              <MenuItem value={0} primaryText='All'/>
-              {categories.map((category, index) =>
-                (<MenuItem value={index + 1} key={index + 1} primaryText={category} />))}
+              {menuItems}
           </SelectField>
           <p>Filter by price range</p>
-            {this.state.ranges.map((range, index) =>
-          (<RaisedButton label={range.label} key={index} style={buttonStyle}
-            onClick={() => { this.onFilterPriceRange(range) }}/>))}
+          {buttons}
         </div>
       )
     } else {
