@@ -12,6 +12,7 @@ import shoppingCart from './shopping/shoppingCart'
 import shoppingFilter from './shopping/shoppingFilter'
 import simpleDialog from './simpleDialog'
 import formDialog from './formDialog'
+import stepperDialog from './stepperDialog'
 
 export default {
   counter,
@@ -27,5 +28,6 @@ export default {
   productList,
   shopping,
   shoppingCart,
-  shoppingFilter
+  shoppingFilter,
+  stepperDialog
 }
