@@ -104,7 +104,6 @@ class db {
   }
 
   static getPriceRange() {
-    var priceRangeList = []
     var minValue = 0
     var maxValue = 0
     this.products.map((product,index) => {
@@ -112,6 +111,7 @@ class db {
       if (product.price > maxValue) maxValue = product.price
     })
 
+    var priceRangeList = []
     const maxButtons = 4
     var rate = Math.round((maxValue - minValue)/ maxButtons)
     for (var i = 1; i <= maxButtons; i++) {

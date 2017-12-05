@@ -31,9 +31,8 @@ class component extends React.PureComponent {
       const buttons = priceRange.map((range, index) => (<RaisedButton label={range.label} key={index} style={buttonStyle} onClick={() => { this.onFilterPriceRange(range) }}/>))
       return (
         <div>
-          <p>Filter by category</p>
           <SelectField
-              floatingLabelText="Category"
+              floatingLabelText="Filter by category"
               onChange={this.onFilterByCategory}>
               {menuItems}
           </SelectField>
