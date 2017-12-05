@@ -16,6 +16,10 @@ const getCategories = state => {
   return get(state).categories
 }
 
+const getPriceRange = state => {
+  return get(state).priceRange
+}
+
 const getProductsInCart = state => {
   return get(state).productsInCart
 }
@@ -39,5 +43,6 @@ export default {
   getIsCheckoutCompleted,
   getCategories,
   getAddedProduct,
-  getIsSnackBarOpen
+  getIsSnackBarOpen,
+  getPriceRange
 }
