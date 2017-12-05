@@ -34,6 +34,28 @@ class db {
     }
   ]
 
+  static productsInCart = []
+
+  static getProductsInCart () {
+    return this.productsInCart
+  }
+
+  static addProductToCart (product) {
+    let inCartId = this.productsInCart.reduce((accumulator, current) => {
+      return current.inCartId + accumulator
+    }, 1)
+    this.productsInCart = this.productsInCart.concat({
+      ...product,
+      inCartId: inCartId
+    })
+  }
+
+  static removeProductFromCart (productToRemove) {
+    this.productsInCart = this.productsInCart.filter((product) => {
+      return product.inCartId !== productToRemove.inCartId
+    })
+  }
+
   static getProducts () {
     return this.products
   }

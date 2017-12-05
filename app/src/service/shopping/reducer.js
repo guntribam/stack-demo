@@ -1,23 +1,14 @@
-const reducer = (state = { productsInCart: [] }, action) => {
+const reducer = (state = {}, action) => {
   const { type, types, data } = action
 
   switch (type) {
     case types.shopping_init:
-      const { products } = data
-      const { categories } = data
-      return { ...state, products, categories }
-    case types.shoppingAddProductToCart:
-      return { ...state, productsInCart: state.productsInCart.concat(data) }
-    case types.shoppingRemoveProductFromCart:
-        // Immutable remove element from array
-        // 1 - make a copy, 2 - find index, 3 - splice copy
-      const productsInCart = state.productsInCart.slice()
-
-      const productToRemoveIndex = productsInCart.findIndex((product) => {
-        return product.id === data.id
-      })
-      productsInCart.splice(productToRemoveIndex, 1)
-      return { ...state, productsInCart: productsInCart }
+      const { products, categories, productsInCart } = data
+      return { ...state, products, categories, productsInCart }
+    case types.shoppingAddProductToCartResponse:
+      return { ...state, productsInCart: data.productsInCart }
+    case types.shoppingRemoveProductFromCartResponse:
+      return { ...state, productsInCart: data.productsInCart }
     case types.shoppingCheckoutCart:
       return { ...state, isHandlingCheckout: true }
     case types.shoppingCheckoutCartResponse:

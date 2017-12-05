@@ -9,12 +9,17 @@ const processor = async action => {
     case types.shoppingCheckoutCart:
       await sleep(5000)
       return { checkoutCompleted: true }
+    case types.shoppingAddProductToCart:
+      db.addProductToCart(data)
+      return { productsInCart: db.getProductsInCart() }
+    case types.shoppingRemoveProductFromCart:
+      db.removeProductFromCart(data)
+      return { productsInCart: db.getProductsInCart() }
     case types.shoppingSearchProducts:
       return { products: db.queryProducts(data) }
     case types.shoppingFilterProductByCategory:
       return { products: db.queryCategories(data) }
     case types.shoppingFilterProductByPriceRange:
-      console.log(data)
       return { products: db.queryPriceRange(data) }
   }
 }

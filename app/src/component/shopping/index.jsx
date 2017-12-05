@@ -81,7 +81,7 @@ class component extends React.PureComponent {
           <ToolbarGroup>
             <FlatButton
               style={{color: '#54647a'}}
-              label={`Cart(${this.props.productsInCart.length})`}
+              label={`Cart(${(this.props.productsInCart) ? this.props.productsInCart.length : 0})`}
               onClick={() => { this.onCartOpen() }}
             />
           </ToolbarGroup>
