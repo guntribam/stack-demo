@@ -4,8 +4,12 @@ const get = state => {
   return state[name]
 }
 
-const getOpen = state => {
-  return get(state).open
+const getStepOpen = state => {
+  return get(state).isStepOpen
+}
+
+const getStepIndex = state => {
+  return get(state).stepIndex
 }
 
 const getSubmitted = state => {
@@ -21,19 +25,21 @@ const getErrorMessages = state => {
   }
 }
 
-const getForm = state => {
+const getStepperInput = state => {
   return {
     firstName: get(state).firstName,
     lastName: get(state).lastName,
     age: get(state).age,
-    email: get(state).email
+    email: get(state).email,
+    sex: get(state).sex,
+    employed: get(state).employed
   }
 }
 
 export default {
-  get,
-  getOpen,
+  getStepOpen,
+  getStepIndex,
+  getErrorMessages,
   getSubmitted,
-  getForm,
-  getErrorMessages
+  getStepperInput
 }

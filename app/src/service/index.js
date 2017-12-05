@@ -8,6 +8,7 @@ import sphere from './sphere'
 import shopping from './shopping'
 import simpleDialog from './simpleDialog'
 import formDialog from './formDialog'
+import stepperDialog from './stepperDialog'
 
 export default {
   counter,
@@ -19,5 +20,6 @@ export default {
   sphere,
   simpleDialog,
   formDialog,
-  shopping
+  shopping,
+  stepperDialog
 }

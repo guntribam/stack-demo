@@ -7,6 +7,7 @@ import todos from './todos'
 import sphere from './sphere'
 import simpleDialog from './simpleDialog'
 import formDialog from './formDialog'
+import stepperDialog from './stepperDialog'
 import shopping from './shopping'
 
 export default {
@@ -19,5 +20,6 @@ export default {
   sphere,
   simpleDialog,
   formDialog,
-  shopping
+  shopping,
+  stepperDialog
 }

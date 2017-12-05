@@ -8,12 +8,7 @@ import { actionHub, services, components } from '../../loader'
 
 class formDialog extends React.PureComponent {
   state = {
-    errorMessages: {
-      wordsError: 'Please only use letters',
-      numericError: 'Please provide a number',
-      urlError: 'Please provide a valid URL',
-      emailError: 'Please provide a valid Email'
-    }
+    canSubmit: false
   }
 
   onSubmit = () => {
@@ -64,8 +59,8 @@ class formDialog extends React.PureComponent {
     const marginStyle = {
       marginLeft: 12
     }
-    const { open, submitted, form } = this.props
-    const { wordsError, numericError, emailError } = this.state.errorMessages
+    const { open, submitted, form, errorMessages } = this.props
+    const { wordsError, numericError, emailError } = errorMessages
 
     const actions = [
       <RaisedButton
@@ -179,7 +174,8 @@ class formDialog extends React.PureComponent {
 const mapStateToProps = state => ({
   open: services.formDialog.selector.getOpen(state),
   submitted: services.formDialog.selector.getSubmitted(state),
-  form: services.formDialog.selector.getForm(state)
+  form: services.formDialog.selector.getForm(state),
+  errorMessages: services.formDialog.selector.getErrorMessages(state)
 })
 
 const mapDispatchToProps = dispatch => ({
