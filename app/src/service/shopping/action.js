@@ -3,12 +3,13 @@ import { makeActions, makeTypes } from '@gp-technical/stack-pack-app'
 
 const api = makeTypes(name, [
   'filterProductByCategory',
-  'filterProductByPriceRange'
+  'filterProductByPriceRange',
+  'addProductToCart',
+  'removeProductFromCart'
 ])
 const local = makeTypes(name, [
-  'addProductToCart',
-  'removeProductFromCart',
   'resetCart',
+  'closeAddedProductSnackbar',
   'openCart',
   'closeCart'
 ])

@@ -8,13 +8,25 @@ const processor = async action => {
   switch (type) {
     case types.shoppingCheckoutCart:
       await sleep(5000)
-      return { checkoutCompleted: true }
+      db.removeAllProductsFromCart()
+      return {
+        isCheckoutCompleted: true,
+        productsInCart: db.getProductsInCart()
+      }
+    case types.shoppingAddProductToCart:
+      let addedProduct = db.addProductToCart(data)
+      return {
+        productsInCart: db.getProductsInCart(),
+        addedProduct: addedProduct
+      }
+    case types.shoppingRemoveProductFromCart:
+      db.removeProductFromCart(data)
+      return { productsInCart: db.getProductsInCart() }
     case types.shoppingSearchProducts:
       return { products: db.queryProducts(data) }
     case types.shoppingFilterProductByCategory:
       return { products: db.queryCategories(data) }
     case types.shoppingFilterProductByPriceRange:
-      console.log(data)
       return { products: db.queryPriceRange(data) }
   }
 }

@@ -14,6 +14,7 @@ import {
   TableRowColumn,
   TableFooter
 } from 'material-ui/Table'
+
 import { services, actionHub } from '../../loader'
 
 const style = {
@@ -23,23 +24,31 @@ const style = {
 }
 
 class component extends React.PureComponent {
+
+  onRemoveProductFromCart = (product) => {
+    this.props.removeProductFromCart(product)
+  }
+
+  onCheckoutCart = () => {
+    this.props.checkoutCart()
+  }
+
   cartTotal = () => {
-    return this.props.products.reduce((currentTotal, product) => {
+    let total = this.props.productsInCart.reduce((currentTotal, product) => {
       return currentTotal + product.price
     }, 0)
+    return total.toFixed(2)
   }
 
   renderActions = () => {
-    var { products } = this.props
-    if (products && products.length > 0) {
+    var { productsInCart } = this.props
+    if (productsInCart && productsInCart.length > 0) {
       return [
         <FlatButton label="Back Shopping" onClick={this.props.closeCart} />,
         <FlatButton
           label="Checkout"
           primary={true}
-          onClick={() => {
-            this.props.onCheckoutCart(products)
-          }}
+          onClick={ () => { this.onCheckoutCart() }}
         />
       ]
     } else {
@@ -54,8 +63,8 @@ class component extends React.PureComponent {
   }
 
   renderProductsInCart = () => {
-    var { products } = this.props
-    if (products && products.length > 0) {
+    var { productsInCart } = this.props
+    if (productsInCart && productsInCart.length > 0) {
       return (
         <Table selectable={false}>
           <TableHeader
@@ -71,7 +80,7 @@ class component extends React.PureComponent {
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-            {products.map((product, index) => (
+            {productsInCart.map((product, index) => (
               <TableRow key={index}>
                 <TableRowColumn>{product.name}</TableRowColumn>
                 <TableRowColumn>$ {product.price}</TableRowColumn>
@@ -79,7 +88,7 @@ class component extends React.PureComponent {
                 <TableRowColumn>
                   <FlatButton
                     onClick={() => {
-                      this.props.onRemoveProductFromCart(product)
+                      this.onRemoveProductFromCart(product)
                     }}
                   >
                     <FontIcon className="material-icons" color={red500}>
@@ -105,19 +114,19 @@ class component extends React.PureComponent {
   }
 
   renderDialogContent = () => {
-    if (this.props.isHandlingCheckout) {
+    const { isHandlingCheckout, isCheckoutCompleted } = this.props
+
+    if (isHandlingCheckout) {
       return (
         <div style={{ textAlign: 'center' }}>
           <CircularProgress />
           <p> Checking payment </p>
         </div>
       )
+    } else if (isCheckoutCompleted) {
+      return (<div style={{textAlign: 'center'}}> Checkout completed </div>)
     } else {
-      if (this.props.checkoutCompleted) {
-        return <div style={{ textAlign: 'center' }}> Checkout completed </div>
-      } else {
-        return this.renderProductsInCart()
-      }
+      return this.renderProductsInCart()
     }
   }
 
@@ -138,13 +147,18 @@ class component extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  isCartOpen: services.shopping.selector.getCartOpen(state)
+  isCartOpen: services.shopping.selector.getCartOpen(state),
+  productsInCart: services.shopping.selector.getProductsInCart(state),
+  isCheckoutCompleted: services.shopping.selector.getIsCheckoutCompleted(state),
+  isHandlingCheckout: services.shopping.selector.getHandlingCheckout(state)
 })
 
 const mapDispatchToProps = dispatch => ({
   resetCart: () => dispatch(actionHub.SHOPPING_RESET_CART()),
   openCart: () => dispatch(actionHub.SHOPPING_OPEN_CART()),
-  closeCart: () => dispatch(actionHub.SHOPPING_CLOSE_CART())
+  closeCart: () => dispatch(actionHub.SHOPPING_CLOSE_CART()),
+  removeProductFromCart: (product) => dispatch(actionHub.SHOPPING_REMOVE_PRODUCT_FROM_CART(product)),
+  checkoutCart: () => dispatch(actionHub.SHOPPING_CHECKOUT_CART())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(component)

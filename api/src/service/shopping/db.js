@@ -34,6 +34,31 @@ class db {
     }
   ]
 
+  static productsInCart = []
+
+  static getProductsInCart () {
+    return this.productsInCart
+  }
+
+  static addProductToCart (product) {
+    let inCartId = this.productsInCart.reduce((accumulator, current) => {
+      return current.inCartId + accumulator
+    }, 1)
+    let addedProduct = { ...product, inCartId: inCartId }
+    this.productsInCart = this.productsInCart.concat(addedProduct)
+    return addedProduct
+  }
+
+  static removeProductFromCart (productToRemove) {
+    this.productsInCart = this.productsInCart.filter((product) => {
+      return product.inCartId !== productToRemove.inCartId
+    })
+  }
+
+  static removeAllProductsFromCart () {
+    this.productsInCart = []
+  }
+
   static getProducts () {
     return this.products
   }

@@ -4,6 +4,14 @@ const get = state => {
   return state[name]
 }
 
+const getAddedProduct = state => {
+  return get(state).addedProduct
+}
+
+const getIsSnackBarOpen = state => {
+  return get(state).isSnackBarOpen
+}
+
 const getCategories = state => {
   return get(state).categories
 }
@@ -24,15 +32,17 @@ const getHandlingCheckout = state => {
   return get(state).isHandlingCheckout
 }
 
-const getCheckoutCompleted = state => {
-  return get(state).checkoutCompleted
+const getIsCheckoutCompleted = state => {
+  return get(state).isCheckoutCompleted
 }
 
 export default {
   getProducts,
   getProductsInCart,
   getHandlingCheckout,
-  getCheckoutCompleted,
+  getIsCheckoutCompleted,
   getCategories,
+  getAddedProduct,
+  getIsSnackBarOpen,
   getCartOpen
 }
