@@ -6,7 +6,7 @@ class db {
       price: 20.99,
       imageURL: 'https://i.ebayimg.com/images/g/pJoAAOSwx~JWE2t0/s-l300.jpg',
       description: 'This is a cool product tho\'',
-      categories: ['toy']
+      categories: ['toy','bb8','star-wars']
     },
     {
       id: 2,
@@ -14,7 +14,7 @@ class db {
       price: 13.99,
       imageURL: 'https://images-na.ssl-images-amazon.com/images/I/71TlUPU8ZhL._SY355_.jpg',
       description: 'R2-D2, pronounced Artoo-Detoo and often referred to as Artoo, was an R2 series astromech droid manufactured by Industrial Automaton with masculine programming.',
-      categories: ['star-wars']
+      categories: ['star-wars','r2-d2']
     },
     {
       id: 3,
@@ -30,7 +30,7 @@ class db {
       price: 9.99,
       imageURL: 'https://vignette.wikia.nocookie.net/starwars/images/b/b8/R2-KT_meeting.png/revision/latest/scale-to-width-down/250?cb=20121008235559',
       description: 'An astromech droid, also referred to as an astro droid or mech, was a type of repair droid that served as an automated mechanic on starships.',
-      categories: ['toy']
+      categories: ['toy','droid']
     }
   ]
 
@@ -94,7 +94,13 @@ class db {
   }
 
   static getCategories() {
-    return ['toy', 'star-wars', 'droid']
+    var categoryList = [];
+    this.products.map((product,index) => {
+      product.categories.map((category, indexCategory) => {
+        if (!categoryList.includes(category)) categoryList.push(category)
+      })
+    })
+    return categoryList
   }
 }
 

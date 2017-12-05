@@ -35,9 +35,7 @@ class component extends React.PureComponent {
   render () {
     var { categories } = this.props
     if (categories && categories.length > 0) {
-      if (!categories.includes('All')) {
-        categories.unshift('All')
-      }
+      if (!categories.includes('All')) categories.unshift('All')
       const menuItems = categories.map((category, index) => (<MenuItem value={index} key={index} primaryText={category} />))
       const buttons = this.state.ranges.map((range, index) => (<RaisedButton label={range.label} key={index} style={buttonStyle} onClick={() => { this.onFilterPriceRange(range) }}/>))
       return (
