@@ -4,7 +4,8 @@ const initialiser = async () => {
   return {
     products: db.getProducts(),
     categories: db.getCategories(),
-    productsInCart: db.getProductsInCart()
+    productsInCart: db.getProductsInCart(),
+    priceRange: db.getPriceRange()
   }
 }
 

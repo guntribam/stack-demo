@@ -10,21 +10,13 @@ const buttonStyle = {
 }
 
 class component extends React.PureComponent {
-  state = {
-    values: 0,
-    ranges: [{'label': 'U$0 to unlimited', 'minValue': 0, 'maxValue': 999},
-            {'label': 'U$0 to U$10', 'minValue': 0, 'maxValue': 10},
-            {'label': 'U$10,01 to U$15', 'minValue': 10.01, 'maxValue': 15},
-            {'label': 'U$15,01 to U$30', 'minValue': 15.01, 'maxValue': 30},
-            {'label': 'U$30 to unlimited', 'minValue': 30, 'maxValue': 999}]
-  }
-
   onFilterByCategory = (event, index, value) => {
     this.setState({value})
     if (value === 0) {
       this.props.filterByCategory('')
+    } else {
+      this.props.filterByCategory(this.props.categories[index])
     }
-    this.props.filterByCategory(this.props.categories[index - 1])
   }
 
   onFilterPriceRange = (range) => {
@@ -32,23 +24,20 @@ class component extends React.PureComponent {
   }
 
   render () {
-    var { categories } = this.props
+    var { categories, priceRange } = this.props
     if (categories && categories.length > 0) {
+      if (!categories.includes('All')) categories.unshift('All')
+      const menuItems = categories.map((category, index) => (<MenuItem value={index} key={index} primaryText={category} />))
+      const buttons = priceRange.map((range, index) => (<RaisedButton label={range.label} key={index} style={buttonStyle} onClick={() => { this.onFilterPriceRange(range) }}/>))
       return (
         <div>
-          <p>Filter by category</p>
           <SelectField
-              floatingLabelText="Category"
-              value={this.state.value}
+              floatingLabelText="Filter by category"
               onChange={this.onFilterByCategory}>
-              <MenuItem value={0} primaryText='All'/>
-              {categories.map((category, index) =>
-                (<MenuItem value={index + 1} key={index + 1} primaryText={category} />))}
+              {menuItems}
           </SelectField>
           <p>Filter by price range</p>
-            {this.state.ranges.map((range, index) =>
-          (<RaisedButton label={range.label} key={index} style={buttonStyle}
-            onClick={() => { this.onFilterPriceRange(range) }}/>))}
+          {buttons}
         </div>
       )
     } else {
@@ -57,7 +46,8 @@ class component extends React.PureComponent {
   }
 }
 const mapStateToProps = (state) => ({
-  categories: services.shopping.selector.getCategories(state)
+  categories: services.shopping.selector.getCategories(state),
+  priceRange: services.shopping.selector.getPriceRange(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -2,8 +2,8 @@ const reducer = (state = { cartOpen: false }, action) => {
   const { type, types, data } = action
   switch (type) {
     case types.shopping_init:
-      const { products, categories, productsInCart } = data
-      return { ...state, products, categories, productsInCart }
+      const { products, categories, productsInCart, priceRange } = data
+      return { ...state, products, categories, productsInCart, priceRange }
     case types.shoppingAddProductToCartResponse:
       return {
         ...state,
