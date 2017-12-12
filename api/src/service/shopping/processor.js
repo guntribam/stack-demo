@@ -1,6 +1,7 @@
 import { makeProcessor } from '@gp-technical/stack-pack-api'
 import { sleep } from '@gp-technical/stack-pack-util'
 import db from './db'
+import cart from './cart'
 
 const processor = async action => {
   var { types, type, data } = action
@@ -8,20 +9,20 @@ const processor = async action => {
   switch (type) {
     case types.shoppingCheckoutCart:
       await sleep(5000)
-      db.removeAllProductsFromCart()
+      cart.removeAllProductsFromCart()
       return {
         isCheckoutCompleted: true,
-        productsInCart: db.getProductsInCart()
+        productsInCart: cart.getProductsInCart()
       }
     case types.shoppingAddProductToCart:
-      let addedProduct = db.addProductToCart(data)
+      let addedProduct = cart.addProductToCart(data)
       return {
-        productsInCart: db.getProductsInCart(),
+        productsInCart: cart.getProductsInCart(),
         addedProduct: addedProduct
       }
     case types.shoppingRemoveProductFromCart:
-      db.removeProductFromCart(data)
-      return { productsInCart: db.getProductsInCart() }
+      cart.removeProductFromCart(data)
+      return { productsInCart: cart.getProductsInCart() }
     case types.shoppingSearchProducts:
       return { products: db.queryProducts(data) }
     case types.shoppingFilterProductByCategory:
