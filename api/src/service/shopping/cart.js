@@ -5,7 +5,7 @@ const getProductsInCart = () => {
   return productsInCart
 }
 
-const addProductToCart = product => {
+const productCartAdd = product => {
   let inCartId = productsInCart.reduce((accumulator, current) => {
     return current.inCartId + accumulator
   }, 1)
@@ -14,19 +14,19 @@ const addProductToCart = product => {
   return addedProduct
 }
 
-const removeProductFromCart = productToRemove => {
+const productCartRemove = productToRemove => {
   productsInCart = productsInCart.filter((product) => {
     return product.inCartId !== productToRemove.inCartId
   })
 }
 
-const removeAllProductsFromCart = () => {
+const productCartRemoveAll = () => {
   productsInCart = []
 }
 
 export default {
   getProductsInCart,
-  addProductToCart,
-  removeProductFromCart,
-  removeAllProductsFromCart
+  productCartAdd,
+  productCartRemove,
+  productCartRemoveAll
 }
