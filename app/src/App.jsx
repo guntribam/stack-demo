@@ -31,9 +31,9 @@ class component extends React.PureComponent {
                   <components.todos />
                   <components.gp />
                   <components.sphere />
-                  <components.simpleDialog />
-                  <components.formDialog />
-                  <components.stepperDialog />
+                  <components.dialogSimple />
+                  <components.dialogForm />
+                  <components.dialogStepper />
                   <components.shopping />
                 </Col>
               </Row>
