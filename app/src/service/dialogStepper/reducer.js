@@ -8,20 +8,20 @@ const reducer = (
 ) => {
   const { type, types, data } = action
   switch (type) {
-    case types.stepperDialogOpenStepper:
+    case types.dialogStepperOpen:
       return { ...state, isStepOpen: true }
-    case types.stepperDialogCloseStepper:
+    case types.dialogStepperClose:
       return {
         ...state,
         isStepOpen: false,
         stepIndex: 0,
         submitted: 'No Data Entry'
       }
-    case types.stepperDialogPreviousStep:
+    case types.dialogStepperPrevious:
       return { ...state, stepIndex: state.stepIndex - 1 }
-    case types.stepperDialogNextStep:
+    case types.dialogStepperNext:
       return { ...state, stepIndex: state.stepIndex + 1 }
-    case types.stepperDialogSubmitResponse:
+    case types.dialogStepperSubmitResponse:
       return {
         ...state,
         ...data,

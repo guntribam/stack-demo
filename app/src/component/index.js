@@ -10,9 +10,9 @@ import shopping from './shopping'
 import productList from './shopping/productList'
 import shoppingCart from './shopping/shoppingCart'
 import shoppingFilter from './shopping/shoppingFilter'
-import simpleDialog from './simpleDialog'
-import formDialog from './formDialog'
-import stepperDialog from './stepperDialog'
+import dialogSimple from './dialogSimple'
+import dialogForm from './dialogForm'
+import dialogStepper from './dialogStepper'
 
 export default {
   counter,
@@ -23,11 +23,11 @@ export default {
   thunks,
   todos,
   sphere,
-  simpleDialog,
-  formDialog,
+  dialogSimple,
+  dialogForm,
   productList,
   shopping,
   shoppingCart,
   shoppingFilter,
-  stepperDialog
+  dialogStepper
 }

@@ -10,7 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import { services, actionHub, components } from '../../loader'
 
-class stepperDialog extends React.PureComponent {
+class dialogStepper extends React.PureComponent {
   state = {
     canSubmit: false
   }
@@ -81,7 +81,7 @@ class stepperDialog extends React.PureComponent {
     const actions = [
       <RaisedButton
         label="Cancel"
-        onClick={this.props.closeStepper}
+        onClick={this.props.close}
         style={marginStyle}
       />,
       <RaisedButton
@@ -89,13 +89,13 @@ class stepperDialog extends React.PureComponent {
         disabled={stepIndex === 0}
         style={marginStyle}
         primary={true}
-        onClick={this.props.previousStep}
+        onClick={this.props.previous}
       />,
       <RaisedButton
         label={stepIndex === 2 ? 'Submit' : 'Next'}
         style={marginStyle}
         primary={true}
-        onClick={stepIndex === 2 ? this.submitStepper : this.props.nextStep}
+        onClick={stepIndex === 2 ? this.submitStepper : this.props.next}
       />
     ]
 
@@ -132,7 +132,7 @@ class stepperDialog extends React.PureComponent {
         <RaisedButton
           label="Open Stepper Dialog"
           primary={true}
-          onClick={this.props.openStepper}
+          onClick={this.props.open}
           style={marginStyle}
         />
         <RaisedButton label="Check State" onClick={this.handleState} />
@@ -141,7 +141,7 @@ class stepperDialog extends React.PureComponent {
           modal={false}
           actions={actions}
           open={isStepOpen}
-          onRequestClose={this.props.closeStepper}
+          onRequestClose={this.props.close}
         >
           <div>
             <Formsy.Form
@@ -229,19 +229,19 @@ class stepperDialog extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  isStepOpen: services.stepperDialog.selector.getStepOpen(state),
-  stepIndex: services.stepperDialog.selector.getStepIndex(state),
-  submitted: services.formDialog.selector.getSubmitted(state),
-  errorMessages: services.stepperDialog.selector.getErrorMessages(state),
-  stepperInput: services.stepperDialog.selector.getStepperInput(state)
+  isStepOpen: services.dialogStepper.selector.getStepOpen(state),
+  stepIndex: services.dialogStepper.selector.getStepIndex(state),
+  submitted: services.dialogStepper.selector.getSubmitted(state),
+  errorMessages: services.dialogStepper.selector.getErrorMessages(state),
+  stepperInput: services.dialogStepper.selector.getStepperInput(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-  openStepper: () => dispatch(actionHub.STEPPER_DIALOG_OPEN_STEPPER()),
-  closeStepper: () => dispatch(actionHub.STEPPER_DIALOG_CLOSE_STEPPER()),
-  nextStep: () => dispatch(actionHub.STEPPER_DIALOG_NEXT_STEP()),
-  previousStep: () => dispatch(actionHub.STEPPER_DIALOG_PREVIOUS_STEP()),
-  submit: data => dispatch(actionHub.STEPPER_DIALOG_SUBMIT(data))
+  open: () => dispatch(actionHub.DIALOG_STEPPER_OPEN()),
+  close: () => dispatch(actionHub.DIALOG_STEPPER_CLOSE()),
+  next: () => dispatch(actionHub.DIALOG_STEPPER_NEXT()),
+  previous: () => dispatch(actionHub.DIALOG_STEPPER_PREVIOUS()),
+  submit: data => dispatch(actionHub.DIALOG_STEPPER_SUBMIT(data))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(stepperDialog)
+export default connect(mapStateToProps, mapDispatchToProps)(dialogStepper)

@@ -4,18 +4,14 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import { actionHub, services, components } from '../../loader'
 
-class simpleDialog extends React.PureComponent {
+class dialogSimple extends React.PureComponent {
   render () {
     const marginStyle = {
       marginLeft: 12
     }
-    const { open, answer } = this.props
+    const { open, answer, closeDialog, submit, openDialog } = this.props
     const actions = [
-      <RaisedButton
-        label="Cancel"
-        onClick={this.props.closeDialog}
-        style={marginStyle}
-      />,
+      <RaisedButton label="Cancel" onClick={closeDialog} style={marginStyle} />,
       <RaisedButton
         label="Delete"
         secondary={true}
@@ -26,7 +22,7 @@ class simpleDialog extends React.PureComponent {
         label="Submit"
         primary={true}
         style={marginStyle}
-        onClick={this.props.submit}
+        onClick={submit}
       />
     ]
 
@@ -45,17 +41,13 @@ class simpleDialog extends React.PureComponent {
           <br />
           Dialog : {open === true ? 'Opened' : 'Closed'}
         </p>
-        <RaisedButton
-          label="Open Dialog"
-          primary={true}
-          onClick={this.props.openDialog}
-        />
+        <RaisedButton label="Open Dialog" primary={true} onClick={openDialog} />
         <Dialog
           title="Dialog With Straightforward Actions"
           actions={actions}
           modal={false}
           open={open}
-          onRequestClose={this.props.closeDialog}
+          onRequestClose={closeDialog}
         >
           <h1>Hello World</h1>
         </Dialog>
@@ -65,15 +57,15 @@ class simpleDialog extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  open: services.simpleDialog.selector.getOpen(state),
-  answer: services.simpleDialog.selector.getAnswer(state)
+  open: services.dialogSimple.selector.getOpen(state),
+  answer: services.dialogSimple.selector.getAnswer(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-  openDialog: () => dispatch(actionHub.SIMPLE_DIALOG_OPEN_DIALOG()),
-  closeDialog: () => dispatch(actionHub.SIMPLE_DIALOG_CLOSE_DIALOG()),
-  delete: () => dispatch(actionHub.SIMPLE_DIALOG_DELETE()),
-  submit: () => dispatch(actionHub.SIMPLE_DIALOG_SUBMIT())
+  openDialog: () => dispatch(actionHub.DIALOG_SIMPLE_OPEN_DIALOG()),
+  closeDialog: () => dispatch(actionHub.DIALOG_SIMPLE_CLOSE_DIALOG()),
+  delete: () => dispatch(actionHub.DIALOG_SIMPLE_DELETE()),
+  submit: () => dispatch(actionHub.DIALOG_SIMPLE_SUBMIT())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(simpleDialog)
+export default connect(mapStateToProps, mapDispatchToProps)(dialogSimple)

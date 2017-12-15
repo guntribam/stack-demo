@@ -7,11 +7,11 @@ const reducer = (
 ) => {
   const { type, types, data } = action
   switch (type) {
-    case types.formDialogOpenDialog:
+    case types.dialogFormOpenDialog:
       return { ...state, open: true }
-    case types.formDialogCloseDialog:
+    case types.dialogFormCloseDialog:
       return { ...state, submitted: 'No Data Entry', open: false }
-    case types.formDialogSubmitResponse:
+    case types.dialogFormSubmitResponse:
       return {
         ...state,
         ...data,

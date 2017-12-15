@@ -2,12 +2,7 @@ import name from './name'
 import { makeActions, makeTypes } from '@gp-technical/stack-pack-app'
 
 const api = makeTypes(name, ['submit'])
-const local = makeTypes(name, [
-  'openStepper',
-  'closeStepper',
-  'previousStep',
-  'nextStep'
-])
+const local = makeTypes(name, ['open', 'close', 'previous', 'next'])
 
 const actions = {
   ...makeActions(api, { local: false }),

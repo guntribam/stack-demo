@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import { actionHub, services, components } from '../../loader'
 
-class formDialog extends React.PureComponent {
+class dialogForm extends React.PureComponent {
   state = {
     canSubmit: false
   }
@@ -20,19 +20,9 @@ class formDialog extends React.PureComponent {
     })
   }
   handleChange = e => {
-    if (e.target.name === 'firstName') {
-      const value = e.target.value
-      this.setState({ firstName: value })
-    } else if (e.target.name === 'lastName') {
-      const value = e.target.value
-      this.setState({ lastName: value })
-    } else if (e.target.name === 'age') {
-      const value = e.target.value
-      this.setState({ age: value })
-    } else if (e.target.name === 'email') {
-      const value = e.target.value
-      this.setState({ email: value })
-    }
+    const state = {}
+    state[e.target.name] = e.target.value
+    this.setState(state)
   }
 
   handleState = e => {
@@ -86,6 +76,7 @@ class formDialog extends React.PureComponent {
           This a form dialog feature that provides form actions such as
           submit...
         </p>
+        <components.CircularProgress thickness={3} size={20} />
         <p>
           Form : {submitted}
           <br />
@@ -172,17 +163,17 @@ class formDialog extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  open: services.formDialog.selector.getOpen(state),
-  submitted: services.formDialog.selector.getSubmitted(state),
-  form: services.formDialog.selector.getForm(state),
-  errorMessages: services.formDialog.selector.getErrorMessages(state)
+  open: services.dialogForm.selector.getOpen(state),
+  submitted: services.dialogForm.selector.getSubmitted(state),
+  form: services.dialogForm.selector.getForm(state),
+  errorMessages: services.dialogForm.selector.getErrorMessages(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-  openDialog: () => dispatch(actionHub.FORM_DIALOG_OPEN_DIALOG()),
-  closeDialog: () => dispatch(actionHub.FORM_DIALOG_CLOSE_DIALOG()),
-  delete: () => dispatch(actionHub.FORM_DIALOG_DELETE()),
-  submit: data => dispatch(actionHub.FORM_DIALOG_SUBMIT(data))
+  openDialog: () => dispatch(actionHub.DIALOG_FORM_OPEN_DIALOG()),
+  closeDialog: () => dispatch(actionHub.DIALOG_FORM_CLOSE_DIALOG()),
+  delete: () => dispatch(actionHub.DIALOG_FORM_DELETE()),
+  submit: data => dispatch(actionHub.DIALOG_FORM_SUBMIT(data))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(formDialog)
+export default connect(mapStateToProps, mapDispatchToProps)(dialogForm)

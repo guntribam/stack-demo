@@ -5,9 +5,9 @@ import gp from './gp'
 import thunks from './thunks'
 import todos from './todos'
 import sphere from './sphere'
-import simpleDialog from './simpleDialog'
-import formDialog from './formDialog'
-import stepperDialog from './stepperDialog'
+import dialogSimple from './dialogSimple'
+import dialogForm from './dialogForm'
+import dialogStepper from './dialogStepper'
 import shopping from './shopping'
 
 export default {
@@ -18,8 +18,8 @@ export default {
   thunks,
   todos,
   sphere,
-  simpleDialog,
-  formDialog,
+  dialogSimple,
+  dialogForm,
   shopping,
-  stepperDialog
+  dialogStepper
 }

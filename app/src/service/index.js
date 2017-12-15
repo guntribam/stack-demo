@@ -6,9 +6,9 @@ import thunks from './thunks'
 import todos from './todos'
 import sphere from './sphere'
 import shopping from './shopping'
-import simpleDialog from './simpleDialog'
-import formDialog from './formDialog'
-import stepperDialog from './stepperDialog'
+import dialogSimple from './dialogSimple'
+import dialogForm from './dialogForm'
+import dialogStepper from './dialogStepper'
 
 export default {
   counter,
@@ -18,8 +18,8 @@ export default {
   thunks,
   todos,
   sphere,
-  simpleDialog,
-  formDialog,
+  dialogSimple,
+  dialogForm,
   shopping,
-  stepperDialog
+  dialogStepper
 }
