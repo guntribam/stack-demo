@@ -76,7 +76,6 @@ class dialogForm extends React.PureComponent {
           This a form dialog feature that provides form actions such as
           submit...
         </p>
-        <components.CircularProgress thickness={3} size={20} />
         <p>
           Form : {submitted}
           <br />
