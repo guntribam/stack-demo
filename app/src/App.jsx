@@ -14,7 +14,12 @@ class component extends React.PureComponent {
       <components.Loader show={!!user} branding={branding}>
         <MuiThemeProvider muiTheme={muiTheme}>
           <div>
-            <components.App title="stack-demo" color={muiTheme.app.color} user={user} style={styles} />
+            <components.App
+              title="stack-demo"
+              color={muiTheme.app.color}
+              user={user}
+              style={styles}
+            />
             <Grid>
               <Row className={styles.main}>
                 <Col xs={12} sm={12} md={8} lg={12}>
@@ -26,6 +31,10 @@ class component extends React.PureComponent {
                   <components.todos />
                   <components.gp />
                   <components.sphere />
+                  <components.dialogSimple />
+                  <components.dialogForm />
+                  <components.dialogStepper />
+                  <components.shopping />
                 </Col>
               </Row>
             </Grid>

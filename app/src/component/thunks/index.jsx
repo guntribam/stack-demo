@@ -24,15 +24,20 @@ class component extends React.PureComponent {
         </h2>
         <h2>Multi-Action Sequences</h2>
         <p>
-          Demonstrates how to dispatch multiple REDUX actions from a single Thunk. It also shows that each action can be <i>awaited</i> allowing for the fine, synchronous control of an multi-action
-          sequence.
+          Demonstrates how to dispatch multiple REDUX actions from a single
+          Thunk. It also shows that each action can be <i>awaited</i> allowing
+          for the fine, synchronous control of an multi-action sequence.
         </p>
         <Divider />
         <h3>Answer To Life, The Universe and Everything</h3>
         <h1>{answer}</h1>
         <Divider />
         <h3>Dispatch a Synchronouse Sequence of REDUX Actions</h3>
-        <RaisedButton label="Get The Answer" onClick={this.onGetAnswer} style={buttonStyle} />
+        <RaisedButton
+          label="Get The Answer"
+          onClick={this.onGetAnswer}
+          style={buttonStyle}
+        />
       </components.Box>
     )
   }
@@ -40,8 +45,8 @@ class component extends React.PureComponent {
 
 const mapStateToProps = state => ({
   answer: services.thunks.selector.getAnswer(state),
-  isRunning: services.thunks.selector.getIsRunning(state),
-  action: services.busy.selector.getAction(state)
+  isRunning: services.thunks.selector.getIsRunning(state)
+  // action: services.busy.selector.getAction(state)
 })
 
 const mapDispatchToProps = dispatch => ({
