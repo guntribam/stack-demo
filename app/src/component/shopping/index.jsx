@@ -10,11 +10,11 @@ import { services, components, actionHub } from '../../loader'
 class component extends React.PureComponent {
 
   handleCart = e => {
-    this.props.open === false ? this.props.openCart : this.props.closeCart
+    this.props.open === false ? this.props.cartOpen : this.props.cartClose
   }
 
   onSearchInput = e => {
-    this.props.searchProducts(e.target.value)
+    this.props.productSearch(e.target.value)
   }
 
   render () {
@@ -45,7 +45,7 @@ class component extends React.PureComponent {
             <FlatButton
               style={{color: '#54647a'}}
               label={`Cart(${(productsInCart) ? productsInCart.length : 0})`}
-              onClick={this.props.openCart}
+              onClick={this.props.cartOpen}
             />
           </ToolbarGroup>
         </Toolbar>
@@ -53,7 +53,7 @@ class component extends React.PureComponent {
         <components.productList />
         <components.shoppingCart
           isCartOpen={ isCartOpen }
-          onCartClose={this.props.closeCart}
+          onCartClose={this.props.cartClose}
         />
       </components.Box>
     )
@@ -66,9 +66,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  openCart: () => dispatch(actionHub.SHOPPING_OPEN_CART()),
-  closeCart: () => dispatch(actionHub.SHOPPING_CLOSE_CART()),
-  searchProducts: (query) => dispatch(actionHub.SHOPPING_SEARCH_PRODUCTS(query))
+  cartOpen: () => dispatch(actionHub.SHOPPING_CART_OPEN()),
+  cartClose: () => dispatch(actionHub.SHOPPING_CART_CLOSE()),
+  productSearch: (query) => dispatch(actionHub.SHOPPING_PRODUCT_SEARCH(query))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(component)

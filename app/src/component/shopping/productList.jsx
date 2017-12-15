@@ -20,25 +20,25 @@ const style = {
 
 class component extends React.PureComponent {
 
-  onAddProductToCart = (product) => {
-    this.props.addProductToCart(product)
+  onProductCartAdd = (product) => {
+    this.props.productCartAdd(product)
   }
 
-  onRemoveProductFromCart = (product) => {
-    this.props.removeProductFromCart(product)
+  onProductCartRemove = (product) => {
+    this.props.productCartRemove(product)
   }
 
-  onRemoveAddedProduct = () => {
-    this.props.removeProductFromCart(this.props.addedProduct)
+  onProductAddedRemove = () => {
+    this.props.productCartRemove(this.props.productAdded)
   }
 
-  onSnackBarClose = (product) => {
-    this.props.closeAddedProductSnackbar()
+  onSnackbarClose = (product) => {
+    this.props.snackbarClose()
   }
 
-  addedProductSnackText = () => {
-    if (this.props.addedProduct) {
-      return `${this.props.addedProduct.name} was added to cart`
+  productAddedSnackText = () => {
+    if (this.props.productAdded) {
+      return `${this.props.productAdded.name} was added to cart`
     } else {
       return 'Product was added to cart'
     }
@@ -57,17 +57,17 @@ class component extends React.PureComponent {
               </CardMedia>
               <CardTitle title={`$ ${product.price}`} subtitle={product.categories.join()} />
               <CardActions>
-                <FlatButton label="Add to Cart" onClick={() => { this.onAddProductToCart(product) }} />
+                <FlatButton label="Add to Cart" onClick={() => { this.onProductCartAdd(product) }} />
               </CardActions>
             </Card>
          ))}
          <Snackbar
            open={ isSnackBarOpen }
            action="Remove"
-           message={this.addedProductSnackText()}
+           message={this.productAddedSnackText()}
            autoHideDuration={4000}
-           onRequestClose={this.onSnackBarClose}
-           onActionTouchTap={this.onRemoveAddedProduct}
+           onRequestClose={this.onSnackbarClose}
+           onActionTouchTap={this.onProductAddedRemove}
          />
         </div>
       )
@@ -79,14 +79,14 @@ class component extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   products: services.shopping.selector.getProducts(state),
-  addedProduct: services.shopping.selector.getAddedProduct(state),
-  isSnackBarOpen: services.shopping.selector.getIsSnackBarOpen(state)
+  productAdded: services.shopping.selector.getProductAdded(state),
+  isSnackBarOpen: services.shopping.selector.getIsSnackbarOpen(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  addProductToCart: (product) => dispatch(actionHub.SHOPPING_ADD_PRODUCT_TO_CART(product)),
-  removeProductFromCart: (product) => dispatch(actionHub.SHOPPING_REMOVE_PRODUCT_FROM_CART(product)),
-  closeAddedProductSnackbar: () => dispatch(actionHub.SHOPPING_CLOSE_ADDED_PRODUCT_SNACKBAR())
+  productCartAdd: (product) => dispatch(actionHub.SHOPPING_PRODUCT_CART_ADD(product)),
+  productCartRemove: (product) => dispatch(actionHub.SHOPPING_PRODUCT_CART_REMOVE(product)),
+  snackbarClose: () => dispatch(actionHub.SHOPPING_SNACKBAR_CLOSE())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(component)

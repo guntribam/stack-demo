@@ -4,39 +4,37 @@ const reducer = (state = { cartOpen: false }, action) => {
     case types.shopping_init:
       const { products, categories, productsInCart, priceRange } = data
       return { ...state, products, categories, productsInCart, priceRange }
-    case types.shoppingAddProductToCartResponse:
+    case types.shoppingProductCartAddResponse:
       return {
         ...state,
         productsInCart: data.productsInCart,
-        addedProduct: data.addedProduct,
-        isSnackBarOpen: true
+        productAdded: data.productAdded,
+        isSnackbarOpen: true
       }
-    case types.shoppingCloseAddedProductSnackbar:
-      return { ...state, isSnackBarOpen: false }
-    case types.shoppingRemoveProductFromCartResponse:
+    case types.shoppingSnackbarClose:
+      return { ...state, isSnackbarOpen: false }
+    case types.shoppingProductCartRemoveResponse:
       return {
         ...state,
         productsInCart: data.productsInCart,
-        isSnackBarOpen: false
+        isSnackbarOpen: false
       }
-    case types.shoppingCheckoutCart:
+    case types.shoppingCartCheckout:
       return { ...state, isHandlingCheckout: true }
-    case types.shoppingCheckoutCartResponse:
+    case types.shoppingCartCheckoutResponse:
       return {
         ...state,
         isHandlingCheckout: false,
         isCheckoutCompleted: data.isCheckoutCompleted,
         productsInCart: data.productsInCart
       }
-    case types.shoppingSearchProductsResponse:
+    case types.shoppingProductSearchResponse:
+    case types.shoppingProductFilterByCategoryResponse:
+    case types.shoppingProductFilterByPriceRangeResponse:
       return { ...state, products: data.products }
-    case types.shoppingFilterProductByCategoryResponse:
-      return { ...state, products: data.products }
-    case types.shoppingFilterProductByPriceRangeResponse:
-      return { ...state, products: data.products }
-    case types.shoppingOpenCart:
+    case types.shoppingCartOpen:
       return { ...state, cartOpen: true }
-    case types.shoppingCloseCart:
+    case types.shoppingCartClose:
       return { ...state, cartOpen: false, isCheckoutCompleted: false }
     default:
       return state

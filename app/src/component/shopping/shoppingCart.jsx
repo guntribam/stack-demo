@@ -25,12 +25,12 @@ const style = {
 
 class component extends React.PureComponent {
 
-  onRemoveProductFromCart = (product) => {
-    this.props.removeProductFromCart(product)
+  onProductCartRemove = (product) => {
+    this.props.productCartRemove(product)
   }
 
-  onCheckoutCart = () => {
-    this.props.checkoutCart()
+  onCartCheckout = () => {
+    this.props.cartCheckout()
   }
 
   cartTotal = () => {
@@ -44,11 +44,11 @@ class component extends React.PureComponent {
     var { productsInCart } = this.props
     if (productsInCart && productsInCart.length > 0) {
       return [
-        <FlatButton label="Back Shopping" onClick={this.props.closeCart} />,
+        <FlatButton label="Back Shopping" onClick={this.props.cartClose} />,
         <FlatButton
           label="Checkout"
           primary={true}
-          onClick={ () => { this.onCheckoutCart() }}
+          onClick={ () => { this.onCartCheckout() }}
         />
       ]
     } else {
@@ -56,7 +56,7 @@ class component extends React.PureComponent {
         <FlatButton
           label="Back Shopping"
           primary={true}
-          onClick={this.props.closeCart}
+          onClick={this.props.cartClose}
         />
       ]
     }
@@ -88,7 +88,7 @@ class component extends React.PureComponent {
                 <TableRowColumn>
                   <FlatButton
                     onClick={() => {
-                      this.onRemoveProductFromCart(product)
+                      this.onProductCartRemove(product)
                     }}
                   >
                     <FontIcon className="material-icons" color={red500}>
@@ -137,7 +137,7 @@ class component extends React.PureComponent {
         title="Shopping Cart - Checkout"
         modal={false}
         open={isCartOpen}
-        onRequestClose={this.props.closeCart}
+        onRequestClose={this.props.cartClose}
         actions={this.renderActions()}
       >
         {this.renderDialogContent()}
@@ -154,10 +154,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  openCart: () => dispatch(actionHub.SHOPPING_OPEN_CART()),
-  closeCart: () => dispatch(actionHub.SHOPPING_CLOSE_CART()),
-  removeProductFromCart: (product) => dispatch(actionHub.SHOPPING_REMOVE_PRODUCT_FROM_CART(product)),
-  checkoutCart: () => dispatch(actionHub.SHOPPING_CHECKOUT_CART())
+  cartOpen: () => dispatch(actionHub.SHOPPING_CART_OPEN()),
+  cartClose: () => dispatch(actionHub.SHOPPING_CART_CLOSE()),
+  cartCheckout: () => dispatch(actionHub.SHOPPING_CART_CHECKOUT()),
+  productCartRemove: (product) => dispatch(actionHub.SHOPPING_PRODUCT_CART_REMOVE(product))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(component)

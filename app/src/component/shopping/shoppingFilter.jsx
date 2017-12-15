@@ -12,11 +12,8 @@ const buttonStyle = {
 class component extends React.PureComponent {
   onFilterByCategory = (event, index, value) => {
     this.setState({value})
-    if (value === 0) {
-      this.props.filterByCategory('')
-    } else {
-      this.props.filterByCategory(this.props.categories[index])
-    }
+    const category = (value === 0) ? '' : this.props.categories[index]
+    this.props.filterByCategory(category)
   }
 
   onFilterPriceRange = (range) => {
@@ -51,8 +48,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  filterByCategory: (category) => dispatch(actionHub.SHOPPING_FILTER_PRODUCT_BY_CATEGORY(category)),
-  filterByPrice: (range) => dispatch(actionHub.SHOPPING_FILTER_PRODUCT_BY_PRICE_RANGE(range))
+  filterByCategory: (category) => dispatch(actionHub.SHOPPING_PRODUCT_FILTER_BY_CATEGORY(category)),
+  filterByPrice: (range) => dispatch(actionHub.SHOPPING_PRODUCT_FILTER_BY_PRICE_RANGE(range))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(component)
