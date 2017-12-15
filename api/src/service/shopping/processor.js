@@ -4,8 +4,8 @@ import db from './db'
 import cart from './cart'
 
 const processor = async action => {
-  var { types, type, data } = action
-
+  var { types, type, data, user } = action
+  
   switch (type) {
     case types.shoppingCartCheckout:
       await sleep(5000)
