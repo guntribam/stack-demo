@@ -1,4 +1,4 @@
-const reducer = (state = { cartOpen: false }, action) => {
+const reducer = (state = { cartOpen: false, isSnackbarOpen: false }, action) => {
   const { type, types, data } = action
   switch (type) {
     case types.shopping_init:

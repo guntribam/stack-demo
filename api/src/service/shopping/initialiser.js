@@ -1,11 +1,14 @@
 import db from './db'
 import cart from './cart'
 
-const initialiser = async (user) => {
+const initialiser = async (session) => {
+  if (session.user === undefined) return
+  if (session.cart === undefined) session.cart = []
+
   return {
     products: db.getProducts(),
     categories: db.getCategories(),
-    productsInCart: cart.getCartForUser(user),
+    productsInCart: session.cart,
     priceRange: db.getPriceRange()
   }
 }

@@ -4,25 +4,25 @@ import db from './db'
 import cart from './cart'
 
 const processor = async action => {
-  var { types, type, data, user } = action
+  var { types, type, data, session } = action
 
   switch (type) {
     case types.shoppingCartCheckout:
       await sleep(5000)
-      cart.productCartRemoveAll(user)
+      cart.productCartRemoveAll(session)
       return {
         isCheckoutCompleted: true,
-        productsInCart: cart.getCartForUser(user)
+        productsInCart: session.cart
       }
     case types.shoppingProductCartAdd:
-      let productAdded = cart.productCartAdd(data, user)
+      let productAdded = cart.productCartAdd(data, session)
       return {
-        productsInCart: cart.getCartForUser(user),
+        productsInCart: session.cart,
         productAdded: productAdded
       }
     case types.shoppingProductCartRemove:
-      cart.productCartRemove(data, user)
-      return { productsInCart: cart.getCartForUser(user) }
+      cart.productCartRemove(data, session)
+      return { productsInCart: session.cart }
     case types.shoppingProductSearch:
       return { products: db.queryProducts(data) }
     case types.shoppingProductFilterByCategory:
