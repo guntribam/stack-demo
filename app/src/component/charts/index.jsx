@@ -4,7 +4,8 @@ import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory'
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts'
 // import { XYPlot, LineSeries, VerticalGridLines, HorizontalGridLines, XAxis, YAxis } from 'react-vis'
 // import { BarChart } from 'react-d3'
-import { ChartistGraph } from 'react-chartist'
+import ChartistGraph from 'react-chartist'
+import Trend from 'react-trend'
 
 class component extends React.PureComponent {
 
@@ -30,29 +31,6 @@ class component extends React.PureComponent {
     )
   }
 
-  renderChartistChart = () => {
-    const chartistData = {
-      labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
-      series: [ [1, 2, 4, 8, 6, -2, -1, -4, -6, -2] ]
-    }
-    const options = {
-      high: 10,
-      low: -10,
-      axisX: {
-        labelInterpolationFnc: function (value, index) {
-          return index % 2 === 0 ? value : null
-        }
-      }
-    }
-    const type = 'Bar'
-    return (
-      <div>
-        <h3>ChartistGraph</h3>
-        <ChartistGraph data={chartistData} options={options} type={type} />
-      </div>
-    )
-  }
-
   renderRechart = () => {
     const rechartData = [
       {name: 1, value: 1},
@@ -71,6 +49,49 @@ class component extends React.PureComponent {
           <Legend />
           <Bar dataKey="value" fill="#0000FF" />
         </BarChart>
+      </div>
+    )
+  }
+
+  renderChartistChart = () => {
+    const chartistData = {
+      labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
+      series: [ [1, 2, 4, 8, 6, -2, -1, -4, -6, -2] ]
+    }
+    const options = {
+      high: 10,
+      low: -10,
+      axisX: {
+        labelInterpolationFnc: function (value, index) {
+          return index % 2 === 0 ? value : null
+        }
+      }
+    }
+    const type = 'Line'
+    return (
+      <div>
+        <h3>ChartistGraph</h3>
+        <ChartistGraph data={chartistData} options={options} type={type} />
+      </div>
+    )
+  }
+
+  renderTrendChart = () => {
+    const trendData = [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]
+    return (
+      <div>
+        <h3>react-trend</h3>
+        <Trend
+          smooth
+          autoDraw
+          autoDrawDuration={3000}
+          autoDrawEasing="ease-out"
+          data={trendData}
+          gradient={['#00c6ff', '#F0F', '#FF0']}
+          radius={10}
+          strokeWidth={2}
+          strokeLinecap={'round'}
+        />
       </div>
     )
   }
@@ -132,6 +153,8 @@ class component extends React.PureComponent {
         </h2>
         {this.renderVictoryChart()}
         {this.renderRechart()}
+        {this.renderChartistChart()}
+        {this.renderTrendChart()}
       </components.Box>
     )
   }
