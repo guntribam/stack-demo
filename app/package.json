@@ -47,7 +47,8 @@
     "react-flexbox-grid": "^1.0.2",
     "react-redux": "^4.4.5",
     "react-tap-event-plugin": "^2.0.1",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "victory": "^0.24.3"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
