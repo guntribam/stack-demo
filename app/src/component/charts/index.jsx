@@ -6,6 +6,7 @@ import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'rec
 // import { BarChart } from 'react-d3'
 import ChartistGraph from 'react-chartist'
 import Trend from 'react-trend'
+// import { Bar } from 'react-chartjs.Bar'
 
 class component extends React.PureComponent {
 
@@ -92,6 +93,23 @@ class component extends React.PureComponent {
           strokeWidth={2}
           strokeLinecap={'round'}
         />
+      </div>
+    )
+  }
+
+  renderReactChartjs = () => {
+    const chartJsData = [{
+      labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+      datasets: [{
+        label: 'Values',
+        data: [1, 2, 3, 0]
+      }],
+      borderWidth: 1
+    }]
+    return (
+      <div>
+        <h3>react-chartjs</h3>
+        <Bar data={chartJsData} width={730} height={250}/>
       </div>
     )
   }
