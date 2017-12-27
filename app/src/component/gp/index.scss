@@ -1,0 +1,86 @@
+:global {
+  .searchIcon {
+    vertical-align: middle;
+    line-height: 50px;
+    position: absolute !important;
+    left: 3px;
+  }
+  .clearIcon {
+    vertical-align: middle;
+    position: absolute !important;
+    right: 0px;
+    span.material-icons {
+      font-size: 10px !important;
+      background-color: #dedede;
+      border-radius: 50%;
+      padding: 2px;
+    }
+  }
+}
+.box {
+  padding: 20px;
+  .toolbar {
+    height: 70px;
+    .textField {
+      margin-right: 10px;
+    }
+  }
+}
+.rightOptionsStyle {
+  // position: absolute;
+  right: 30px;
+  display: inline-block;
+  & > * {
+    margin: 5px;
+  }
+}
+.searchform {
+  padding: 5px 20px;
+  background-color: #ebeff2 !important;
+  position: relative;
+  .formSelect {
+    vertical-align: middle;
+  }
+  .searchfield {
+    position: relative;
+  }
+}
+.lastColumn {
+  text-align: right !important;
+  width: 50px;
+}
+.firstColumn {
+  min-width: 220px;
+}
+.contentContainer {
+  .contentTitle {
+    font-size: 18px;
+  }
+  .contentSubTitle {
+    margin-top: 5;
+  }
+}
+.emptyState {
+  text-align: center;
+  margin-top: 24px;
+  :global {
+    .material-icons {
+      font-size: 50px !important;
+      color: #b0bdc5 !important;
+    }
+  }
+}
+.dropDownFooter {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 10px;
+}
+.menuItem {
+  .active {
+    color: #d32f2f !important;
+    .material-icon {
+      color: #d32f2f !important;
+    }
+  }
+}
+
