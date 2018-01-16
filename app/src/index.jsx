@@ -16,8 +16,19 @@ var opts = {
 
 const store = createStore(services, stackReduxApp(opts))
 
+window.addEventListener("resize", function() {
+  document.getElementById("wrapper").style.height = `${window.innerHeight}px`;
+});
+
+document.getElementsByTagName("body")[0].style["padding"] = "0";
+document.getElementsByTagName("body")[0].style["margin"] = "0";
+
+const styleDiv = { height:`${window.innerHeight}px`, "overflow-y": "auto" };
+
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <div id="wrapper" style={styleDiv}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </div>,
   document.getElementById('app'))
