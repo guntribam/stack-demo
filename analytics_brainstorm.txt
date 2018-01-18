@@ -1,0 +1,5 @@
+
+- keeping track of mutable content, like editable entities from db (id only may be not enough)
+- check possibility of passing a click "id" to react action code.
+  If possible, passing an ID generated inside one "window.onclick" callback.
+
