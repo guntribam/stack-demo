@@ -12,7 +12,7 @@ import { services, actionHub, components } from '../../loader'
 
 import VisibilityDetectable from '../analytics/visibilityDetectable'
 
-@VisibilityDetectable
+@VisibilityDetectable("props.testAnalytics")
 class dialogStepper extends React.PureComponent {
   state = {
     canSubmit: false

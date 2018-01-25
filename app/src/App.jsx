@@ -33,7 +33,7 @@ class component extends React.PureComponent {
                   <components.sphere />
                   <components.dialogSimple />
                   <components.dialogForm />
-                  <components.dialogStepper />
+                  <components.dialogStepper testAnalytics="testValue" />
                   <components.shopping />
                 </Col>
               </Row>

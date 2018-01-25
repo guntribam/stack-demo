@@ -2,4 +2,8 @@
 - keeping track of mutable content, like editable entities from db (id only may be not enough)
 - check possibility of passing a click "id" to react action code.
   If possible, passing an ID generated inside one "window.onclick" callback.
+  -- possible solution: keep track of milisecond time for clicks, and try to match it
+     with an event, in the client side
+- evaluate better scrolling, specially to chek if the user is not AFK
+- check with jonny which data is more valuable fo the analytics: dynamic content or actions executed
 
